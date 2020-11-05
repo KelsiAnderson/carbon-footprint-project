@@ -1,0 +1,160 @@
+"""data models for my carbon emmissions app."""
+
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+
+class user(db.Model):
+    """ table representing a user"""
+
+    __tablename__ = "user"
+
+    user_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    email = db.Column(db.String, unique=True)
+    password = db.Column(db.String)
+
+    # this has a foreign key for vehicle, daily vehicile travel, public trans, 
+    #comment, household, monthly natural gas, monrthly elct use
+    vehicle = db.relationship("vehicle")
+    public_trans = db.relationship("public_trans")
+    monthly_nat_gas = db.relationship("monthly_nat_gas")
+    household = db.relationship("household")
+    monthly_elect = db.relationship("monthly_elect")
+    comment = db.relationship("comments")
+    
+    def __repr__(self):
+        return f'<user user_id= {self.user_id} email={self.email}>'
+
+
+class vehicle(db.Model):
+    """table representing the vehicle type a user drives"""
+
+    __tablename__ = "vehicle"
+
+    vehicle_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    mpg = db.Column(db.Integer, nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+
+    user = db.relationship('user')
+
+    def __repr__(self):
+        return f'<vehicle vehicle_id{self.vehicle_id} user_id{self.user_id}>'
+
+class vehicle_travel(db.Model):
+    """table representing daily mileage travelled"""
+
+    __tablename___ = "daily_vehicle_travel"
+
+    travel_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    mileage = db.Column(db.Integer)
+    travel_date = db.Column(db.DateTime)
+    carbon_footprint = db.Column(db.Float)
+    vehicle_id = db.Column(db.Integer, db.ForeignKey('vehicle.vehicle_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"))
+
+    user = db.relationship("user")
+    vehicle = db.relationship("vehicle")
+
+    def __repr__(self):
+        return f'<travel_id = {self.travel_id} mileage = {self.mileage}  vehicle_id = {self.vehicle_id}user_id = {self.user_id}>'
+
+class public_trans(db.Model):
+    """table to hold a users public transit travel"""
+
+    __tablename__ = "public_transit"
+
+    public_trans_id = db.Column(db.Integer, autoincrement= True, nullable= False, primary_key = True)
+    mileage = db.Column(db.Integer)
+    public_trans_date = db.Column(db.DateTime)
+    carbon_footprint = db.Column(db.Float)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+    
+
+    user = db.relationship('user')
+
+    def __repr__(self):
+        return f'<public_trans_id = {self.public_trans_id} mileage = {self.mileage} user_id = {self.user_id}>'
+
+class household(db.Model):
+    """table to represent household occupant amt"""
+
+    __tablename__ = "household"
+
+    household_id = db.Column(db.Integer, autoincrement = True, nullable = False, primary_key = True)
+    num_occupants = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+
+    user = db.relationship('user')
+
+    def __repr__(self):
+        return f'<household_id  = {self.household_id } user_id = {self.user_id}>'
+
+class monthly_nat_gas(db.Model):
+    """table to represent monthly gas use by bill amt"""
+
+    __tablename__ = "natural_gas_usage"
+
+    nat_gas_id = db.Column(db.Integer, autoincrement= True, nullable= False, primary_key = True)
+    nat_gas_bill = db.Column(db.Integer)
+    nat_gas_date = db.Column(db.DateTime)
+    carbon_footprint = db.Column(db.Float)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+    household_id = db.Column(db.Integer, db.ForeignKey('household.household_id'))
+
+    user = db.relationship('user')
+    household = db.relationship('household')
+
+    def __repr__(self):
+        return f'<nat_gas_id = {self.nat_gas_id} nat_gas_date = {self.nat_gas_date} user_id = {self.user_id}>'
+
+class monthly_elect(db.Model):
+    """table representing monthly elcetricity use by bill amt"""
+
+    __tablename__ = "electricity_use"
+
+    elect_id = db.Column(db.Integer, autoincrement = True, nullable = False, primary_key = True)
+    elect_bill = db.Column(db.Integer)
+    elect_date = db.Column(db.DateTime)
+    carbon_footprint = db.Column(db.Float)
+    household_id = db.Column(db.Integer, db.ForeignKey('household.household_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+
+    user = db.relationship('user')
+    household = db.relationship('household')
+
+    def __repr__(self):
+        return f'<electricity_id = {self.elect_id} elect_bill = {self.elect_bill} electricity_date = {self.elect_date} user_id = {self.user_id}>'
+
+class comments(db.Model):
+    """table holding a users comments"""
+
+    __tablename__ = "comments"
+
+    comment_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    user_ir = db.Column(db.Integer, db.ForeignKey("user.user_id"))
+    text = db.Column(db.String(500))
+
+    user = db.relationship("user")
+
+    def __repr__(self):
+        return f'<comment_id = {self.comment_id} user_id = {self.user_id}>'
+
+
+def connect_to_db(flask_app, db_uri='postgresql:///project', echo=True):
+    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+    flask_app.config['SQLALCHEMY_ECHO'] = echo
+    flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    db.app = flask_app
+    db.init_app(flask_app)
+
+    print('Connect to the db!')
+
+if __name__ == '__main__':
+    from server import app
+
+    # Call connect_to_db(app, echo=False) if your program output gets
+    # too annoying; this will tell SQLAlchemy not to print out every
+    # query it executes.
+
+    connect_to_db(app)
