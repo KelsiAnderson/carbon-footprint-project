@@ -3,10 +3,10 @@
 
 from model import db, User, Vehicle, Vehicle_Travel, Public_Trans, Household, Monthly_Nat_Gas, Monthly_Elect, Comments, connect_to_db
 
-def create_user(email, password):
+def create_user(user_name, email, password):
     """Create and return a new user"""
 
-    user = User(emal=email, password=password)
+    user = User(user_name=user_name, email=email, password=password)
 
     db.session.add(user)
     db.session.commit()
@@ -74,15 +74,17 @@ def create_montly_elect_bill(elect_bill, elect_date, carbon_footprint):
 
     return monthly_elect_bill
 
+
 def create_comment(comment_id, user_id, text):
     """create and return a users comments"""
 
-    comments_instance = Comments(comment_id=comment_id, user_id=user_id, text=text)
+    comment = Comments(comment_id=comment_id, user_id=user_id, text=text)
 
-    db.session.add(comments_instance)
+    db.session.add(comment)
     db.session.commit()
 
-    return comments_instance
+    return comments
+
 
 def all_users():
     """get and return all users"""

@@ -10,6 +10,7 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    user_name = db.Column(db.String)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
 
@@ -132,10 +133,10 @@ class Comments(db.Model):
     __tablename__ = "comments"
 
     comment_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
-    text = db.Column(db.String(500))
+    text = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
-    user = db.relationship("User")
+    user = db.relationship('User')
 
     def __repr__(self):
         return f'<comment_id = {self.comment_id} user_id = {self.user_id}>'

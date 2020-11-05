@@ -1,12 +1,12 @@
 """script to seed the database"""
 
 import os
-import json
 from random import choice, randint
 from datetime import datetime
 from flask import (Flask, render_template, request, flash, session, redirect)
+from server import app
+from model import connect_to_db, db, User, Vehicle, Vehicle_Travel, Public_Trans, Household, Monthly_Nat_Gas, Monthly_Elect, Comments
 
-from model import connect_to_db
 import crud
 
 
@@ -17,8 +17,8 @@ import server
 # os.sysytem('dropdb ratings')
 # os.system('createdb ratings')
 
-# model.connect_to_db(server.app)
-# model.db.create_all()
+model.connect_to_db(server.app)
+model.db.create_all()
 
 #for element in list, create user password
 def open_pipe_file(pipe_file): 
@@ -32,11 +32,14 @@ def open_pipe_file(pipe_file):
     return result_list
 
 
-comments_list = open_pipe_file("seed_text_files/comments.seed")
-
-for comment in comments_list:
-    comment_id = comment[0]
-    user_id = comment[1]
-    text = comment[2]
-    all_comments = crud.create_comment(comment_id, user_id, text)
+user_file = open_pipe_file("seed_text_files/user.seed")
+for user in user_file:
+    user_name = user[0] 
+    email = user[1]
+    password = user[2]
+    all_users = crud.create_user(user_name, email, password)
     
+
+vehicle_file = open_pipe_file("seed_text_files/vehicle.seed")
+for vehicle in vehicle_file:
+    mileage
