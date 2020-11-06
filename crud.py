@@ -13,6 +13,7 @@ def create_user(user_name, email, password):
 
     return user
 
+
 def create_vehicle(mpg):
     """create and return a new users vehicle"""
     mileage = Vehicle(mpg=mpg)

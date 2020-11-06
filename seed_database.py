@@ -38,8 +38,17 @@ for user in user_file:
     email = user[1]
     password = user[2]
     all_users = crud.create_user(user_name, email, password)
-    
+
 
 vehicle_file = open_pipe_file("seed_text_files/vehicle.seed")
 for vehicle in vehicle_file:
-    mileage
+    mpg = vehicle[0]
+    all_vehicles = crud.create_vehicle(mpg)
+
+vehicle_travel_file = open_pipe_file("seed_text_files/vehicle_travel.seed")
+for travel in vehicle_travel_file:
+    mileage = travel[0]
+    travel_date = travel[1]
+    carbon_footprint - travel[2]
+    vehicle_travel = crud.create_vehicle_travel(mileage, travel_date, carbon_footprint)
+
