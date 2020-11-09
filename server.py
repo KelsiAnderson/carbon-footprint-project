@@ -50,6 +50,12 @@ def create_new_user():
 
     return render_template("new_user.html")
 
+@app.route('/get-emission-info')
+def get_emission_info():
+
+    flash("You are now logged in!")
+    return render_template("emission_info.html")
+
 
 if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also
