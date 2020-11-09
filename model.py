@@ -25,7 +25,8 @@ class User(db.Model):
     comment = db.relationship("Comments")
     
     def __repr__(self):
-        return f'<user user_id= {self.user_id} email={self.email}>'
+        return f'<User user_id= {self.user_id} email={self.email}>'
+
 
 
 class Vehicle(db.Model):
@@ -40,25 +41,26 @@ class Vehicle(db.Model):
     user = db.relationship('User')
 
     def __repr__(self):
-        return f'<vehicle vehicle_id{self.vehicle_id} user_id{self.user_id}>'
+        return f'<vehicle vehicle_id={self.vehicle_id} user_id={self.user_id}>'
 
 class Vehicle_Travel(db.Model):
     """table representing daily mileage travelled"""
 
-    __tablename___ = "daily_vehicle_travel"
+    __tablename___ = "vehicle_travel"
 
     travel_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
     mileage = db.Column(db.Integer)
     travel_date = db.Column(db.DateTime)
     carbon_footprint = db.Column(db.Float)
-    vehicle_id = db.Column(db.Integer, db.ForeignKey('vehicles.vehicle_id'))
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
+    vehicle_id = db.Column(db.Integer, db.ForeignKey('vehicles.vehicle_id'))
+    
 
     user = db.relationship("User")
     vehicle = db.relationship("Vehicle")
 
     def __repr__(self):
-        return f'<travel_id = {self.travel_id} mileage = {self.mileage}  vehicle_id = {self.vehicle_id}user_id = {self.user_id}>'
+        return f'<travel_id = {self.travel_id} mileage = {self.mileage}  vehicle_id = {self.vehicle_id} user_id = {self.user_id}>'
 
 class Public_Trans(db.Model):
     """table to hold a users public transit travel"""
@@ -97,7 +99,7 @@ class Monthly_Nat_Gas(db.Model):
     __tablename__ = "natural_gas_usage"
 
     nat_gas_id = db.Column(db.Integer, autoincrement= True, nullable= False, primary_key = True)
-    nat_gas_bill = db.Column(db.Integer)
+    nat_gas_bill = db.Column(db.Float)
     nat_gas_date = db.Column(db.DateTime)
     carbon_footprint = db.Column(db.Float)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
@@ -115,7 +117,7 @@ class Monthly_Elect(db.Model):
     __tablename__ = "electricity_use"
 
     elect_id = db.Column(db.Integer, autoincrement = True, nullable = False, primary_key = True)
-    elect_bill = db.Column(db.Integer)
+    elect_bill = db.Column(db.Float)
     elect_date = db.Column(db.DateTime)
     carbon_footprint = db.Column(db.Float)
     household_id = db.Column(db.Integer, db.ForeignKey('households.household_id'))
@@ -141,8 +143,8 @@ class Comments(db.Model):
     def __repr__(self):
         return f'<comment_id = {self.comment_id} user_id = {self.user_id}>'
 
-
-def connect_to_db(flask_app, db_uri='postgresql:///project', echo=True):
+#Dont forget to turn on echo (echo = True)
+def connect_to_db(flask_app, db_uri='postgresql:///project', echo=False):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

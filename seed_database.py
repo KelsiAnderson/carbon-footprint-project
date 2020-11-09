@@ -43,12 +43,56 @@ for user in user_file:
 vehicle_file = open_pipe_file("seed_text_files/vehicle.seed")
 for vehicle in vehicle_file:
     mpg = vehicle[0]
-    all_vehicles = crud.create_vehicle(mpg)
+    user_id = vehicle[1]
+    all_vehicles = crud.create_vehicle(mpg, user_id)
 
 vehicle_travel_file = open_pipe_file("seed_text_files/vehicle_travel.seed")
 for travel in vehicle_travel_file:
     mileage = travel[0]
     travel_date = travel[1]
-    carbon_footprint - travel[2]
-    vehicle_travel = crud.create_vehicle_travel(mileage, travel_date, carbon_footprint)
+    carbon_footprint = travel[2]
+    user_id= travel[3]
+    vehicle_id = travel[4]
+    all_v_travel = crud.create_vehicle_travel(mileage, travel_date, carbon_footprint, user_id, vehicle_id)
 
+public_trans_file = open_pipe_file("seed_text_files/public_transit.seed")
+for transit in public_trans_file:
+    mileage = transit[0]
+    public_trans_date = transit[1]
+    carbon_footprint = transit[2]
+    user_id = transit[3]
+    transit_travel = crud.create_public_trans(mileage, public_trans_date, carbon_footprint, user_id)
+
+household_file = open_pipe_file("seed_text_files/household.seed")
+for house in household_file:
+    num_occupants = house[0]
+    user_id = house[1]
+    household = crud.create_household(num_occupants, user_id)
+
+nat_gas_file = open_pipe_file("seed_text_files/nat_gas.seed")
+for nat_gas in nat_gas_file:
+    print('CHECK HEREEEEEEEEEEEE', nat_gas)
+    nat_gas_bill = nat_gas[0]
+    # print('did i make it here', nat_gas_bill)
+    # print('type of gas bill', type(nat_gas_bill))
+    nat_gas_date = nat_gas[1]
+    carbon_footprint = nat_gas[2]
+    user_id = nat_gas[3]
+    # print("LOOK HEEERRRR", type(user_id))
+    household_id = nat_gas[4]
+    nat_gas_all = crud.create_monthly_nat_gas(nat_gas_bill, nat_gas_date, carbon_footprint, user_id, household_id)
+
+monthly_elect_file = open_pipe_file("seed_text_files/electricity.seed")
+for elect in monthly_elect_file:
+    elect_bill = elect[0]
+    elect_date = elect[1]
+    carbon_footprint = elect[2]
+    user_id = elect[3]
+    household_id = elect[4]
+    monthly_elect = crud.create_monthly_elect_bill(elect_bill, elect_date, carbon_footprint, user_id, household_id)
+
+comment_file = open_pipe_file("seed_text_files/comments.seed")
+for comment in comment_file:
+    text = comment[0]
+    user_id = comment[1]
+    comment_all = crud.create_comment(text, user_id)

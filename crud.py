@@ -14,9 +14,9 @@ def create_user(user_name, email, password):
     return user
 
 
-def create_vehicle(mpg):
+def create_vehicle(mpg, user_id):
     """create and return a new users vehicle"""
-    mileage = Vehicle(mpg=mpg)
+    mileage = Vehicle(mpg=mpg, user_id= user_id)
 
     db.session.add(mileage)
     db.session.commit()
@@ -24,51 +24,51 @@ def create_vehicle(mpg):
     return mileage
 
 
-def create_vehicle_travel(mileage, travel_date, carbon_footprint):
+def create_vehicle_travel(mileage, travel_date, carbon_footprint, user_id, vehicle_id):
     """create and return daily travel by vehicle """
 
-    daily_travel = Vehicle_Travel(pileage=mileage, tavel_date=travel_date, carbon_footprint=carbon_footprint)
+    daily_travel = Vehicle_Travel(mileage=mileage, travel_date=travel_date, carbon_footprint=carbon_footprint, user_id=user_id, vehicle_id=vehicle_id)
 
     db.session.add(daily_travel)
     db.session.commit()
 
     return daily_travel
 
-def create_public_trans(mileage, public_trans_date, carbon_footprint):
+def create_public_trans(mileage, public_trans_date, carbon_footprint, user_id):
     """create and return daily public transit"""
 
-    public_trans = Public_Trans(mileage=mileage, public_trans_date=public_trans_date, carbon_footprint=carbon_footprint)
+    public_trans = Public_Trans(mileage=mileage, public_trans_date=public_trans_date, carbon_footprint=carbon_footprint, user_id=user_id)
 
     db.session.add(public_trans)
     db.session.commit()
 
     return public_trans
 
-def create_household(num_occupants):
+def create_household(num_occupants, user_id):
     """create and return household"""
     
-    num_occupants = Household(num_occupants=num_occupants)
+    household_occ = Household(num_occupants=num_occupants, user_id=user_id)
 
-    db.session.add(num_occupants)
+    db.session.add(household_occ)
     db.session.commit()
 
-    return num_occupants
+    return household_occ
 
 
-def create_monthly_nat_gas(nat_gas_bill, nat_gas_date, carbon_footprint):
+def create_monthly_nat_gas(nat_gas_bill, nat_gas_date, carbon_footprint, user_id, household_id):
     """create and return the monthly gass bill"""
 
-    monthly_gas_bill = Monthly_Nat_Gas(nat_gas_bill=nat_gas_bill, nat_gas_date=nat_gas_date, carbon_footprint=carbon_footprint)
+    monthly_gas_bill = Monthly_Nat_Gas(nat_gas_bill=nat_gas_bill, nat_gas_date=nat_gas_date, carbon_footprint=carbon_footprint, user_id=user_id, household_id=household_id)
 
     db.session.add(monthly_gas_bill)
     db.session.commit()
 
     return monthly_gas_bill
 
-def create_montly_elect_bill(elect_bill, elect_date, carbon_footprint):
+def create_monthly_elect_bill(elect_bill, elect_date, carbon_footprint, user_id, household_id):
     """create and return monthly electricity use"""
 
-    monthly_elect_bill = Monthly_Elect(elect_bill=elect_bill, elect_date=elect_date, carbon_footprint=carbon_footprint)
+    monthly_elect_bill = Monthly_Elect(elect_bill=elect_bill, elect_date=elect_date, carbon_footprint=carbon_footprint, user_id=user_id, household_id=household_id)
 
     db.session.add(monthly_elect_bill)
     db.session.commit()
@@ -76,12 +76,12 @@ def create_montly_elect_bill(elect_bill, elect_date, carbon_footprint):
     return monthly_elect_bill
 
 
-def create_comment(comment_id, user_id, text):
+def create_comment(text, user_id):
     """create and return a users comments"""
 
-    comment = Comments(comment_id=comment_id, user_id=user_id, text=text)
+    comments = Comments(text=text, user_id=user_id)
 
-    db.session.add(comment)
+    db.session.add(comments)
     db.session.commit()
 
     return comments
