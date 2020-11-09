@@ -4,7 +4,6 @@ import os
 from random import choice, randint
 from datetime import datetime
 from flask import (Flask, render_template, request, flash, session, redirect)
-from server import app
 from model import connect_to_db, db, User, Vehicle, Vehicle_Travel, Public_Trans, Household, Monthly_Nat_Gas, Monthly_Elect, Comments
 
 import crud
@@ -96,3 +95,8 @@ for comment in comment_file:
     text = comment[0]
     user_id = comment[1]
     comment_all = crud.create_comment(text, user_id)
+
+
+if __name__ == '__main__':
+    from server import app
+    connect_to_db(app) 

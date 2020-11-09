@@ -98,10 +98,12 @@ def get_user_by_id(user_id):
     user_by_id = User.query.get(user_id)
     return user_by_id
 
+
 def get_user_by_email(email):
     """get and return users by email address"""
 
     return User.query.filter(User.email == email).first()
+
 
 def get_vehicle_by_id(vehicle_id):
     """get and return vehicle type by id"""
