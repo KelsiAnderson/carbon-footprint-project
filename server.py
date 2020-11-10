@@ -38,10 +38,11 @@ def existing_user():
             session['current_user'] = user_by_email.user_id
         
             current_user = session.get('current_user')
+            vehicle_travel = crud.get_vehicle_travel_by_user(current_user)
             electricity_use = crud.get_monthly_elect_by_user(current_user)
             nat_gas_use = crud.get_monthly_nat_gas_by_user(current_user)
 
-            return render_template("existing_user.html", user_by_email=user_by_email, electricity_use=electricity_use, nat_gas_use=nat_gas_use)
+            return render_template("existing_user.html", user_by_email=user_by_email, vehicle_travel=vehicle_travel, electricity_use=electricity_use, nat_gas_use=nat_gas_use)
 
 
 @app.route('/new_users', methods=["POST"])
