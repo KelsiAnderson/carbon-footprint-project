@@ -88,11 +88,14 @@ def receive_emission_info():
     input_elect_bill = request.form.get("elect-bill")
     input_nat_gas_bill = request.form.get("nat-gas-bill")
 
-    render_template()
+    return render_template("existing_user.html", input_fuel=input_fuel, input_mpg=input_mpg, 
+    input_public_trans=input_public_trans, input_income=input_income, input_amt=input_amt, 
+    input_elect_bill=input_elect_bill, input_nat_gas_bill=input_nat_gas_bill)
 
 
 
-    coolclimate_defaults(input_feul, input_mpg, input_public_trans, input_income, input_amt, input_elect_bill, input_nat_gas_bill)
+    coolclimate_defaults(input_fuel, input_mpg, input_public_trans, 
+                input_income, input_amt, input_elect_bill, input_nat_gas_bill)
 
 # @app.route('/submit_emission_info')
 # def submit_emission_info():
@@ -108,7 +111,9 @@ def receive_emission_info():
 #     return render_template("existing_user.html", electricity_use=electricity_use)
 
 # @app.route('/coolclimte/defualts')
-def coolclimate_defaults(input_feul, input_mpg, input_public_trans, input_income, input_amt, input_elect_bill, input_nat_gas_bill):
+def coolclimate_defaults(input_fuel, input_mpg, input_public_trans, 
+                    input_income, input_amt, input_elect_bill, 
+                    input_nat_gas_bill):
 
     # input_income = request.args.get('household-income', '')
     # input_size = request.args.get('household-amt', '')
@@ -129,7 +134,10 @@ def coolclimate_defaults(input_feul, input_mpg, input_public_trans, input_income
     
     response = requests.get("https://apis.berkeley.edu/coolclimate/footprint-sandbox", params=payload, headers=headers)
 
-coolclimate_defaults()
+    data = response.json()
+    print(data)
+
+
 
 if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also
