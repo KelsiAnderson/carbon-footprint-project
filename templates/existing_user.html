@@ -2,8 +2,13 @@
 {% block title %}existing user page{% endblock %}
 
 {% block body %}
+{% for msg in get_flashed_messages() %}
+    <p class="flash-msg">
+      {{ msg }}
+    </p>
+  {% endfor %}
 <h1>Welcome back {{user_by_email.fname}}!</h1>
-<h4>Here are your trends from this past week on travel</h4>
+<h4>Here is yoour yearly carbon emission form travel</h4>
 <p>
    {{vehicle_travel.carbon_footprint}}
     

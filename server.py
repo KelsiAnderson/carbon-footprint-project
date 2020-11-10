@@ -1,11 +1,18 @@
 """server for carbon emmissions app."""
 
 from flask import (Flask, render_template, request, flash, session, redirect)
-
+import os
 from model import connect_to_db
 import crud
+import requests
 
+#import coolClimateAPI as cc 
 
+app_key = os.environ['app_key']
+app_id = os.environ['app_id']
+
+# response = api.get_emission_info(input_income=1, input_size=2, input_location_mode=4)
+# data = response.json()
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
@@ -50,7 +57,7 @@ def existing_user():
 def new_user():
     
     session['current_user'] = request.args.get("User.user_id")
-    fname = request.form.get("firstname")
+    fname = request.form.get("fname")
     user_name = request.form.get("username")
     email = request.form.get("email")
     password = request.form.get("password")
@@ -65,9 +72,32 @@ def create_new_user():
 
 @app.route('/get-emission-info')
 def get_emission_info():
-
+    
     flash("You are now logged in")
     return render_template("emission_info.html")
+
+
+@app.route('/get-emission-info', methods=['POST'])
+def receive_emission_info():
+
+    input_fuel = request.form.get("fuel-type")
+    input_mpg = request.form.get("mpg")
+    input_public_trans = request.form.get("public-trans")
+    input_income = request.form.get("household-income")
+    input_amt = request.form.get("household-amt")
+    input_elect_bill = request.form.get("elect-bill")
+    input_nat_gas_bill = request.form.get("nat-gas-bill")
+
+    render_template()
+
+
+
+    coolclimate_defaults(input_feul, input_mpg, input_public_trans, input_income, input_amt, input_elect_bill, input_nat_gas_bill)
+
+# @app.route('/submit_emission_info')
+# def submit_emission_info():
+
+
 
 # @app.route('/get_monthly_elect')
 # def get_monthly_elect():
@@ -77,11 +107,29 @@ def get_emission_info():
 
 #     return render_template("existing_user.html", electricity_use=electricity_use)
 
-# response = request.get(
-#     apis.berkeley.edu/coolclimate,
-#     params = {input_income: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
+# @app.route('/coolclimte/defualts')
+def coolclimate_defaults(input_feul, input_mpg, input_public_trans, input_income, input_amt, input_elect_bill, input_nat_gas_bill):
 
-)
+    # input_income = request.args.get('household-income', '')
+    # input_size = request.args.get('household-amt', '')
+    # input_location_mode = request.args.get('input_location_mode', '')
+    
+    #add header and refer to variables app_id and app_key not actual keys
+    #params/payload
+    #request.get from below
+    #connect user response
+    url = "https://apis.berkeley.edu/coolclimate/footprint-sandbox"
+    payload = {'input_income': 1, 
+            'input_footprint_transportation_miles1': 12000, 
+            'input_footprint_transportation_fuel1': 1, 
+            'input_footprint_transportation_mpg1': 32, 
+            'input_size': 1}
+    
+    headers = (app_id, app_key)
+    
+    response = requests.get("https://apis.berkeley.edu/coolclimate/footprint-sandbox", params=payload, headers=headers)
+
+coolclimate_defaults()
 
 if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also

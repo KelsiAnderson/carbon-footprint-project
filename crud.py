@@ -127,6 +127,10 @@ def get_vehicle_travel_by_user(user_id):
     return vehicle_travel
 
 #TODO: create a route for household income
+def get_household_by_id(user_id):
+
+    household = Household.query.filter(vehicle_Travel.user_id == user_id).first()
+    return household
 
 if __name__ == '__main__':
     from server import app
