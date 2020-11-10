@@ -27,14 +27,21 @@ def existing_user():
     user_name = request.args.get("username")
     password = request.args.get("password")
     user_by_email = crud.get_user_by_email(email)
-    session['current_user'] = user_by_email.user_id
+    
     if not user_by_email:
         flash("Please create account below!")
     else:
-       #I need to figure out how to prove that the name is already in the database
-       #when they sign in, their info successfully logs them into the website
-       # and then redirects to existing user
-        return render_template("existing_user.html", user_by_email=user_by_email)
+        if not password:
+            flash('password incorrect')
+        
+        else:
+            session['current_user'] = user_by_email.user_id
+        
+            current_user = session.get('current_user')
+            electricity_use = crud.get_monthly_elect_by_user(current_user)
+            nat_gas_use = crud.get_monthly_nat_gas_by_user(current_user)
+
+            return render_template("existing_user.html", user_by_email=user_by_email, electricity_use=electricity_use, nat_gas_use=nat_gas_use)
 
 
 @app.route('/new_users', methods=["POST"])
@@ -58,6 +65,15 @@ def get_emission_info():
 
     flash("You are now logged in")
     return render_template("emission_info.html")
+
+# @app.route('/get_monthly_elect')
+# def get_monthly_elect():
+
+#     current_user = session.get('current_user')
+#     electricity_use = crud.get_monthly_elect_by_user(current_user)
+
+#     return render_template("existing_user.html", electricity_use=electricity_use)
+
 
 
 if __name__ == '__main__':

@@ -111,10 +111,20 @@ def get_vehicle_by_id(vehicle_id):
     vehicle_by_id = Vehicle.query.get(vehicle_id)
     return vehicle_by_id
 
-def get_monthly_nat_gas(nat_gas_bill):
+def get_monthly_nat_gas_by_user(user_id):
 
-    gas_by_bill = Monthly_Nat_Gas.query.get(nat_gas_bill)
+    gas_by_bill = Monthly_Nat_Gas.query.filter(Monthly_Nat_Gas.user_id == user_id).first()
     return gas_by_bill
+
+def get_monthly_elect_by_user(user_id):
+
+    monthly_elect = Monthly_Elect.query.filter(Monthly_Elect.user_id == user_id).first()
+    return monthly_elect
+
+def get_vehicle_travel_by_user(user_id):
+
+    vehicle_travel = Vehicle_Travel.query.filter(Vehicle_Travel.user_id == user_id).first()
+    return vehicle_travel
 
 if __name__ == '__main__':
     from server import app
