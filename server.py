@@ -22,10 +22,12 @@ def homepage():
 @app.route('/existing_users')
 def existing_user():
     
+    
     email= request.args.get("email")
     user_name = request.args.get("username")
     password = request.args.get("password")
     user_by_email = crud.get_user_by_email(email)
+    session['current_user'] = user_by_email.user_id
     if not user_by_email:
         flash("Please create account below!")
     else:
@@ -38,6 +40,7 @@ def existing_user():
 @app.route('/new_users', methods=["POST"])
 def new_user():
     
+    session['current_user'] = request.args.get("User.user_id")
     user_name = request.form.get("username")
     email = request.form.get("email")
     password = request.form.get("password")
@@ -53,7 +56,7 @@ def create_new_user():
 @app.route('/get-emission-info')
 def get_emission_info():
 
-    flash("You are now logged in!")
+    flash("You are now logged in")
     return render_template("emission_info.html")
 
 

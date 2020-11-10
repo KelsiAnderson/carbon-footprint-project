@@ -111,6 +111,11 @@ def get_vehicle_by_id(vehicle_id):
     vehicle_by_id = Vehicle.query.get(vehicle_id)
     return vehicle_by_id
 
+def get_monthly_nat_gas(nat_gas_bill):
+
+    gas_by_bill = Monthly_Nat_Gas.query.get(nat_gas_bill)
+    return gas_by_bill
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)  
