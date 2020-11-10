@@ -33,10 +33,11 @@ def open_pipe_file(pipe_file):
 
 user_file = open_pipe_file("seed_text_files/user.seed")
 for user in user_file:
-    user_name = user[0] 
-    email = user[1]
-    password = user[2]
-    all_users = crud.create_user(user_name, email, password)
+    fname = user[0]
+    user_name = user[1] 
+    email = user[2]
+    password = user[3]
+    all_users = crud.create_user(fname, user_name, email, password)
 
 
 vehicle_file = open_pipe_file("seed_text_files/vehicle.seed")
@@ -65,19 +66,16 @@ for transit in public_trans_file:
 household_file = open_pipe_file("seed_text_files/household.seed")
 for house in household_file:
     num_occupants = house[0]
-    user_id = house[1]
-    household = crud.create_household(num_occupants, user_id)
+    income = house[1]
+    user_id = house[2]
+    household = crud.create_household(num_occupants, income, user_id)
 
 nat_gas_file = open_pipe_file("seed_text_files/nat_gas.seed")
 for nat_gas in nat_gas_file:
-    print('CHECK HEREEEEEEEEEEEE', nat_gas)
     nat_gas_bill = nat_gas[0]
-    # print('did i make it here', nat_gas_bill)
-    # print('type of gas bill', type(nat_gas_bill))
     nat_gas_date = nat_gas[1]
     carbon_footprint = nat_gas[2]
     user_id = nat_gas[3]
-    # print("LOOK HEEERRRR", type(user_id))
     household_id = nat_gas[4]
     nat_gas_all = crud.create_monthly_nat_gas(nat_gas_bill, nat_gas_date, carbon_footprint, user_id, household_id)
 

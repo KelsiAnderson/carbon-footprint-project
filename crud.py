@@ -3,10 +3,10 @@
 
 from model import db, User, Vehicle, Vehicle_Travel, Public_Trans, Household, Monthly_Nat_Gas, Monthly_Elect, Comments, connect_to_db
 
-def create_user(user_name, email, password):
+def create_user(fname, user_name, email, password):
     """Create and return a new user"""
 
-    user = User(user_name=user_name, email=email, password=password)
+    user = User(fname=fname, user_name=user_name, email=email, password=password)
 
     db.session.add(user)
     db.session.commit()
@@ -44,15 +44,15 @@ def create_public_trans(mileage, public_trans_date, carbon_footprint, user_id):
 
     return public_trans
 
-def create_household(num_occupants, user_id):
+def create_household(num_occupants, income, user_id):
     """create and return household"""
     
-    household_occ = Household(num_occupants=num_occupants, user_id=user_id)
+    household = Household(num_occupants=num_occupants, income=income, user_id=user_id)
 
-    db.session.add(household_occ)
+    db.session.add(household)
     db.session.commit()
 
-    return household_occ
+    return household
 
 
 def create_monthly_nat_gas(nat_gas_bill, nat_gas_date, carbon_footprint, user_id, household_id):
@@ -125,6 +125,8 @@ def get_vehicle_travel_by_user(user_id):
 
     vehicle_travel = Vehicle_Travel.query.filter(Vehicle_Travel.user_id == user_id).first()
     return vehicle_travel
+
+#TODO: create a route for household income
 
 if __name__ == '__main__':
     from server import app

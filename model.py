@@ -10,6 +10,7 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    fname = db.Column(db.String)
     user_name = db.Column(db.String)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
@@ -86,6 +87,7 @@ class Household(db.Model):
 
     household_id = db.Column(db.Integer, autoincrement = True, nullable = False, primary_key = True)
     num_occupants = db.Column(db.Integer)
+    income = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
     user = db.relationship('User')

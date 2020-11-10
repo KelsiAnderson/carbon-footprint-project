@@ -2,6 +2,13 @@
 {% block title %}Emissions Footprint Home{% endblock %}
 
 {% block body %}
+{% with messages = get_flashed_messages() %}
+  {% if messages%}
+    {% for message in messages %}
+      <p>message</p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 <h1>Welcome!</h1>
   <h2>LOGIN</h2>
   <form action="/existing_users">

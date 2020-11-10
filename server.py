@@ -5,6 +5,7 @@ from flask import (Flask, render_template, request, flash, session, redirect)
 from model import connect_to_db
 import crud
 
+
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
@@ -31,8 +32,8 @@ def existing_user():
     if not user_by_email:
         flash("Please create account below!")
     else:
-        if not password:
-            flash('password incorrect')
+        if not user_by_email.password:
+            flash('incorrect password')
         
         else:
             session['current_user'] = user_by_email.user_id
@@ -49,10 +50,11 @@ def existing_user():
 def new_user():
     
     session['current_user'] = request.args.get("User.user_id")
+    fname = request.form.get("firstname")
     user_name = request.form.get("username")
     email = request.form.get("email")
     password = request.form.get("password")
-    new_user = crud.create_user(user_name, email, password)
+    new_user = crud.create_user(fname, user_name, email, password)
 
     return render_template("emission_info.html")
 
@@ -75,7 +77,11 @@ def get_emission_info():
 
 #     return render_template("existing_user.html", electricity_use=electricity_use)
 
+# response = request.get(
+#     apis.berkeley.edu/coolclimate,
+#     params = {input_income: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
 
+)
 
 if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also
