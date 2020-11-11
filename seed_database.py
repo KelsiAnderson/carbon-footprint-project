@@ -4,13 +4,10 @@ import os
 from random import choice, randint
 from datetime import datetime
 from flask import (Flask, render_template, request, flash, session, redirect)
+import model
 from model import connect_to_db, db, User, Vehicle, Vehicle_Travel, Public_Trans, Household, Monthly_Nat_Gas, Monthly_Elect, Comments
 
 import crud
-
-
-import crud
-import model
 import server
 
 # os.sysytem('dropdb ratings')

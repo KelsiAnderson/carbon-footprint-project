@@ -38,10 +38,11 @@ def existing_user():
     
     if not user_by_email:
         flash("Please create account below!")
+        return redirect('/')
     else:
-        if not user_by_email.password:
+        if password != user_by_email.password:
             flash('incorrect password')
-        
+            return redirect('/')
         else:
             session['current_user'] = user_by_email.user_id
         
@@ -56,12 +57,19 @@ def existing_user():
 @app.route('/new_users', methods=["POST"])
 def new_user():
     
-    session['current_user'] = request.args.get("User.user_id")
-    fname = request.form.get("fname")
-    user_name = request.form.get("username")
-    email = request.form.get("email")
-    password = request.form.get("password")
-    new_user = crud.create_user(fname, user_name, email, password)
+    email= request.args.get("email")
+    user_by_email = crud.get_user_by_email(email)
+    # session['current_user'] = request.args.get("User.user_id")
+    # current_user = session.get('current_user')
+    if email !=  user_by_email:
+        fname = request.form.get("fname")
+        user_name = request.form.get("username")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        new_user = crud.create_user(fname, user_name, email, password)
+    else:
+        flash('User already exists')
+        return redirect('/')
 
     return render_template("emission_info.html")
 
@@ -97,28 +105,11 @@ def receive_emission_info():
     coolclimate_defaults(input_fuel, input_mpg, input_public_trans, 
                 input_income, input_amt, input_elect_bill, input_nat_gas_bill)
 
-# @app.route('/submit_emission_info')
-# def submit_emission_info():
 
-
-
-# @app.route('/get_monthly_elect')
-# def get_monthly_elect():
-
-#     current_user = session.get('current_user')
-#     electricity_use = crud.get_monthly_elect_by_user(current_user)
-
-#     return render_template("existing_user.html", electricity_use=electricity_use)
-
-# @app.route('/coolclimte/defualts')
 def coolclimate_defaults(input_fuel, input_mpg, input_public_trans, 
                     input_income, input_amt, input_elect_bill, 
                     input_nat_gas_bill):
-
-    # input_income = request.args.get('household-income', '')
-    # input_size = request.args.get('household-amt', '')
-    # input_location_mode = request.args.get('input_location_mode', '')
-    
+ 
     #add header and refer to variables app_id and app_key not actual keys
     #params/payload
     #request.get from below
