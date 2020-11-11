@@ -59,8 +59,7 @@ def new_user():
     
     email= request.args.get("email")
     user_by_email = crud.get_user_by_email(email)
-    # session['current_user'] = request.args.get("User.user_id")
-    # current_user = session.get('current_user')
+
     if email !=  user_by_email:
         fname = request.form.get("fname")
         user_name = request.form.get("username")
@@ -96,14 +95,12 @@ def receive_emission_info():
     input_elect_bill = request.form.get("elect-bill")
     input_nat_gas_bill = request.form.get("nat-gas-bill")
 
+    coolclimate_defaults(input_fuel, input_mpg, input_public_trans, 
+                input_income, input_amt, input_elect_bill, input_nat_gas_bill)
+
     return render_template("existing_user.html", input_fuel=input_fuel, input_mpg=input_mpg, 
     input_public_trans=input_public_trans, input_income=input_income, input_amt=input_amt, 
     input_elect_bill=input_elect_bill, input_nat_gas_bill=input_nat_gas_bill)
-
-
-
-    coolclimate_defaults(input_fuel, input_mpg, input_public_trans, 
-                input_income, input_amt, input_elect_bill, input_nat_gas_bill)
 
 
 def coolclimate_defaults(input_fuel, input_mpg, input_public_trans, 
@@ -134,5 +131,5 @@ if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also
     # "reloads" our web app if we change the code.
     connect_to_db(app)
-    app.run(debug=True, host="0.0.0.0")
+    # app.run(debug=True, host="0.0.0.0")
    
