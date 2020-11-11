@@ -6,17 +6,14 @@ from model import connect_to_db
 import crud
 import requests
 
-#import coolClimateAPI as cc 
+app = Flask(__name__)
 
-app_key = os.environ['app_key']
 app_id = os.environ['app_id']
+app_key = os.environ['app_key']
 
-# response = api.get_emission_info(input_income=1, input_size=2, input_location_mode=4)
-# data = response.json()
 from jinja2 import StrictUndefined
 
-app = Flask(__name__)
-app.secret_key = "TBD"
+app.secret_key = "WHATEVERYOUDOTAKECAREOFYOURSHOES"
 app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
@@ -29,7 +26,6 @@ def homepage():
 #route that takes you to existing user page
 @app.route('/existing_users')
 def existing_user():
-    
     
     email= request.args.get("email")
     user_name = request.args.get("username")
@@ -54,19 +50,21 @@ def existing_user():
             return render_template("existing_user.html", user_by_email=user_by_email, vehicle_travel=vehicle_travel, electricity_use=electricity_use, nat_gas_use=nat_gas_use)
 
 
-@app.route('/new_users', methods=["POST"])
+@app.route('/new_users', methods=["POST","GET"])
 def new_user():
     
-    email= request.args.get("email")
+    email= request.form.get("email")
     user_by_email = crud.get_user_by_email(email)
 
-    if email !=  user_by_email:
+    if email != user_by_email:
+        print("LOOOOOOKKK HERE")
         fname = request.form.get("fname")
         user_name = request.form.get("username")
         email = request.form.get("email")
         password = request.form.get("password")
         new_user = crud.create_user(fname, user_name, email, password)
     else:
+        print('LOOOKKK ATTT MEEEE')
         flash('User already exists')
         return redirect('/')
 
@@ -88,7 +86,9 @@ def get_emission_info():
 def receive_emission_info():
 
     input_fuel = request.form.get("fuel-type")
+    print("FUEL HEREEE", input_fuel)
     input_mpg = request.form.get("mpg")
+    vehicle_travel = request.form.get("vehicle-travel")
     input_public_trans = request.form.get("public-trans")
     input_income = request.form.get("household-income")
     input_amt = request.form.get("household-amt")
@@ -98,22 +98,21 @@ def receive_emission_info():
     coolclimate_defaults(input_fuel, input_mpg, input_public_trans, 
                 input_income, input_amt, input_elect_bill, input_nat_gas_bill)
 
-    return render_template("existing_user.html", input_fuel=input_fuel, input_mpg=input_mpg, 
+    return render_template("existing_user.html", input_fuel=input_fuel, input_mpg=input_mpg, vehicle_travel=vehicle_travel,
     input_public_trans=input_public_trans, input_income=input_income, input_amt=input_amt, 
     input_elect_bill=input_elect_bill, input_nat_gas_bill=input_nat_gas_bill)
 
 
-def coolclimate_defaults(input_fuel, input_mpg, input_public_trans, 
+def coolclimate_defaults(input_fuel, input_mpg, vehicle_travel, input_public_trans, 
                     input_income, input_amt, input_elect_bill, 
                     input_nat_gas_bill):
- 
     #add header and refer to variables app_id and app_key not actual keys
     #params/payload
     #request.get from below
     #connect user response
     url = "https://apis.berkeley.edu/coolclimate/footprint-sandbox"
-    payload = {'input_income': 1, 
-            'input_footprint_transportation_miles1': 12000, 
+    payload = {'input_income': input_income, 
+            'input_footprint_transportation_miles1': vehicle_travel, 
             'input_footprint_transportation_fuel1': 1, 
             'input_footprint_transportation_mpg1': 32, 
             'input_size': 1}
@@ -124,12 +123,12 @@ def coolclimate_defaults(input_fuel, input_mpg, input_public_trans,
 
     data = response.json()
     print(data)
-
+    income = data['_embedded']['input_income']
 
 
 if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also
     # "reloads" our web app if we change the code.
     connect_to_db(app)
-    # app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0")
    
