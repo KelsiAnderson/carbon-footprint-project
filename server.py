@@ -55,9 +55,8 @@ def new_user():
     
     email= request.form.get("email")
     user_by_email = crud.get_user_by_email(email)
-
-    if email != user_by_email:
-        print("LOOOOOOKKK HERE")
+    print(user_by_email)
+    if not user_by_email:
         fname = request.form.get("fname")
         user_name = request.form.get("username")
         email = request.form.get("email")
@@ -123,7 +122,8 @@ def coolclimate_defaults(input_fuel, input_mpg, vehicle_travel, input_public_tra
 
     data = response.json()
     print(data)
-    income = data['_embedded']['input_income']
+    # income = data['_embedded']['input_income']
+    return data
 
 
 if __name__ == '__main__':

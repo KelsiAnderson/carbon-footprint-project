@@ -101,7 +101,7 @@ def get_user_by_id(user_id):
 
 def get_user_by_email(email):
     """get and return users by email address"""
-
+    
     return User.query.filter(User.email == email).first()
 
 
