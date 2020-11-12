@@ -14,9 +14,9 @@ def create_user(fname, user_name, email, password):
     return user
 
 
-def create_vehicle(mpg, user_id):
+def create_vehicle(mpg, fuel_type, user_id):
     """create and return a new users vehicle"""
-    mileage = Vehicle(mpg=mpg, user_id= user_id)
+    mileage = Vehicle(mpg=mpg, fuel_type=fuel_type, user_id= user_id)
 
     db.session.add(mileage)
     db.session.commit()
@@ -125,6 +125,35 @@ def get_vehicle_travel_by_user(user_id):
 
     vehicle_travel = Vehicle_Travel.query.filter(Vehicle_Travel.user_id == user_id).first()
     return vehicle_travel
+
+def add_user_info(input_fuel, input_mpg, vehicle_travel, input_public_trans, 
+            input_income, input_amt, input_elect_bill, input_nat_gas_bill, user_id):
+
+    add_fuel = Vehicle(input_fuel=fuel_type, input_mpg=mpg, user_id=user_id)
+    db.session.add(add_fuel)
+    db.session.commit()
+
+    add_vehicle_travel = Vehicle_Travel(vehicle_travel=mileage, user_id=user_id)
+    db.session.add(add_vehicle_travel)
+    db.session.commit()
+
+    add_public_trans = Public_Trans(input_public_trans=mileage, user_id=user_id)
+    db.session.add(add_fuel)
+    db.session.commit()
+
+    add_income = Household(input_income=income, input_amt=num_occupants, user_id=user_id)
+    db.session.add(add_income)
+    db.session.commit()
+
+    add_elect_bill = Monthly_Elect(input_elect_bill=elect_bill, user_id=user_id)
+    db.session.add(add_elect_bill)
+    db.session.commit()
+
+    add_nat_gas = Monthly_Nat_Gas(input_nat_gas_bill=nat_gas_bill, user_id=user_id)
+    db.session.add(add_nat_gas)
+    db.session.commit()
+
+    return "success!"
 
 #TODO: create a route for household income
 def get_household_by_id(user_id):

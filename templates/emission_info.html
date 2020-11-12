@@ -3,7 +3,7 @@
 {% block body %}
 
 <h1>Hi! Tell us a little more about your lifestyle</h1>
-<form action="/get-emission-info">
+<form action="/submit-info">
     What does your car run on?
     <select name="fuel-type">
         <option value="diesel">Diesel</option>
@@ -11,21 +11,16 @@
         <option value="electric">Electric</option>
     </select>
     <br>
-    <form>
     <label>What is your vehicle's mpg?</label>
        <input type="text" name="mpg"> 
-    </form>
     <br>
-    <form>
         <label>How many miles per year do you travel by car?</label>
         <input type="text" name="vehicle-travel">
-    </form><br>
-    <form>
+    <br>
         <label>How many miles per year do you travel on pubic transit?</label>
         <input type="text" name="public-trans">
-    </form><br>
+    <br>
 <!-- add location -->
-    <form>
         <label>What is your household income</label>
         <select name="household-income">
             <option value="2">Less than $10,000</option>
@@ -39,8 +34,7 @@
             <option value="10">$100,000 to $119,999</option>
             <option value="11">$120,000 or more</option>
         </select>
-    </form><br>
-    <form>
+    <br>
         <label>How many people live in your household</label>
         <select name="household-amt">
             <option value="1">1 person</option>
@@ -49,19 +43,14 @@
             <option value="4">4 people</option>
             <option value="5">5 or more people</option>
         </select>
-    </form><br>
-    <form>
+    <br>
         <label>Please enter your monthly electricity bill</label>
         <input type="text" name="elect-bill">
-    </form><br>
-    <form>
+    <br>
         <label> Please enter your monthly natrual gas bill</label>
         <input type="text" name="nat-gas-bill">
-    </form>
-    <form>
     <p>
         <input type="submit">
       </p>
-    </form>
 </form>
 {% endblock %}

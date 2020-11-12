@@ -40,8 +40,9 @@ for user in user_file:
 vehicle_file = open_pipe_file("seed_text_files/vehicle.seed")
 for vehicle in vehicle_file:
     mpg = vehicle[0]
-    user_id = vehicle[1]
-    all_vehicles = crud.create_vehicle(mpg, user_id)
+    fuel_type = vehicle[1]
+    user_id = vehicle[2]
+    all_vehicles = crud.create_vehicle(mpg, fuel_type, user_id)
 
 vehicle_travel_file = open_pipe_file("seed_text_files/vehicle_travel.seed")
 for travel in vehicle_travel_file:

@@ -63,7 +63,6 @@ def new_user():
         password = request.form.get("password")
         new_user = crud.create_user(fname, user_name, email, password)
     else:
-        print('LOOOKKK ATTT MEEEE')
         flash('User already exists')
         return redirect('/')
 
@@ -74,18 +73,11 @@ def create_new_user():
 
     return render_template("new_user.html")
 
-@app.route('/get-emission-info')
-def get_emission_info():
+@app.route('/submit_info', methods=["POST"])
+def submit_info():
     
-    flash("You are now logged in")
-    return render_template("emission_info.html")
-
-
-@app.route('/get-emission-info', methods=['POST'])
-def receive_emission_info():
-
+    user_id = session.get('current_user')
     input_fuel = request.form.get("fuel-type")
-    print("FUEL HEREEE", input_fuel)
     input_mpg = request.form.get("mpg")
     vehicle_travel = request.form.get("vehicle-travel")
     input_public_trans = request.form.get("public-trans")
@@ -93,18 +85,19 @@ def receive_emission_info():
     input_amt = request.form.get("household-amt")
     input_elect_bill = request.form.get("elect-bill")
     input_nat_gas_bill = request.form.get("nat-gas-bill")
+    add_all = crud.add_user_info(input_fuel, input_mpg, vehicle_travel, 
+                                input_public_trans, input_income, input_amt,
+                                input_elect_bill, input_nat_gas_bill)
+    
+    #add to databse with crud function
+    #redirect to existing user
+    #get user out of session 
+    return redirect("/existing-users")
 
-    coolclimate_defaults(input_fuel, input_mpg, input_public_trans, 
-                input_income, input_amt, input_elect_bill, input_nat_gas_bill)
 
-    return render_template("existing_user.html", input_fuel=input_fuel, input_mpg=input_mpg, vehicle_travel=vehicle_travel,
-    input_public_trans=input_public_trans, input_income=input_income, input_amt=input_amt, 
-    input_elect_bill=input_elect_bill, input_nat_gas_bill=input_nat_gas_bill)
-
-
-def coolclimate_defaults(input_fuel, input_mpg, vehicle_travel, input_public_trans, 
-                    input_income, input_amt, input_elect_bill, 
-                    input_nat_gas_bill):
+#perhaps restore all of the inputs in a dictioanry 
+def coolclimate_defaults(input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
+                    input_elect_bill, input_nat_gas_bill):
     #add header and refer to variables app_id and app_key not actual keys
     #params/payload
     #request.get from below
@@ -112,17 +105,24 @@ def coolclimate_defaults(input_fuel, input_mpg, vehicle_travel, input_public_tra
     url = "https://apis.berkeley.edu/coolclimate/footprint-sandbox"
     payload = {'input_income': input_income, 
             'input_footprint_transportation_miles1': vehicle_travel, 
-            'input_footprint_transportation_fuel1': 1, 
-            'input_footprint_transportation_mpg1': 32, 
-            'input_size': 1}
-    
-    headers = (app_id, app_key)
+            'input_footprint_transportation_fuel1': input_fuel, 
+            'input_footprint_transportation_mpg1': input_mpg, 
+            'input_size': input_amt,
+            'input_footprint_transportation_mpg1': input_public_trans
+            # 'input_natural_gas_monthly_bill': input_nat_gas_bill,
+            # 'input_elctricity_monthly_bill': input_elect_bill
+            }
+            #coolclimate_defaults('gas', 32, 12000, 100, 6, 2, 32.00, 10.00)
+    print(payload)
+    headers = {"app_id": app_id, "app_key": app_key}
     
     response = requests.get("https://apis.berkeley.edu/coolclimate/footprint-sandbox", params=payload, headers=headers)
-
+    print(response.text)
     data = response.json()
     print(data)
     # income = data['_embedded']['input_income']
+    # vehicle_miles = data['_embdedded']['input_footprint_transportation_miles1']
+    # vehicle_fuel = data['_embdeed']['input_footprint_transportation_fuel1']
     return data
 
 
