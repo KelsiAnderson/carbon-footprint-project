@@ -41,4 +41,9 @@ for child in tree:
     print(child.tag, child.text)
     #turne child.text into dictionary
     #extract the info needed from child.text
+
+result = {}
+for child in tree:
+   if child.tag == 'input_footprint_transportation_bus':
+               result['input_footprint_transportation_bus']= child.text
     #
