@@ -129,27 +129,27 @@ def get_vehicle_travel_by_user(user_id):
 def add_user_info(input_fuel, input_mpg, vehicle_travel, input_public_trans, 
             input_income, input_amt, input_elect_bill, input_nat_gas_bill, user_id):
 
-    add_fuel = Vehicle(input_fuel=fuel_type, input_mpg=mpg, user_id=user_id)
+    add_fuel = Vehicle(fuel_type=input_fuel, mpg=input_mpg, user_id=user_id)
     db.session.add(add_fuel)
     db.session.commit()
 
-    add_vehicle_travel = Vehicle_Travel(vehicle_travel=mileage, user_id=user_id)
+    add_vehicle_travel = Vehicle_Travel(mileage=vehicle_travel, user_id=user_id)
     db.session.add(add_vehicle_travel)
     db.session.commit()
 
-    add_public_trans = Public_Trans(input_public_trans=mileage, user_id=user_id)
+    add_public_trans = Public_Trans(mileage=input_public_trans, user_id=user_id)
     db.session.add(add_fuel)
     db.session.commit()
 
-    add_income = Household(input_income=income, input_amt=num_occupants, user_id=user_id)
+    add_income = Household(income=input_income, num_occupants=input_amt, user_id=user_id)
     db.session.add(add_income)
     db.session.commit()
 
-    add_elect_bill = Monthly_Elect(input_elect_bill=elect_bill, user_id=user_id)
+    add_elect_bill = Monthly_Elect(elect_bill=input_elect_bill, user_id=user_id)
     db.session.add(add_elect_bill)
     db.session.commit()
 
-    add_nat_gas = Monthly_Nat_Gas(input_nat_gas_bill=nat_gas_bill, user_id=user_id)
+    add_nat_gas = Monthly_Nat_Gas(nat_gas_bill=input_nat_gas_bill, user_id=user_id)
     db.session.add(add_nat_gas)
     db.session.commit()
 
