@@ -4,43 +4,70 @@ import requests
 app_id = os.environ['app_id']
 app_key = os.environ['app_key']
 
-def coolclimate_defaults(input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
+def coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
                     input_elect_bill, input_nat_gas_bill):
     #add header and refer to variables app_id and app_key not actual keys
     #params/payload
     #request.get from below
     #connect user response
-    url = "https://apis.berkeley.edu/coolclimate/footprint-sandbox"
-    payload = {'input_income': input_income, 
-            'input_footprint_transportation_miles1': vehicle_travel, 
-            'input_footprint_transportation_fuel1': input_fuel, 
-            'input_footprint_transportation_mpg1': input_mpg, 
-            'input_size': input_amt,
-            'input_footprint_transportation_mpg1': input_public_trans
-            # 'input_natural_gas_monthly_bill': input_nat_gas_bill,
-            # 'input_elctricity_monthly_bill': input_elect_bill
+
+
+
+    payload = {"input_location_mode": 1, 
+            "input_location": location_by_zip, 
+            "input_income": input_income, 
+            "input_size": input_amt,
+            "input_footprint_housing_naturalgas_dollars": input_nat_gas_bill,
+            "input_footprint_transportation_fuel1": input_fuel,
+            "input_footprint_transportation_miles1": vehicle_travel,
+            "input_footprint_transportation_mpg1": input_mpg,
+            "input_footprint_transportation_bus": input_public_trans,
+            "input_footprint_housing_electricity_dollars": input_elect_bill
             }
-            #coolclimate_defaults('gas', 32, 12000, 100, 6, 2, 32.00, 10.00)
-    #print(payload)
     headers = {"app_id": app_id, "app_key": app_key, "Accept": "application/xml" }
     
-    response = requests.get("https://apis.berkeley.edu/coolclimate/footprint-sandbox", params=payload, headers=headers)
+    response = requests.get("https://apis.berkeley.edu/coolclimate/footprint-defaults", params=payload, headers=headers)
     
     result = {}
     from xml.etree import ElementTree
     tree = ElementTree.fromstring(response.content)
     for child in tree:
         print(child.tag, child.text)
-        
-    for child in tree:
-        if child.tag == 'input_footprint_transportation_bus':
-            result['input_footprint_transportation_bus']= child.text
+        for child in tree:
+            if child.tag == 'input_location_mode':
+                result['input_location_mode']= child.text
+            if child.tag == 'input_location':
+                result['input_location']= child.text
+            if child.tag == 'input_income':
+                result['input_income']= child.text
+            if child.tag == 'input_size':
+                result['input_size']= child.text
+            if child.tag == 'input_footprint_housing_electricity_dollars':
+                result['input_footprint_housing_electricity_dollars']= child.text        
+            if child.tag == 'input_footprint_transportation_fuel1':
+                result['input_footprint_transportation_fuel1']= child.text
+            
+            if child.tag == 'input_footprint_transportation_bus':
+                result['input_footprint_transportation_bus']= child.text
+            if child.tag == 'input_footprint_housing_naturalgas_therms':
+                result['input_footprint_housing_naturalgas_dollars']= child.text 
+            
 
+            
+    print(result)
     return result
 
-response = coolclimate_defaults("gas", 32, 13000, 100, 6, 2, 32.00, 10.00 )
+response = coolclimate_defaults(80120, "gas", 32, 13000, 100, 6, 2, 32.00, 10.00 )
 
 
+##############################################################
+def existing_user_cc_calcs(user_id):
+    """deliver user that already exists its calculations through the database"""
+    user_obj = User.query.filter(user_id=user_id)
+    user_location = user_obj.location.zipcode
+
+
+##############################################################
     #turne child.text into dictionary
     #extract the info needed from child.text
 

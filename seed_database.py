@@ -5,7 +5,7 @@ from random import choice, randint
 from datetime import datetime
 from flask import (Flask, render_template, request, flash, session, redirect)
 import model
-from model import connect_to_db, db, User, Vehicle, Vehicle_Travel, Public_Trans, Household, Monthly_Nat_Gas, Monthly_Elect, Comments
+from model import connect_to_db, db, User, Location, Vehicle, Vehicle_Travel, Public_Trans, Household, Monthly_Nat_Gas, Monthly_Elect, Comments
 
 import crud
 import server
@@ -36,6 +36,11 @@ for user in user_file:
     password = user[3]
     all_users = crud.create_user(fname, user_name, email, password)
 
+location_file = open_pipe_file("seed_text_files/location.seed")
+for zip in location_file:
+    zipcode = zip[0]
+    user_id =zip[1]
+    add_location = crud.create_location(zipcode, user_id)
 
 vehicle_file = open_pipe_file("seed_text_files/vehicle.seed")
 for vehicle in vehicle_file:

@@ -48,7 +48,7 @@ def existing_user():
             electricity_use = crud.get_monthly_elect_by_user(current_user)
             nat_gas_use = crud.get_monthly_nat_gas_by_user(current_user)
 
-            return render_template("existing_user.html", user_by_email=user_by_email, vehicle_travel=vehicle_travel, electricity_use=electricity_use, nat_gas_use=nat_gas_use)
+            return render_template("profile.html", user_by_email=user_by_email, vehicle_travel=vehicle_travel, electricity_use=electricity_use, nat_gas_use=nat_gas_use)
 
 
 @app.route('/new_users', methods=["POST","GET"])
@@ -80,7 +80,7 @@ def submit_info():
     user_by_email = crud.get_user_by_email(email)
     #session['current_user'] = user_by_email.user_id
     user_id = session.get('current_user')
-
+    location_by_zip = request.form.get("zipcode")
     input_fuel = request.form.get("fuel-type")
     input_mpg = request.form.get("mpg")
     vehicle_travel = request.form.get("vehicle-travel")
@@ -89,10 +89,10 @@ def submit_info():
     input_amt = request.form.get("household-amt")
     input_elect_bill = request.form.get("elect-bill")
     input_nat_gas_bill = request.form.get("nat-gas-bill")
-    add_all = crud.add_user_info(input_fuel=input_fuel, input_mpg=input_mpg, vehicle_travel=vehicle_travel, 
+    add_all = crud.add_user_info(location_by_zip=location_by_zip, input_fuel=input_fuel, input_mpg=input_mpg, vehicle_travel=vehicle_travel, 
                                 input_public_trans=input_public_trans, input_income=input_income, input_amt=input_amt,
                                 input_elect_bill=input_elect_bill, input_nat_gas_bill=input_nat_gas_bill, user_id=user_id)
-    
+    results = coolclimate_defaults()
     #add to databse with crud function
     #redirect to existing user
     #get user out of session 
@@ -103,6 +103,7 @@ def submit_info():
 
 #perhaps restore all of the inputs in a dictioanry 
 
+#
 
 if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also

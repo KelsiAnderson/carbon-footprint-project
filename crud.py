@@ -1,7 +1,7 @@
 
 """CRUD operations"""
 
-from model import db, User, Vehicle, Vehicle_Travel, Public_Trans, Household, Monthly_Nat_Gas, Monthly_Elect, Comments, connect_to_db
+from model import db, User, Location, Vehicle, Vehicle_Travel, Public_Trans, Household, Monthly_Nat_Gas, Monthly_Elect, Comments, connect_to_db
 
 def create_user(fname, user_name, email, password):
     """Create and return a new user"""
@@ -12,6 +12,16 @@ def create_user(fname, user_name, email, password):
     db.session.commit()
 
     return user
+
+def create_location(zipcode, user_id):
+
+    location = Location(zipcode=zipcode, user_id=user_id)
+
+    db.session.add(location)
+    db.session.commit()
+
+    return location
+    
 
 
 def create_vehicle(mpg, fuel_type, user_id):
@@ -126,8 +136,13 @@ def get_vehicle_travel_by_user(user_id):
     vehicle_travel = Vehicle_Travel.query.filter(Vehicle_Travel.user_id == user_id).first()
     return vehicle_travel
 
-def add_user_info(input_fuel, input_mpg, vehicle_travel, input_public_trans, 
+def add_user_info(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, 
             input_income, input_amt, input_elect_bill, input_nat_gas_bill, user_id):
+
+    add_location = Location(zipcode=location_by_zip, user_id=user_id)
+    db.session.add(add_location)
+    db.session.commit()
+
 
     add_fuel = Vehicle(fuel_type=input_fuel, mpg=input_mpg, user_id=user_id)
     db.session.add(add_fuel)

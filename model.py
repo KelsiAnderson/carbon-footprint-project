@@ -17,6 +17,7 @@ class User(db.Model):
 
     # this has a foreign key for vehicle, daily vehicile travel, public trans, 
     #comment, household, monthly natural gas, monrthly elct use
+    location = db.relationship("Location")
     vehicle = db.relationship("Vehicle")
     vehicle_travel = db.relationship("Vehicle_Travel")
     public_trans = db.relationship("Public_Trans")
@@ -24,11 +25,22 @@ class User(db.Model):
     household = db.relationship("Household")
     monthly_elect = db.relationship("Monthly_Elect")
     comment = db.relationship("Comments")
-    
+
     def __repr__(self):
         return f'<User user_id= {self.user_id} email={self.email}>'
 
+class Location(db.Model):
+    """location table"""
 
+    __tablename__ = "location"
+    location_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    zipcode = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+
+    user = db.relationship('User')
+
+    def __repr__(self):
+        return f'<Location location_id= {self.location_id} zipcode={self.zipcode}>'
 
 class Vehicle(db.Model):
     """table representing the vehicle type a user drives"""
