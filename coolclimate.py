@@ -25,25 +25,27 @@ def coolclimate_defaults(input_fuel, input_mpg, vehicle_travel, input_public_tra
     headers = {"app_id": app_id, "app_key": app_key, "Accept": "application/xml" }
     
     response = requests.get("https://apis.berkeley.edu/coolclimate/footprint-sandbox", params=payload, headers=headers)
-    #print(response.text)
-    #data = response.json()
-    #print(data)
-    # income = data['_embedded']['input_income']
-    # vehicle_miles = data['_embdedded']['input_footprint_transportation_miles1']
-    # vehicle_fuel = data['_embdeed']['input_footprint_transportation_fuel1']
-    return response
+    
+    result = {}
+    from xml.etree import ElementTree
+    tree = ElementTree.fromstring(response.content)
+    for child in tree:
+        print(child.tag, child.text)
+        
+    for child in tree:
+        if child.tag == 'input_footprint_transportation_bus':
+            result['input_footprint_transportation_bus']= child.text
+
+    return result
 
 response = coolclimate_defaults("gas", 32, 13000, 100, 6, 2, 32.00, 10.00 )
 
-from xml.etree import ElementTree
-tree = ElementTree.fromstring(response.content)
-for child in tree:
-    print(child.tag, child.text)
+
     #turne child.text into dictionary
     #extract the info needed from child.text
 
-result = {}
-for child in tree:
-   if child.tag == 'input_footprint_transportation_bus':
-               result['input_footprint_transportation_bus']= child.text
+# result = {}
+# for child in tree:
+#    if child.tag == 'input_footprint_transportation_bus':
+#                result['input_footprint_transportation_bus']= child.text
     #

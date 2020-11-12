@@ -76,8 +76,11 @@ def create_new_user():
 
 @app.route('/submit-info', methods=["POST"])
 def submit_info():
-    
+    email= request.args.get("email")
+    user_by_email = crud.get_user_by_email(email)
+    #session['current_user'] = user_by_email.user_id
     user_id = session.get('current_user')
+
     input_fuel = request.form.get("fuel-type")
     input_mpg = request.form.get("mpg")
     vehicle_travel = request.form.get("vehicle-travel")
@@ -93,9 +96,9 @@ def submit_info():
     #add to databse with crud function
     #redirect to existing user
     #get user out of session 
-    return render_template("existing_user.html", input_fuel=input_fuel, input_mpg=input_mpg, vehicle_travel=vehicle_travel, 
+    return render_template("profile.html", input_fuel=input_fuel, input_mpg=input_mpg, vehicle_travel=vehicle_travel, 
                                 input_public_trans=input_public_trans, input_income=input_income, input_amt=input_amt,
-                                input_elect_bill=input_elect_bill, input_nat_gas_bill=input_nat_gas_bill, user_id=user_id)
+                                input_elect_bill=input_elect_bill, input_nat_gas_bill=input_nat_gas_bill, user_id=user_id, user_by_email=user_by_email)
 
 
 #perhaps restore all of the inputs in a dictioanry 
