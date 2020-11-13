@@ -118,26 +118,6 @@ def get_location(zipcode):
 
     return Location.query.filter(Location.zipcode == zipcode).first()
 
-# def get_fuel(fuel_type):
-
-
-#     return Vehicle.query.filter(Vehicle.fuel_type == fuel_type).first()
-
-def get_mpg(mpg):
-
-    return Vehicle.query.filter(Vehicle.mpg == mpg).first()
-
-def get_public_trans(mileage):
-    
-    return Public_Trans.query.filter(Public_Trans.mileage == mileage).first()
-
-def get_user_income(income):
-
-    return Household.query.filter(Household.income == income).first()
-
-def get_num_occupants(num_occupants):
-
-    return Household.query.filter(Household.num_occupants == num_occupants).first()
 
 def get_vehicle_by_id(vehicle_id):
     """get and return vehicle type by id"""
