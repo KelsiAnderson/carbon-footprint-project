@@ -134,6 +134,10 @@ def get_user_income(income):
 
     return Household.query.filter(Household.income == income).first()
 
+def get_num_occupants(num_occupants):
+
+    return Household.query.filter(Household.num_occupants == num_occupants).first()
+
 def get_vehicle_by_id(vehicle_id):
     """get and return vehicle type by id"""
 

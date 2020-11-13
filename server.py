@@ -43,11 +43,11 @@ def existing_user():
             current_user = session.get('current_user')
             location_by_zip = crud.get_location(current_user)
             input_fuel = crud.get_fuel(current_user)
-            input_mpg = crud.get_mpg(current_user)
+            #input_mpg = crud.get_mpg(current_user)
             vehicle_travel = crud.get_vehicle_travel_by_user(current_user)
             public_trans = crud.get_public_trans(current_user)
             input_income = crud.get_user_income(current_user)
-            input_amt = 
+            input_amt = crud.get_num_occupants(current_user)
             electricity_use = crud.get_monthly_elect_by_user(current_user)
             nat_gas_use = crud.get_monthly_nat_gas_by_user(current_user)
     
@@ -55,7 +55,8 @@ def existing_user():
 
             # result = coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
             #         input_elect_bill, input_nat_gas_bill)
-            return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_travel, elect_bill=electricity_use, nat_gas_emit=nat_gas_use)
+            return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_travel, 
+                                nat_gas_emit=nat_gas_use, public_trans_emit=public_trans, elect_bill=electricity_use) 
 
 
 @app.route('/new_users', methods=["POST","GET"])
@@ -90,7 +91,7 @@ def submit_info():
     # user_by_email = crud.get_user_by_email(email)
     
     user_id = session.get('current_user')
-    print("SUBMIT INFO", user_id)
+    #print("SUBMIT INFO", user_id)
     user_obj = crud.get_user_by_id(user_id)
     email = user_obj.email
     location_by_zip = request.form.get("zipcode")
@@ -113,10 +114,10 @@ def submit_info():
         #print("KEY HERE", result[key])
         if key == "input_location":
             location = result[key]
-            print("LOCATION", location)
+            #print("LOCATION", location)
         if key == "input_footprint_housing_electricity_dollars":
             elect_bill = result[key]
-            print("ELECTRICITY", elect_bill)
+            #print("ELECTRICITY", elect_bill)
         if key == "input_footprint_transportation_miles1":
             vehicle_emit = result[key]
         if key == "input_footprint_transportation_bus":

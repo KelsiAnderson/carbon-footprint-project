@@ -75,3 +75,11 @@ response = coolclimate_defaults(location_by_zip=80120, input_fuel="gas", input_m
 #     """deliver user that already exists its calculations through the database"""
 #     user_obj = User.query.filter(user_id=user_id)
 #     user_location = user_obj.location.zipcode
+    #user_income = user_obj.household.income
+    #household_size = user_obj.household.num_occupants
+    # elect_bill = user_obj.monthly_elect.elect_bill
+    # fule_type = user_obj.vehicle.fule_type
+    # vehicle_miles = user_obj.vehicle_travel.mileage
+    # mpg = user_obj.vehicle.mpg
+    # nat_gas_bill = user_obj.monthly_nat_gas.nat_gas_bill
+    # public_trans = user_obj.public_trans.mileage 
