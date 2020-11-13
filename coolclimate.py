@@ -1,17 +1,12 @@
 import os
 import requests
+from model import User
 
 app_id = os.environ['app_id']
 app_key = os.environ['app_key']
 
 def coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
                     input_elect_bill, input_nat_gas_bill):
-    #add header and refer to variables app_id and app_key not actual keys
-    #params/payload
-    #request.get from below
-    #connect user response
-
-
 
     payload = {"input_location_mode": 1, 
             "input_location": location_by_zip, 
@@ -32,7 +27,7 @@ def coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel,
     from xml.etree import ElementTree
     tree = ElementTree.fromstring(response.content)
     for child in tree:
-        print(child.tag, child.text)
+        #print(child.tag, child.text)
         for child in tree:
             if child.tag == 'input_location_mode':
                 result['input_location_mode']= child.text
@@ -63,7 +58,7 @@ def coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel,
             if child.tag == 'input_footprint_transportation_bus':
                 result['input_footprint_transportation_bus']= child.text
             
-    print(result)
+    #print(result)
     return result
 
 response = coolclimate_defaults(location_by_zip=80120, input_fuel="gas", input_mpg=32, vehicle_travel=13000, input_public_trans=100, input_income=6, input_amt=2,
@@ -71,15 +66,19 @@ response = coolclimate_defaults(location_by_zip=80120, input_fuel="gas", input_m
 
 
 ##############################################################
-# def existing_user_cc_calcs(user_id):
-#     """deliver user that already exists its calculations through the database"""
-#     user_obj = User.query.filter(user_id=user_id)
-#     user_location = user_obj.location.zipcode
-    #user_income = user_obj.household.income
-    #household_size = user_obj.household.num_occupants
-    # elect_bill = user_obj.monthly_elect.elect_bill
-    # fule_type = user_obj.vehicle.fule_type
-    # vehicle_miles = user_obj.vehicle_travel.mileage
-    # mpg = user_obj.vehicle.mpg
-    # nat_gas_bill = user_obj.monthly_nat_gas.nat_gas_bill
-    # public_trans = user_obj.public_trans.mileage 
+def existing_user_cc_calcs(user_id):
+    """deliver user that already exists its calculations through the database"""
+    user_obj = User.query.filter(user_id=user_id)
+    user_location = user_obj.location.zipcode
+    user_income = user_obj.household.income
+    household_size = user_obj.household.num_occupants
+    elect_bill = user_obj.monthly_elect.elect_bill
+    input_fuel = user_obj.vehicle.fuel_type
+    vehicle_miles = user_obj.vehicle_travel.mileage
+    input_mpg = user_obj.vehicle.mpg
+    nat_gas_bill = user_obj.monthly_nat_gas.nat_gas_bill
+    public_trans = user_obj.public_trans.mileage 
+    
+    coolclimate_defaults(user_location, user_income, household_size, elect_bill, 
+                    input_fuel, vehicle_miles, input_mpg, nat_gas_bill, 
+                    public_trans)

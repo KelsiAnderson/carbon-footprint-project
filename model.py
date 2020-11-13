@@ -48,7 +48,7 @@ class Vehicle(db.Model):
     __tablename__ = "vehicles"
 
     vehicle_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    fuel_type = db.Column(db.String)
+    fuel_type = db.Column(db.Integer)
     mpg = db.Column(db.Integer, nullable = False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 

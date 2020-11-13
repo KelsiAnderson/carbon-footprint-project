@@ -41,21 +41,9 @@ def existing_user():
             session['current_user'] = user_obj.user_id
         
             current_user = session.get('current_user')
-            location_by_zip = crud.get_location(current_user)
-            input_fuel = crud.get_fuel(current_user)
-            #input_mpg = crud.get_mpg(current_user)
-            vehicle_travel = crud.get_vehicle_travel_by_user(current_user)
-            public_trans = crud.get_public_trans(current_user)
-            input_income = crud.get_user_income(current_user)
-            input_amt = crud.get_num_occupants(current_user)
-            electricity_use = crud.get_monthly_elect_by_user(current_user)
-            nat_gas_use = crud.get_monthly_nat_gas_by_user(current_user)
-    
+            existing_user_cc_calcs(user_id)
 
-
-            # result = coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
-            #         input_elect_bill, input_nat_gas_bill)
-            return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_travel, 
+            return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_travel.mileage, 
                                 nat_gas_emit=nat_gas_use, public_trans_emit=public_trans, elect_bill=electricity_use) 
 
 
@@ -88,14 +76,13 @@ def create_new_user():
 @app.route('/submit-info', methods=["POST"])
 def submit_info():
     
-    # user_by_email = crud.get_user_by_email(email)
-    
     user_id = session.get('current_user')
-    #print("SUBMIT INFO", user_id)
     user_obj = crud.get_user_by_id(user_id)
     email = user_obj.email
     location_by_zip = request.form.get("zipcode")
     input_fuel = request.form.get("fuel-type")
+    
+    print("LOOK HERE FOR FUEL", input_fuel)
     input_mpg = request.form.get("mpg")
     vehicle_travel = request.form.get("vehicle-travel")
     input_public_trans = request.form.get("public-trans")
@@ -109,33 +96,25 @@ def submit_info():
 
     result = coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
                     input_elect_bill, input_nat_gas_bill)
-    #print("RESULT HERE", result)
+
     for key in result:
-        #print("KEY HERE", result[key])
         if key == "input_location":
             location = result[key]
-            #print("LOCATION", location)
+
         if key == "input_footprint_housing_electricity_dollars":
             elect_bill = result[key]
-            #print("ELECTRICITY", elect_bill)
+            
         if key == "input_footprint_transportation_miles1":
             vehicle_emit = result[key]
+
         if key == "input_footprint_transportation_bus":
             public_trans_emit = result[key]
+
         if key == "input_footprint_housing_naturalgas_dollars":
             nat_gas_emit = result[key]
         
-    #make vars equal to the value of key value pair
-    #call coolclimate default with info 
-    #add to databse with crud function
-    #redirect to existing user
-    #get user out of session 
     return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_emit, nat_gas_emit=nat_gas_emit, public_trans_emit=public_trans_emit, elect_bill=elect_bill)
 
-
-#perhaps restore all of the inputs in a dictioanry 
-
-#
 
 if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also
