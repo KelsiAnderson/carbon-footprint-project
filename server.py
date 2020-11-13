@@ -28,24 +28,29 @@ def existing_user():
     email= request.args.get("email")
     user_name = request.args.get("username")
     password = request.args.get("password")
-    user_by_email = crud.get_user_by_email(email)
+    user_obj = crud.get_user_by_email(email)
     
-    if not user_by_email:
+    if not user_obj:
         flash("Please create account below!")
         return redirect('/')
     else:
-        if password != user_by_email.password:
+        if password != user_obj.password:
             flash('incorrect password')
             return redirect('/')
         else:
-            session['current_user'] = user_by_email.user_id
+            session['current_user'] = user_obj.user_id
         
             current_user = session.get('current_user')
+            location_by_zip = curd.get_location(current_user)
+            fuel =
             vehicle_travel = crud.get_vehicle_travel_by_user(current_user)
             electricity_use = crud.get_monthly_elect_by_user(current_user)
             nat_gas_use = crud.get_monthly_nat_gas_by_user(current_user)
 
-            return render_template("profile.html", user_by_email=user_by_email, vehicle_travel=vehicle_travel, electricity_use=electricity_use, nat_gas_use=nat_gas_use)
+
+            # result = coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
+            #         input_elect_bill, input_nat_gas_bill)
+            return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_travel, elect_bill=electricity_use, nat_gas_emit=nat_gas_use)
 
 
 @app.route('/new_users', methods=["POST","GET"])
@@ -60,6 +65,9 @@ def new_user():
         email = request.form.get("email")
         password = request.form.get("password")
         new_user = crud.create_user(fname, user_name, email, password)
+        session['current_user'] = new_user.user_id
+        print("NEW USER", new_user.user_id)
+
     else:
         flash('User already exists')
         return redirect('/')
@@ -75,7 +83,9 @@ def create_new_user():
 def submit_info():
     
     # user_by_email = crud.get_user_by_email(email)
+    
     user_id = session.get('current_user')
+    print("SUBMIT INFO", user_id)
     user_obj = crud.get_user_by_id(user_id)
     email = user_obj.email
     location_by_zip = request.form.get("zipcode")

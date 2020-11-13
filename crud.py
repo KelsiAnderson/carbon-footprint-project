@@ -114,6 +114,11 @@ def get_user_by_email(email):
     
     return User.query.filter(User.email == email).first()
 
+def get_location(zipcode):
+
+    return Location.query.filter(Location.zipcode == zipcode).first()
+
+def get_fuel = 
 
 def get_vehicle_by_id(vehicle_id):
     """get and return vehicle type by id"""
