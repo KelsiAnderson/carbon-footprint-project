@@ -95,7 +95,22 @@ def submit_info():
 
     result = coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
                     input_elect_bill, input_nat_gas_bill)
-    print(result)
+    #print("RESULT HERE", result)
+    for key in result:
+        #print("KEY HERE", result[key])
+        if key == "input_location":
+            location = result[key]
+            print("LOCATION", location)
+        if key == "input_footprint_housing_electricity_dollars":
+            elect_bill = result[key]
+            print("ELECTRICITY", elect_bill)
+        if key == "input_footprint_transportation_miles1":
+            vehicle_emit = result[key]
+        if key == "input_footprint_transportation_bus":
+            public_trans_emit = reasult[key]
+        if key == "input_footprint_housing_naturalgas_dollars":
+            nat_gas_emit = result[key]
+        
     #make vars equal to the value of key value pair
     #call coolclimate default with info 
     #add to databse with crud function
