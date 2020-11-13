@@ -43,11 +43,14 @@ def existing_user():
             current_user = session.get('current_user')
             location_by_zip = crud.get_location(current_user)
             input_fuel = crud.get_fuel(current_user)
-            input_mpg = 
-
+            input_mpg = crud.get_mpg(current_user)
             vehicle_travel = crud.get_vehicle_travel_by_user(current_user)
+            public_trans = crud.get_public_trans(current_user)
+            input_income = crud.get_user_income(current_user)
+            input_amt = 
             electricity_use = crud.get_monthly_elect_by_user(current_user)
             nat_gas_use = crud.get_monthly_nat_gas_by_user(current_user)
+    
 
 
             # result = coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
