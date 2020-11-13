@@ -32,47 +32,46 @@ def coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel,
     from xml.etree import ElementTree
     tree = ElementTree.fromstring(response.content)
     for child in tree:
-        print(child.tag, child.text)
+        #print(child.tag, child.text)
         for child in tree:
             if child.tag == 'input_location_mode':
                 result['input_location_mode']= child.text
             if child.tag == 'input_location':
                 result['input_location']= child.text
+            
             if child.tag == 'input_income':
                 result['input_income']= child.text
+            
             if child.tag == 'input_size':
                 result['input_size']= child.text
+            
             if child.tag == 'input_footprint_housing_electricity_dollars':
                 result['input_footprint_housing_electricity_dollars']= child.text        
+            
             if child.tag == 'input_footprint_transportation_fuel1':
                 result['input_footprint_transportation_fuel1']= child.text
             
+            if child.tag == 'input_footprint_transportation_miles1':
+                result['input_footprint_transportation_miles1']= child.text
+            
+            if child.tag == 'input_footprint_transportation_mpg1':
+                result['input_footprint_transportation_mpg1']= child.text
+            
+            if child.tag == 'input_footprint_housing_naturalgas_dollars':
+                result['input_footprint_housing_naturalgas_dollars']= child.text 
+
             if child.tag == 'input_footprint_transportation_bus':
                 result['input_footprint_transportation_bus']= child.text
-            if child.tag == 'input_footprint_housing_naturalgas_therms':
-                result['input_footprint_housing_naturalgas_dollars']= child.text 
-            
-
             
     print(result)
     return result
 
-response = coolclimate_defaults(80120, "gas", 32, 13000, 100, 6, 2, 32.00, 10.00 )
+response = coolclimate_defaults(location_by_zip=80120, input_fuel="gas", input_mpg=32, vehicle_travel=13000, input_public_trans=100, input_income=6, input_amt=2,
+                    input_elect_bill=30.00, input_nat_gas_bill=22.00)
 
 
 ##############################################################
-def existing_user_cc_calcs(user_id):
-    """deliver user that already exists its calculations through the database"""
-    user_obj = User.query.filter(user_id=user_id)
-    user_location = user_obj.location.zipcode
-
-
-##############################################################
-    #turne child.text into dictionary
-    #extract the info needed from child.text
-
-# result = {}
-# for child in tree:
-#    if child.tag == 'input_footprint_transportation_bus':
-#                result['input_footprint_transportation_bus']= child.text
-    #
+# def existing_user_cc_calcs(user_id):
+#     """deliver user that already exists its calculations through the database"""
+#     user_obj = User.query.filter(user_id=user_id)
+#     user_location = user_obj.location.zipcode

@@ -22,9 +22,6 @@ def homepage():
 
     return render_template("homepage.html")
 
-#route that takes you to the new use page
-
-#route that takes you to existing user page
 @app.route('/existing_users')
 def existing_user():
     
@@ -76,10 +73,13 @@ def create_new_user():
 
 @app.route('/submit-info', methods=["POST"])
 def submit_info():
-    email= request.args.get("email")
-    user_by_email = crud.get_user_by_email(email)
-    #session['current_user'] = user_by_email.user_id
+    
+    # user_by_email = crud.get_user_by_email(email)
     user_id = session.get('current_user')
+    user_obj = crud.get_user_by_id(user_id)
+    email = user_obj.email
+    print("LOOOKKK HEEERRR", user_id)
+    print("EMAIL IS HERE", email)
     location_by_zip = request.form.get("zipcode")
     input_fuel = request.form.get("fuel-type")
     input_mpg = request.form.get("mpg")
@@ -92,13 +92,16 @@ def submit_info():
     add_all = crud.add_user_info(location_by_zip=location_by_zip, input_fuel=input_fuel, input_mpg=input_mpg, vehicle_travel=vehicle_travel, 
                                 input_public_trans=input_public_trans, input_income=input_income, input_amt=input_amt,
                                 input_elect_bill=input_elect_bill, input_nat_gas_bill=input_nat_gas_bill, user_id=user_id)
-    results = coolclimate_defaults()
+
+    result = coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
+                    input_elect_bill, input_nat_gas_bill)
+    print(result)
+    #make vars equal to the value of key value pair
+    #call coolclimate default with info 
     #add to databse with crud function
     #redirect to existing user
     #get user out of session 
-    return render_template("profile.html", input_fuel=input_fuel, input_mpg=input_mpg, vehicle_travel=vehicle_travel, 
-                                input_public_trans=input_public_trans, input_income=input_income, input_amt=input_amt,
-                                input_elect_bill=input_elect_bill, input_nat_gas_bill=input_nat_gas_bill, user_id=user_id, user_by_email=user_by_email)
+    return render_template("profile.html", user_obj=user_obj)
 
 
 #perhaps restore all of the inputs in a dictioanry 
