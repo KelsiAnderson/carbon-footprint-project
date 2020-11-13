@@ -32,7 +32,7 @@ def coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel,
     from xml.etree import ElementTree
     tree = ElementTree.fromstring(response.content)
     for child in tree:
-        #print(child.tag, child.text)
+        print(child.tag, child.text)
         for child in tree:
             if child.tag == 'input_location_mode':
                 result['input_location_mode']= child.text

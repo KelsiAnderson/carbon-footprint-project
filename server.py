@@ -78,8 +78,6 @@ def submit_info():
     user_id = session.get('current_user')
     user_obj = crud.get_user_by_id(user_id)
     email = user_obj.email
-    print("LOOOKKK HEEERRR", user_id)
-    print("EMAIL IS HERE", email)
     location_by_zip = request.form.get("zipcode")
     input_fuel = request.form.get("fuel-type")
     input_mpg = request.form.get("mpg")
@@ -107,7 +105,7 @@ def submit_info():
         if key == "input_footprint_transportation_miles1":
             vehicle_emit = result[key]
         if key == "input_footprint_transportation_bus":
-            public_trans_emit = reasult[key]
+            public_trans_emit = result[key]
         if key == "input_footprint_housing_naturalgas_dollars":
             nat_gas_emit = result[key]
         
@@ -116,7 +114,7 @@ def submit_info():
     #add to databse with crud function
     #redirect to existing user
     #get user out of session 
-    return render_template("profile.html", user_obj=user_obj)
+    return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_emit, nat_gas_emit=nat_gas_emit, public_trans_emit=public_trans_emit, elect_bill=elect_bill)
 
 
 #perhaps restore all of the inputs in a dictioanry 

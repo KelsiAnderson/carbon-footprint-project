@@ -6,6 +6,21 @@
 <h2> this is the profile page</h2>
 <p>
    Hi {{ user_obj.fname }}!
+ <br>  
+Check out your emissions for the year by category:
+<br>
+Vehicle Travel Emissions:
+{{vehicle_emit}}
+<br>
+Natural Gas Emissions:
+{{nat_gas_emit}}
+<br>
+Public Transit Emissions:
+{{public_trans_emit}}
+<br>
+Electricity Emissions:
+{{elect_bill}}
+
 </p>
 
 {% endblock %}
