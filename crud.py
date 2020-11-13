@@ -118,7 +118,9 @@ def get_location(zipcode):
 
     return Location.query.filter(Location.zipcode == zipcode).first()
 
-def get_fuel = 
+def get_fuel(fuel_type):
+
+    return Vehicle.query.filter(Vehicle.fuel_type == fuel_type).first()
 
 def get_vehicle_by_id(vehicle_id):
     """get and return vehicle type by id"""
