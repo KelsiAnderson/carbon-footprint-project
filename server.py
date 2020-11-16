@@ -5,7 +5,7 @@ import os
 from model import connect_to_db
 import crud
 import requests
-from coolclimate import coolclimate_defaults, existing_user_cc_calcs
+
 
 app = Flask(__name__)
 
@@ -13,6 +13,7 @@ app_id = os.environ['app_id']
 app_key = os.environ['app_key']
 
 from jinja2 import StrictUndefined
+from coolclimate import coolclimate_defaults, existing_user_cc_calcs
 
 app.secret_key = "WHATEVERYOUDOTAKECAREOFYOURSHOES"
 app.jinja_env.undefined = StrictUndefined
@@ -41,12 +42,18 @@ def existing_user():
             session['current_user'] = user_obj.user_id
         
             current_user = session.get('current_user')
-            # cc_calcs = existing_user_cc_calcs(current_user)
-            # print("SEE CALCULATIONS", cc_calcs)
+            cc_calcs = existing_user_cc_calcs(current_user)
+            print("SEE CALCULATIONS", cc_calcs)
             # vehicle_emit = user_obj.vehicle_travel[0].mileage
             # print("VEHICLE EMISSION", vehicle_emit)
             # nat_gas_emit = user_obj.monthly_nat_gat.nat_gas_bill
+            elect_bill = cc_calcs['input_footprint_housing_electricity_dollars']
+            nat_gas_emit = cc_calcs['input_footprint_housing_naturalgas_dollars']
+            vehicle_emit = cc_calcs['input_footprint_transportation_miles1']
+            public_trans_emit = cc_calcs['input_footprint_transportation_miles1']
 
+            #call funciton in render template
+            #access the info on the jinja
             return render_template("profile.html", user_obj=user_obj, vehicle_emit="vehicle_emit", 
                                 nat_gas_emit="nat_gas_use", public_trans_emit="public_trans", elect_bill="electricity_use") 
 

@@ -4,17 +4,16 @@ import os
 from random import choice, randint
 from datetime import datetime
 from flask import (Flask, render_template, request, flash, session, redirect)
-import model
-from model import connect_to_db, db, User, Location, Vehicle, Vehicle_Travel, Public_Trans, Household, Monthly_Nat_Gas, Monthly_Elect, Comments
+from model import connect_to_db, db, User, Vehicle, Vehicle_Travel, Public_Trans, Household, Monthly_Nat_Gas, Monthly_Elect, Comments
 
 import crud
-import server
+from server import app
 
 # os.sysytem('dropdb ratings')
 # os.system('createdb ratings')
 
-model.connect_to_db(server.app)
-model.db.create_all()
+connect_to_db(app)
+db.create_all()
 
 #for element in list, create user password
 def open_pipe_file(pipe_file): 
@@ -36,11 +35,11 @@ for user in user_file:
     password = user[3]
     all_users = crud.create_user(fname, user_name, email, password)
 
-location_file = open_pipe_file("seed_text_files/location.seed")
-for zip in location_file:
-    zipcode = zip[0]
-    user_id =zip[1]
-    add_location = crud.create_location(zipcode, user_id)
+# location_file = open_pipe_file("seed_text_files/location.seed")
+# for zip in location_file:
+#     zipcode = zip[0]
+#     user_id =zip[1]
+#     add_location = crud.create_location(zipcode, user_id)
 
 vehicle_file = open_pipe_file("seed_text_files/vehicle.seed")
 for vehicle in vehicle_file:
@@ -68,10 +67,12 @@ for transit in public_trans_file:
 
 household_file = open_pipe_file("seed_text_files/household.seed")
 for house in household_file:
-    num_occupants = house[0]
-    income = house[1]
-    user_id = house[2]
-    household = crud.create_household(num_occupants, income, user_id)
+    # num_occupants = house[0]
+    # income = house[1]
+    # zipcode = house[2]
+    # user_id = house[3]
+    num_occupants, income, zipcode, user_id = house
+    household = crud.create_household(num_occupants, income, zipcode, user_id)
 
 nat_gas_file = open_pipe_file("seed_text_files/nat_gas.seed")
 for nat_gas in nat_gas_file:
@@ -98,6 +99,6 @@ for comment in comment_file:
     comment_all = crud.create_comment(text, user_id)
 
 
-if __name__ == '__main__':
-    from server import app
-    connect_to_db(app) 
+# if __name__ == '__main__':
+#     from server import app
+#     connect_to_db(app) 
