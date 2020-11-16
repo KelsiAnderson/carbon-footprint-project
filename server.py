@@ -5,7 +5,7 @@ import os
 from model import connect_to_db
 import crud
 import requests
-from coolclimate import coolclimate_defaults
+from coolclimate import coolclimate_defaults, existing_user_cc_calcs
 
 app = Flask(__name__)
 
@@ -41,10 +41,14 @@ def existing_user():
             session['current_user'] = user_obj.user_id
         
             current_user = session.get('current_user')
-            existing_user_cc_calcs(user_id)
+            # cc_calcs = existing_user_cc_calcs(current_user)
+            # print("SEE CALCULATIONS", cc_calcs)
+            # vehicle_emit = user_obj.vehicle_travel[0].mileage
+            # print("VEHICLE EMISSION", vehicle_emit)
+            # nat_gas_emit = user_obj.monthly_nat_gat.nat_gas_bill
 
-            return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_travel.mileage, 
-                                nat_gas_emit=nat_gas_use, public_trans_emit=public_trans, elect_bill=electricity_use) 
+            return render_template("profile.html", user_obj=user_obj, vehicle_emit="vehicle_emit", 
+                                nat_gas_emit="nat_gas_use", public_trans_emit="public_trans", elect_bill="electricity_use") 
 
 
 @app.route('/new_users', methods=["POST","GET"])

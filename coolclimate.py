@@ -27,7 +27,7 @@ def coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel,
     from xml.etree import ElementTree
     tree = ElementTree.fromstring(response.content)
     for child in tree:
-        #print(child.tag, child.text)
+        print(child.tag, child.text)
         for child in tree:
             if child.tag == 'input_location_mode':
                 result['input_location_mode']= child.text
@@ -58,27 +58,36 @@ def coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel,
             if child.tag == 'input_footprint_transportation_bus':
                 result['input_footprint_transportation_bus']= child.text
             
-    #print(result)
+    print("SEE THE RESULTS", result)
     return result
 
-response = coolclimate_defaults(location_by_zip=80120, input_fuel="gas", input_mpg=32, vehicle_travel=13000, input_public_trans=100, input_income=6, input_amt=2,
-                    input_elect_bill=30.00, input_nat_gas_bill=22.00)
+# response = coolclimate_defaults(location_by_zip=80120, input_fuel="gas", input_mpg=32, vehicle_travel=13000, input_public_trans=100, input_income=6, input_amt=2,
+#                     input_elect_bill=30.00, input_nat_gas_bill=22.00)
 
 
 ##############################################################
 def existing_user_cc_calcs(user_id):
     """deliver user that already exists its calculations through the database"""
-    user_obj = User.query.filter(user_id=user_id)
-    user_location = user_obj.location.zipcode
-    user_income = user_obj.household.income
-    household_size = user_obj.household.num_occupants
-    elect_bill = user_obj.monthly_elect.elect_bill
-    input_fuel = user_obj.vehicle.fuel_type
-    vehicle_miles = user_obj.vehicle_travel.mileage
-    input_mpg = user_obj.vehicle.mpg
-    nat_gas_bill = user_obj.monthly_nat_gas.nat_gas_bill
-    public_trans = user_obj.public_trans.mileage 
+    user_obj = User.query.filter(User.user_id == user_id).first()
+    # print("LOOK IM USER ID", user_obj)
+    user_location = user_obj.location[0].zipcode
+    # print("THIS IS USER LOCATION", user_location)
+    user_income = user_obj.household[0].income
+    household_size = user_obj.household[0].num_occupants
+    elect_bill = user_obj.monthly_elect[0].elect_bill
+    input_fuel = user_obj.vehicle[0].fuel_type
+    vehicle_miles = user_obj.vehicle_travel[0].mileage
+    input_mpg = user_obj.vehicle[0].mpg
+    # print("MILEAGE", input_mpg)
+    nat_gas_bill = user_obj.monthly_nat_gas[0].nat_gas_bill
+    # print("NATURAL GAS", nat_gas_bill)
+    public_trans = user_obj.public_trans[0].mileage 
+    # print("TRANSPORT HERERERERERE", public_trans)
     
-    coolclimate_defaults(user_location, user_income, household_size, elect_bill, 
+    results = coolclimate_defaults(user_location, user_income, household_size, elect_bill, 
                     input_fuel, vehicle_miles, input_mpg, nat_gas_bill, 
                     public_trans)
+
+    print("SEE RESULTS", results)
+    
+    return "success!"
