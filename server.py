@@ -6,7 +6,6 @@ from model import connect_to_db
 import crud
 import requests
 
-
 app = Flask(__name__)
 
 app_id = os.environ['app_id']

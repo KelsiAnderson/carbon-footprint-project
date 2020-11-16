@@ -1,8 +1,8 @@
 import os
 import requests
 from model import User, connect_to_db, db
-
 from server import app
+
 connect_to_db(app)
 
 app_id = os.environ['app_id']
