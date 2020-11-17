@@ -1,9 +1,11 @@
+
 import os
 import requests
 from model import User, connect_to_db, db
-from server import app
+import crud
+# from server import app
 
-connect_to_db(app)
+# connect_to_db(app)
 
 app_id = os.environ['app_id']
 app_key = os.environ['app_key']
@@ -27,6 +29,8 @@ def coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel,
     response = requests.get("https://apis.berkeley.edu/coolclimate/footprint-defaults", params=payload, headers=headers)
     
     result = {}
+   
+
     from xml.etree import ElementTree
     tree = ElementTree.fromstring(response.content)
     for child in tree:
@@ -72,38 +76,39 @@ def coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel,
 def existing_user_cc_calcs(user_id):
     """deliver user that already exists its calculations through the database"""
     print("THIS IS A TEST PRINT")
-    user_obj = User.query.get(user_id)
-    print("LOOK IM USER ID", user_obj)
+    # user_obj = User.query.get(user_id)
+    user_obj = crud.get_user_by_id(user_id)
+    print("LOOK IM USER ID", user_obj)  
     user_location = user_obj.household[0].zipcode
     print("THIS IS USER LOCATION", user_location)
     user_income = user_obj.household[0].income
-    #print("SEE INCOME", user_income)
+    print("SEE INCOME", user_income)
     household_size = user_obj.household[0].num_occupants
-    #print("SEE HOUSEHOLD SIZE", household_size)
+    print("SEE HOUSEHOLD SIZE", household_size)
     elect_bill = user_obj.monthly_elect[0].elect_bill
-    #print("ELECTRICITY", elect_bill)
+    print("ELECTRICITY", elect_bill)
     input_fuel = user_obj.vehicle[0].fuel_type
-    #print("FUEL", input_fuel)
+    print("FUEL", input_fuel)
     vehicle_miles = user_obj.vehicle_travel[0].mileage
-    #print("MILEAGE", vehicle_miles)
+    print("MILEAGE", vehicle_miles)
     input_mpg = user_obj.vehicle[0].mpg
-    #print("MILEAGE", input_mpg)
+    print("MILEAGE", input_mpg)
     nat_gas_bill = user_obj.monthly_nat_gas[0].nat_gas_bill
-    #print("NATURAL GAS", nat_gas_bill)
+    print("NATURAL GAS", nat_gas_bill)
     public_trans = user_obj.public_trans[0].mileage 
-    #print("TRANSPORT HERERERERERE", public_trans)
+    print("TRANSPORT HERERERERERE", public_trans)
     
     results = coolclimate_defaults(user_location, input_fuel, input_mpg, vehicle_miles, public_trans, user_income, household_size, elect_bill, 
                        nat_gas_bill)
-
-    # response = coolclimate_defaults(location_by_zip=80120, input_fuel=1, input_mpg=32, vehicle_travel=13000, input_public_trans=100, input_income=6, input_amt=2,
-    #                 input_elect_bill=30.00, input_nat_gas_bill=22.00)
-
     
     print("SEE RESULTS", results)
     return results
 
 
 existing_user_cc_calcs(1)
+
+# if __name__ == "__main__":
+#     from server import app
+#     connect_to_db(app)
 
     

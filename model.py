@@ -168,6 +168,8 @@ def connect_to_db(flask_app, db_uri='postgresql:///project', echo=True):
     db.app = flask_app
     db.init_app(flask_app)
 
+
+
     print('Connect to the db!')
 
 if __name__ == '__main__':

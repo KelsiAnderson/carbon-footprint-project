@@ -12,7 +12,8 @@ app_id = os.environ['app_id']
 app_key = os.environ['app_key']
 
 from jinja2 import StrictUndefined
-from coolclimate import coolclimate_defaults, existing_user_cc_calcs
+#from coolclimate import coolclimate_defaults, existing_user_cc_calcs
+#import coolclimate
 
 app.secret_key = "WHATEVERYOUDOTAKECAREOFYOURSHOES"
 app.jinja_env.undefined = StrictUndefined
@@ -25,10 +26,13 @@ def homepage():
 @app.route('/existing_users')
 def existing_user():
     
+    import coolclimate #LUCIA ADDED THIS 
     email= request.args.get("email")
     user_name = request.args.get("username")
     password = request.args.get("password")
     user_obj = crud.get_user_by_email(email)
+
+    
     
     if not user_obj:
         flash("Please create account below!")
@@ -41,7 +45,8 @@ def existing_user():
             session['current_user'] = user_obj.user_id
         
             current_user = session.get('current_user')
-            cc_calcs = existing_user_cc_calcs(current_user)
+            print("THIS IS YOLANDA'S USER OBJECT INFO", user_obj.household[0].num_occupants, user_obj.household[0].income)
+            cc_calcs = coolclimate.existing_user_cc_calcs(current_user)
             print("SEE CALCULATIONS", cc_calcs)
             # vehicle_emit = user_obj.vehicle_travel[0].mileage
             # print("VEHICLE EMISSION", vehicle_emit)
@@ -49,12 +54,12 @@ def existing_user():
             elect_bill = cc_calcs['input_footprint_housing_electricity_dollars']
             nat_gas_emit = cc_calcs['input_footprint_housing_naturalgas_dollars']
             vehicle_emit = cc_calcs['input_footprint_transportation_miles1']
-            public_trans_emit = cc_calcs['input_footprint_transportation_miles1']
+            public_trans_emit = cc_calcs['input_footprint_transportation_bus']
 
             #call funciton in render template
             #access the info on the jinja
-            return render_template("profile.html", user_obj=user_obj, vehicle_emit="vehicle_emit", 
-                                nat_gas_emit="nat_gas_use", public_trans_emit="public_trans", elect_bill="electricity_use") 
+            return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_emit, 
+                                nat_gas_emit=nat_gas_emit, public_trans_emit=public_trans_emit, elect_bill=elect_bill) 
 
 
 @app.route('/new_users', methods=["POST","GET"])
@@ -86,6 +91,7 @@ def create_new_user():
 @app.route('/submit-info', methods=["POST"])
 def submit_info():
     
+    import coolclimate #LUCIA ADDED THIS 
     user_id = session.get('current_user')
     user_obj = crud.get_user_by_id(user_id)
     email = user_obj.email
@@ -97,14 +103,19 @@ def submit_info():
     vehicle_travel = request.form.get("vehicle-travel")
     input_public_trans = request.form.get("public-trans")
     input_income = request.form.get("household-income")
+
     input_amt = request.form.get("household-amt")
     input_elect_bill = request.form.get("elect-bill")
     input_nat_gas_bill = request.form.get("nat-gas-bill")
-    add_all = crud.add_user_info(location_by_zip=location_by_zip, input_fuel=input_fuel, input_mpg=input_mpg, vehicle_travel=vehicle_travel, 
-                                input_public_trans=input_public_trans, input_income=input_income, input_amt=input_amt,
-                                input_elect_bill=input_elect_bill, input_nat_gas_bill=input_nat_gas_bill, user_id=user_id)
+    # add_all = crud.add_user_info(location_by_zip=location_by_zip, input_fuel=input_fuel, input_mpg=input_mpg, vehicle_travel=vehicle_travel, 
+    #                             input_public_trans=input_public_trans, input_income=input_income, input_amt=input_amt,
+    #                             input_elect_bill=input_elect_bill, input_nat_gas_bill=input_nat_gas_bill, user_id=user_id)
 
-    result = coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
+    add_all = crud.add_user_info(location_by_zip, input_fuel, input_mpg, vehicle_travel, 
+                                input_public_trans, input_income, input_amt,
+                                input_elect_bill, input_nat_gas_bill, user_id)
+
+    result = coolclimate.coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
                     input_elect_bill, input_nat_gas_bill)
 
     for key in result:

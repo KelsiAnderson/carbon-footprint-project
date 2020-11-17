@@ -158,7 +158,7 @@ def add_user_info(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_
     db.session.commit()
 
     add_public_trans = Public_Trans(mileage=input_public_trans, user_id=user_id)
-    db.session.add(add_fuel)
+    db.session.add(add_public_trans)
     db.session.commit()
 
     add_income = Household(income=input_income, num_occupants=input_amt, user_id=user_id)
