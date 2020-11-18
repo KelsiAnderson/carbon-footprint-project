@@ -105,6 +105,8 @@ class Household(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
     user = db.relationship('User')
+    monthly_gas = db.relationship('Monthly_Nat_Gas')
+    monthly_elect = db.relationship('Monthly_Elect')
 
     def __repr__(self):
         return f'<household_id  = {self.household_id } user_id = {self.user_id}>'

@@ -144,10 +144,9 @@ def get_vehicle_travel_by_user(user_id):
 def add_user_info(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, 
             input_income, input_amt, input_elect_bill, input_nat_gas_bill, user_id):
 
-    add_location = Household(zipcode=location_by_zip, user_id=user_id)
+    add_location = Household(num_occupants=input_amt, income=input_income, zipcode=location_by_zip, user_id=user_id)
     db.session.add(add_location)
     db.session.commit()
-
 
     add_fuel = Vehicle(fuel_type=input_fuel, mpg=input_mpg, user_id=user_id)
     db.session.add(add_fuel)
@@ -159,10 +158,6 @@ def add_user_info(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_
 
     add_public_trans = Public_Trans(mileage=input_public_trans, user_id=user_id)
     db.session.add(add_public_trans)
-    db.session.commit()
-
-    add_income = Household(income=input_income, num_occupants=input_amt, user_id=user_id)
-    db.session.add(add_income)
     db.session.commit()
 
     add_elect_bill = Monthly_Elect(elect_bill=input_elect_bill, user_id=user_id)

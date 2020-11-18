@@ -42,15 +42,21 @@ def existing_user():
             flash('incorrect password')
             return redirect('/')
         else:
-            session['current_user'] = user_obj.user_id
+            session['current_user'] = user_obj.user_id #hunch
         
             current_user = session.get('current_user')
-            print("THIS IS YOLANDA'S USER OBJECT INFO", user_obj.household[0].num_occupants, user_obj.household[0].income)
+           # print("THIS IS YOLANDA'S USER OBJECT INFO", user_obj.household[0].num_occupants, user_obj.household[0].income)
             cc_calcs = coolclimate.existing_user_cc_calcs(current_user)
-            print("SEE CALCULATIONS", cc_calcs)
+            #print("SEE CALCULATIONS", cc_calcs)
             # vehicle_emit = user_obj.vehicle_travel[0].mileage
             # print("VEHICLE EMISSION", vehicle_emit)
+            # print('*********************************')
+            # print('*********************************')
+            # print('*********************************')
+            # print('*********************************')
+            # print(type(user_obj.household[0].income))
             # nat_gas_emit = user_obj.monthly_nat_gat.nat_gas_bill
+            
             elect_bill = cc_calcs['input_footprint_housing_electricity_dollars']
             nat_gas_emit = cc_calcs['input_footprint_housing_naturalgas_dollars']
             vehicle_emit = cc_calcs['input_footprint_transportation_miles1']
@@ -81,7 +87,7 @@ def new_user():
         flash('User already exists')
         return redirect('/')
 
-    return render_template("emission_info.html")
+    return render_template("emission_info.html") #sus
 
 @app.route('/create-new-user')
 def create_new_user():
@@ -102,9 +108,9 @@ def submit_info():
     input_mpg = request.form.get("mpg")
     vehicle_travel = request.form.get("vehicle-travel")
     input_public_trans = request.form.get("public-trans")
-    input_income = request.form.get("household-income")
-
-    input_amt = request.form.get("household-amt")
+    input_income = request.form.get("household-income") ####### NOT GETTING SEEDED 
+    print("THIS IS THE INCOME", input_income)
+    input_amt = request.form.get("household-amt") ####### NOT GETTING SEEDED 
     input_elect_bill = request.form.get("elect-bill")
     input_nat_gas_bill = request.form.get("nat-gas-bill")
     # add_all = crud.add_user_info(location_by_zip=location_by_zip, input_fuel=input_fuel, input_mpg=input_mpg, vehicle_travel=vehicle_travel, 
@@ -114,6 +120,7 @@ def submit_info():
     add_all = crud.add_user_info(location_by_zip, input_fuel, input_mpg, vehicle_travel, 
                                 input_public_trans, input_income, input_amt,
                                 input_elect_bill, input_nat_gas_bill, user_id)
+                    
 
     result = coolclimate.coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
                     input_elect_bill, input_nat_gas_bill)

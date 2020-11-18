@@ -79,11 +79,11 @@ def existing_user_cc_calcs(user_id):
     # user_obj = User.query.get(user_id)
     user_obj = crud.get_user_by_id(user_id)
     print("LOOK IM USER ID", user_obj)  
-    user_location = user_obj.household[0].zipcode
+    user_location = user_obj.household[0].zipcode #zipcode comes up
     print("THIS IS USER LOCATION", user_location)
-    user_income = user_obj.household[0].income
+    user_income = user_obj.household[0].income #income does not
     print("SEE INCOME", user_income)
-    household_size = user_obj.household[0].num_occupants
+    household_size = user_obj.household[0].num_occupants #num occupants does not
     print("SEE HOUSEHOLD SIZE", household_size)
     elect_bill = user_obj.monthly_elect[0].elect_bill
     print("ELECTRICITY", elect_bill)
