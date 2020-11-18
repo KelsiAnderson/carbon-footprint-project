@@ -143,6 +143,15 @@ def submit_info():
         
     return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_emit, nat_gas_emit=nat_gas_emit, public_trans_emit=public_trans_emit, elect_bill=elect_bill)
 
+@app.route('/user-emission-info.json')
+def get_user_emission_info():
+    """get the users emission info from the db, store it as json for charts"""
+
+    emission_info = []
+    user_obj = crud.get_user_by_id(user_id)
+    monthly_elect = user_obj.
+
+    
 
 if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also
