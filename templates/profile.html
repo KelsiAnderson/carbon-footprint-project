@@ -1,29 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}profile{% endblock %}
 
-{% block body %}
+{% block head %}
 <script src="https://cdn.cool-js-lib.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-<canvas id="myDonutChart"></canvas>
 
-<script>
-  const ctx = document.getElementById('myDonutChart')
-  const donutChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: ['vehicle emissions', 'public transit', 'natural gas usage', 'electricity usage'],
-      datasets: [{data: [2, 4, 8, 5]}
-      ]
-    }
-  }); 
-</script>
+{% endblock %}
 
+{% block body %}
 <h2> this is the profile page</h2>
-<p>
-   Hi {{ user_obj.fname }}!
- <br>  
+
+<div id="profile-chart"></div>
+<p>Hi {{ user_obj.fname }}! </p>
+<br>  
 Check out your emissions for the year by category:
+<canvas id="my-donut-chart"></canvas>
 <br>
+
 Vehicle Travel Emissions:
 {{vehicle_emit}}
 <br>
@@ -37,5 +30,6 @@ Electricity Emissions:
 {{elect_bill}}
 
 </p>
+</div>
 
 {% endblock %}

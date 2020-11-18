@@ -149,9 +149,13 @@ def get_user_emission_info():
 
     emission_info = []
     user_obj = crud.get_user_by_id(user_id)
-    monthly_elect = user_obj.
+    monthly_elect = user_obj.monthly_elect[0].elect_bill
+    vehicle_emit = user_obj.vehicle_travel[0].mileage
+    nat_gas_emit = user_obj.monthly_nat_gas[0].nat_gas_bill
+    public_trans_emit = user_obj.public_trans[0].mileage
+    emission_info.extend(monthly_elect, vehicle_emit, nat_gas_emit, public_trans_emit, public_trans_emit)
 
-    
+    return jsonify({'data', emission_info})
 
 if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also
