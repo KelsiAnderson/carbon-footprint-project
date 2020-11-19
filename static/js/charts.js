@@ -2,9 +2,9 @@
 
 $.get('/user-emission-info.json', (res) =>{
   const labels = res.labels
-  print(labels)
+  console.log(labels)
   const data = res.data
-  print(data)
+  console.log(data)
   new Chart(
     $("#myDonutChart"),
     {

@@ -116,30 +116,26 @@ def submit_info():
     # add_all = crud.add_user_info(location_by_zip=location_by_zip, input_fuel=input_fuel, input_mpg=input_mpg, vehicle_travel=vehicle_travel, 
     #                             input_public_trans=input_public_trans, input_income=input_income, input_amt=input_amt,
     #                             input_elect_bill=input_elect_bill, input_nat_gas_bill=input_nat_gas_bill, user_id=user_id)
-
-    add_all = crud.add_user_info(location_by_zip, input_fuel, input_mpg, vehicle_travel, 
-                                input_public_trans, input_income, input_amt,
-                                input_elect_bill, input_nat_gas_bill, user_id)
                     
-
     result = coolclimate.coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
                     input_elect_bill, input_nat_gas_bill)
 
-    for key in result:
-        if key == "input_location":
-            location = result[key]
+    location = result["input_location"]
+    input_fuel = result["input_footprint_transportation_fuel1"]
+    input_mpg = result["input_footprint_transportation_mpg1"]
+    vehicle_emit = result["input_footprint_transportation_miles1"]
+    public_trans_emit = result["input_footprint_transportation_bus"]
+    input_income = result["input_income"]
+    input_amt = result["input_size"]
+    elect_bill = result["input_footprint_housing_electricity_dollars"]
+    nat_gas_emit = result["input_footprint_housing_naturalgas_dollars"]
 
-        if key == "input_footprint_housing_electricity_dollars":
-            elect_bill = result[key]
-            
-        if key == "input_footprint_transportation_miles1":
-            vehicle_emit = result[key]
-
-        if key == "input_footprint_transportation_bus":
-            public_trans_emit = result[key]
-
-        if key == "input_footprint_housing_naturalgas_dollars":
-            nat_gas_emit = result[key]
+    crud.add_user_info(location_by_zip=location, input_fuel= input_fuel,                  
+    input_mpg=input_mpg, vehicle_travel=vehicle_emit, 
+                                input_public_trans=public_trans_emit, input_income=input_income, input_amt=input_amt,
+                                input_elect_bill=elect_bill, input_nat_gas_bill=nat_gas_emit, user_id=user_id)
+    # location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, 
+    #         input_income, input_amt, input_elect_bill, input_nat_gas_bill, user_id
         
     return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_emit, nat_gas_emit=nat_gas_emit, public_trans_emit=public_trans_emit, elect_bill=elect_bill)
 
@@ -159,7 +155,7 @@ def get_user_emission_info():
                     "data": [monthly_elect, vehicle_emit, nat_gas_emit, public_trans_emit]
     }
     
-    return jsonify({'data': emission_info})
+    return jsonify(emission_info)
 
 if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also
