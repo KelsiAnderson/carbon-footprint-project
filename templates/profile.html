@@ -3,21 +3,17 @@
 {% block title %}profile{% endblock %}
 
 {% block head %}
-<script src="https://cdn.cool-js-lib.js"></script>
+<!-- <script src="https://cdn.cool-js-lib.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js"></script>
 
 {% endblock %}
 
 {% block body %}
-<h2> this is the profile page</h2>
-
 <div id="profile-chart">
-<p>Hi {{ user_obj.fname }}! </p>
-<br>  
+<h2>Hi {{ user_obj.fname }}! </h2>
 Check out your emissions for the year by category:
-
 <canvas id="myDonutChart"></canvas>
 </div>
 <br>

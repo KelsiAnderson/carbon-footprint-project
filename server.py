@@ -155,12 +155,9 @@ def get_user_emission_info():
     nat_gas_emit = user_obj.monthly_nat_gas[0].nat_gas_bill
     public_trans_emit = user_obj.public_trans[0].mileage
 
-    emission_info = [{
-        "monthly_elect": monthly_elect,
-        "vehicle_emit": vehicle_emit,
-        "nat_gas_emit": nat_gas_emit,
-        "public_trans_emit": public_trans_emit
-    }]
+    emission_info = {"labels": ["Electric Emissions", "Vehicle Emissions", "Natural Gass Emissions", "Public Transit Emissions"],
+                    "data": [monthly_elect, vehicle_emit, nat_gas_emit, public_trans_emit]
+    }
     
     return jsonify({'data': emission_info})
 

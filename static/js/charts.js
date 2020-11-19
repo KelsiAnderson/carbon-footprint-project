@@ -1,29 +1,23 @@
 "use strict";
 
 $.get('/user-emission-info.json', (res) =>{
-  const data = []
-  for (const info of res.data){
-    data.push({monthly_elect: info.month_elect,
-              vehicle_emit: vehicle_emit,
-              nat_gas_emit: nat_gas_emit,
-              public_trans_emit: public_trans_emit
-    })  // end data push
+  const labels = res.labels
+  print(labels)
+  const data = res.data
+  print(data)
+  new Chart(
+    $("#myDonutChart"),
+    {
+      type: 'doughnut',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data
+        }]
+      }
+    }); 
   } // end for
-  new Chart($("#myDonutChart"),
-   {
-    
-    type: 'doughnut',
-    data: {
-      labels: ['electricity usage', 'vehicle emissions', 'natural gas usage', 'public transit' ],
-      datasets: [{
-        data: data
-      }]
-    }
-  }); 
-
-  
-}
-)
+);
 // emission_info = [{
 //   "monthly_elect": monthly_elect,
 //   "vehicle_emit": vehicle_emit,
@@ -38,7 +32,7 @@ $.get('/user-emission-info.json', (res) =>{
 //   data: {
 //     labels: ['electricity usage', 'vehicle emissions', 'natural gas usage', 'public transit' ],
 //     datasets: [{
-//       data: data
+//       data: [2, 4, 7, 12]
 //     }]
 //   }
 // }); 
