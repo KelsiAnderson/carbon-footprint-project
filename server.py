@@ -1,6 +1,6 @@
 """server for carbon emmissions app."""
 
-from flask import (Flask, render_template, request, flash, session, redirect)
+from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
 import os
 from model import connect_to_db
 import crud
@@ -147,15 +147,22 @@ def submit_info():
 def get_user_emission_info():
     """get the users emission info from the db, store it as json for charts"""
 
-    emission_info = []
-    user_obj = crud.get_user_by_id(user_id)
+    #emission_info = []
+    current_user = session.get('current_user')
+    user_obj = crud.get_user_by_id(current_user)
     monthly_elect = user_obj.monthly_elect[0].elect_bill
     vehicle_emit = user_obj.vehicle_travel[0].mileage
     nat_gas_emit = user_obj.monthly_nat_gas[0].nat_gas_bill
     public_trans_emit = user_obj.public_trans[0].mileage
-    emission_info.extend(monthly_elect, vehicle_emit, nat_gas_emit, public_trans_emit, public_trans_emit)
 
-    return jsonify({'data', emission_info})
+    emission_info = [{
+        "monthly_elect": monthly_elect,
+        "vehicle_emit": vehicle_emit,
+        "nat_gas_emit": nat_gas_emit,
+        "public_trans_emit": public_trans_emit
+    }]
+    
+    return jsonify({'data': emission_info})
 
 if __name__ == '__main__':
     # Setting debug=True gives us error messages in the browser and also
