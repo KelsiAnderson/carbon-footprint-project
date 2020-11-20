@@ -167,9 +167,9 @@ def add_vehicle_info(input_fuel, input_mpg, user_id):
 
     return seed_vehicle_info
 
-def add_public_trans(user_id, input_public_trans, carbon_footprint):
+def add_public_trans(user_id, input_public_trans, carbon_footprint, travel_date=datetime.now()):
     
-    seed_public_trans = Public_Trans(mileage=input_public_trans, user_id=user_id, carbon_footprint=carbon_footprint)
+    seed_public_trans = Public_Trans(mileage=input_public_trans, user_id=user_id, carbon_footprint=carbon_footprint, public_trans_date=travel_date)
     db.session.add(seed_public_trans)
     db.session.commit()
 
@@ -177,15 +177,15 @@ def add_public_trans(user_id, input_public_trans, carbon_footprint):
 
 def add_elect_bill(user_id, input_elect_bill, carbon_footprint, travel_date=datetime.now()):
  
-    seed_elect_info = Monthly_Elect(elect_bill=input_elect_bill, carbon_footprint=carbon_footprint, user_id=user_id)
+    seed_elect_info = Monthly_Elect(elect_bill=input_elect_bill, carbon_footprint=carbon_footprint, user_id=user_id, elect_date=travel_date)
     db.session.add(seed_elect_info)
     db.session.commit()
 
     return seed_elect_info
 
-def add_nat_gas_info(input_nat_gas_bill, carbon_footprint, user_id):
+def add_nat_gas_info(input_nat_gas_bill, carbon_footprint, user_id, travel_date=datetime.now()):
 
-    seed_nat_gas_info = Monthly_Nat_Gas(nat_gas_bill=input_nat_gas_bill, user_id=user_id)
+    seed_nat_gas_info = Monthly_Nat_Gas(nat_gas_bill=input_nat_gas_bill, user_id=user_id, nat_gas_date=travel_date)
     db.session.add(seed_nat_gas_info)
     db.session.commit()
 
