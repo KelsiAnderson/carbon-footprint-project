@@ -108,3 +108,15 @@ existing_user_cc_calcs(1)
 #     connect_to_db(app)
 
     
+
+# Vehicle Travel Emissions:
+# {{vehicle_emit}}
+# <br>
+# Natural Gas Emissions:
+# {{nat_gas_emit}}
+# <br>
+# Public Transit Emissions:
+# {{public_trans_emit}}
+# <br>
+# Electricity Emissions:
+# {{elect_bill}}

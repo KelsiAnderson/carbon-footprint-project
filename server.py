@@ -30,24 +30,27 @@ def existing_user():
     
     import coolclimate #LUCIA ADDED THIS 
     email= request.args.get("email")
-   #user_name = request.args.get("username")
     password = request.args.get("password")
-    if session.get("current_user"):
-        user_obj = crud.get_user_by_id(session['current_user'])
-    else:
-        user_obj = crud.get_user_by_email(email)
+    # user_obj = crud.get_user_by_email(email)
+    print("THIS IS THE SESSION", session['current_user'])
+    # if session.get("current_user"):
+    #     user_obj = crud.get_user_by_id(session['current_user'])
+    #     print("SESSION CURRENT USER WHAT IS ITTTT", user_obj)
+    # else:
+    user_obj = crud.get_user_by_email(email)
 
     if not user_obj:
         flash("Please create account below!")
         return redirect('/')
     elif password:
         if password != user_obj.password:
+            print("USER OBJ PASSWORD HERE",user_obj.password)
+            print("password in text field:", password)
             flash('incorrect password')
+
             return redirect('/')
         else:
             session['current_user'] = user_obj.user_id 
-        
-    # current_user = session.get('current_user')
 
     cc_calcs = coolclimate.existing_user_cc_calcs(user_obj.user_id)
     
@@ -56,8 +59,8 @@ def existing_user():
     vehicle_emit = cc_calcs['input_footprint_transportation_miles1']
     public_trans_emit = cc_calcs['input_footprint_transportation_bus']
 
-    return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_emit, 
-                        nat_gas_emit=nat_gas_emit, public_trans_emit=public_trans_emit, elect_bill=elect_bill) 
+    return render_template("profile.html", user_obj=user_obj) #user_obj=user_obj, vehicle_emit=vehicle_emit, 
+    #                     nat_gas_emit=nat_gas_emit, public_trans_emit=public_trans_emit, elect_bill=elect_bill) 
 
 
 @app.route('/new_users', methods=["POST","GET"])
@@ -139,8 +142,10 @@ def get_user_emission_info():
     """get the users emission info from the db, store it as json for charts"""
 
     current_user = session.get('current_user')
+    print("CUREENT USER IN SESSION",current_user)
     user_obj = crud.get_user_by_id(current_user)
     monthly_elect = user_obj.monthly_elect[-1].carbon_footprint
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",monthly_elect)
     vehicle_emit = user_obj.vehicle_travel[-1].carbon_footprint
     nat_gas_emit = user_obj.monthly_nat_gas[-1].carbon_footprint
     public_trans_emit = user_obj.public_trans[-1].carbon_footprint
@@ -192,7 +197,6 @@ def update_info():
     input_amt = result["input_size"]
     elect_bill = result["input_footprint_housing_electricity_dollars"]
     nat_gas_emit = result["input_footprint_housing_naturalgas_dollars"]
-    
     public_trans_emit = float(public_trans_emit)
 
     crud.add_mileage(user_id=user_id, mileage=vehicle_travel, carbon_footprint=vehicle_emit)
@@ -208,7 +212,7 @@ def update_info():
     crud.add_nat_gas_info(input_nat_gas_bill=input_nat_gas_bill, carbon_footprint=nat_gas_emit, user_id=user_id)
 
     
-    return redirect('/existing_users')
+    return render_template('profile.html', user_obj=user_obj)
 
 #TODO: for update info route. It needs to be cleaned up and shorter
  # user_inputs = {'location': request.form.get('zipcode'),
