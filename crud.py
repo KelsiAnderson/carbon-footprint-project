@@ -185,7 +185,7 @@ def add_elect_bill(user_id, input_elect_bill, carbon_footprint, travel_date=date
 
 def add_nat_gas_info(input_nat_gas_bill, carbon_footprint, user_id, travel_date=datetime.now()):
 
-    seed_nat_gas_info = Monthly_Nat_Gas(nat_gas_bill=input_nat_gas_bill, user_id=user_id, nat_gas_date=travel_date)
+    seed_nat_gas_info = Monthly_Nat_Gas(nat_gas_bill=input_nat_gas_bill, carbon_footprint=carbon_footprint, user_id=user_id, nat_gas_date=travel_date)
     db.session.add(seed_nat_gas_info)
     db.session.commit()
 
