@@ -123,9 +123,17 @@ def submit_info():
 
     crud.add_mileage(user_id=user_id, mileage=vehicle_travel, carbon_footprint=vehicle_emit, travel_date=datetime.now())
 
-    crud.add_user_info(location_by_zip=location, input_fuel=input_fuel, input_mpg=input_mpg,                 
-    input_public_trans=public_trans_emit, input_income=input_income, input_amt=input_amt, input_elect_bill=elect_bill, input_nat_gas_bill=nat_gas_emit, user_id=user_id)
-        
+    crud.add_household_info(user_id=user_id, input_amt=input_amt, input_income=input_income, location_by_zip=location)
+
+    crud.add_vehicle_info(input_fuel=input_fuel, input_mpg=input_mpg, user_id=user_id)
+
+    crud.add_public_trans(user_id=user_id, input_public_trans=input_public_trans,carbon_footprint=public_trans_emit)
+
+    crud.add_elect_bill(user_id=user_id, input_elect_bill=input_elect_bill, carbon_footprint=elect_bill)
+
+    crud.add_nat_gas_info(input_nat_gas_bill=input_nat_gas_bill, carbon_footprint=nat_gas_emit, user_id=user_id)
+
+    
     return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_emit, nat_gas_emit=nat_gas_emit, public_trans_emit=public_trans_emit, elect_bill=elect_bill)
 
 @app.route('/user-emission-info.json')
@@ -154,7 +162,7 @@ def show_update_form():
     return render_template("update_info.html")
 
 #TODO: rewrite a funciton that unpacks the result of the API OR 
-@app.route('/update-info', methods=["POST"])
+@app.route(su, methods=["POST"])
 def update_info():
     
     import coolclimate
