@@ -2,6 +2,8 @@
 """CRUD operations"""
 
 from model import db, User, Vehicle, Vehicle_Travel, Public_Trans, Household, Monthly_Nat_Gas, Monthly_Elect, Comments, connect_to_db
+from datetime import datetime
+
 
 def create_user(fname, user_name, email, password):
     """Create and return a new user"""
@@ -141,24 +143,44 @@ def get_vehicle_travel_by_user(user_id):
     vehicle_travel = Vehicle_Travel.query.filter(Vehicle_Travel.user_id == user_id).first()
     return vehicle_travel
 
-def add_user_info(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, 
-            input_income, input_amt, input_elect_bill, input_nat_gas_bill, user_id):
+def add_mileage(user_id, mileage, carbon_footprint, travel_date=datetime.now()):
 
-    add_location = Household(num_occupants=input_amt, income=input_income, zipcode=location_by_zip, user_id=user_id)
-    db.session.add(add_location)
+    add_mileage = Vehicle_Travel(user_id=user_id, mileage=mileage, carbon_footprint=carbon_footprint, travel_date=travel_date)
+    db.session.add(add_mileage)
     db.session.commit()
 
-    add_fuel = Vehicle(fuel_type=input_fuel, mpg=input_mpg, user_id=user_id)
-    db.session.add(add_fuel)
+    return add_mileage
+
+def add_household_info(user_id, input_amt, input_income, location_by_zip):
+
+    add_house_info = Household(num_occupants=input_amt, income=input_income, zipcode=location_by_zip, user_id=user_id)
+    db.session.add(add_house_info)
     db.session.commit()
 
-    add_vehicle_travel = Vehicle_Travel(mileage=vehicle_travel, user_id=user_id)
-    db.session.add(add_vehicle_travel)
+    return add_house_info
+
+def add_vehicle_info(input_fuel, input_mpg, user_id):
+
+    seed_vehicle_info = Vehicle(fuel_type=input_fuel, mpg=input_mpg, user_id=user_id)
+    db.session.add(seed_vehicle_info)
     db.session.commit()
 
-    add_public_trans = Public_Trans(mileage=input_public_trans, user_id=user_id)
-    db.session.add(add_public_trans)
+    return seed_vehicle_info
+
+def add_public_trans(user_id, input_public_trans, carbon_footprint):
+    
+    seed_public_trans = Public_Trans(mileage=input_public_trans, user_id=user_id,)
+    db.session.add(seed_public_trans)
     db.session.commit()
+
+    return seed_public_trans
+
+
+#TODO: this needs to be broken up into individual function for each table
+def add_user_info(input_public_trans, 
+            input_elect_bill, input_nat_gas_bill, user_id):
+
+    
 
     add_elect_bill = Monthly_Elect(elect_bill=input_elect_bill, user_id=user_id)
     db.session.add(add_elect_bill)
@@ -169,6 +191,8 @@ def add_user_info(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_
     db.session.commit()
 
     return "success!"
+
+
 
 #TODO: create a route for household income
 def get_household_by_id(user_id):

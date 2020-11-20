@@ -60,7 +60,7 @@ class Vehicle(db.Model):
 class Vehicle_Travel(db.Model):
     """table representing daily mileage travelled"""
 
-    __tablename___ = "vehicle_travel"
+    __tablename__ = "vehicle_travel"
 
     travel_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
     mileage = db.Column(db.Integer)
@@ -162,7 +162,7 @@ class Comments(db.Model):
         return f'<comment_id = {self.comment_id} user_id = {self.user_id}>'
 
 #Dont forget to turn on echo (echo = True)
-def connect_to_db(flask_app, db_uri='postgresql:///project', echo=False):
+def connect_to_db(flask_app, db_uri='postgresql:///project', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
