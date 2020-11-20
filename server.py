@@ -210,7 +210,10 @@ def update_info():
 
     crud.add_public_trans(user_id=user_id, input_public_trans=input_public_trans,carbon_footprint=public_trans_emit)
 
-    crud.add_user_info(user_id=user_id, input_public_trans=public_trans_emit, input_elect_bill=elect_bill, input_nat_gas_bill=nat_gas_emit, )
+    crud.add_elect_bill(user_id=user_id, input_elect_bill=input_elect_bill, carbon_footprint=elect_bill)
+
+    crud.add_nat_gas_info(input_nat_gas_bil=input_nat_gas_bill, carbon_footprint=nat_gas_emit, user_id=user_id)
+
     
     return redirect('/existing_users')
 

@@ -169,30 +169,27 @@ def add_vehicle_info(input_fuel, input_mpg, user_id):
 
 def add_public_trans(user_id, input_public_trans, carbon_footprint):
     
-    seed_public_trans = Public_Trans(mileage=input_public_trans, user_id=user_id,)
+    seed_public_trans = Public_Trans(mileage=input_public_trans, user_id=user_id, carbon_footprint=carbon_footprint)
     db.session.add(seed_public_trans)
     db.session.commit()
 
     return seed_public_trans
 
-
-#TODO: this needs to be broken up into individual function for each table
-def add_user_info(input_public_trans, 
-            input_elect_bill, input_nat_gas_bill, user_id):
-
-    
-
-    add_elect_bill = Monthly_Elect(elect_bill=input_elect_bill, user_id=user_id)
-    db.session.add(add_elect_bill)
+def add_elect_bill(user_id, input_elect_bill, carbon_footprint, travel_date=datetime.now()):
+ 
+    seed_elect_info = Monthly_Elect(elect_bill=input_elect_bill, carbon_footprint=carbon_footprint, user_id=user_id)
+    db.session.add(seed_elect_info)
     db.session.commit()
 
-    add_nat_gas = Monthly_Nat_Gas(nat_gas_bill=input_nat_gas_bill, user_id=user_id)
-    db.session.add(add_nat_gas)
+    return seed_elect_info
+
+def add_nat_gas_info(input_nat_gas_bill, carbon_footprint, user_id):
+
+    seed_nat_gas_info = Monthly_Nat_Gas(nat_gas_bill=input_nat_gas_bill, user_id=user_id)
+    db.session.add(seed_nat_gas_info)
     db.session.commit()
 
-    return "success!"
-
-
+    return seed_nat_gas_info
 
 #TODO: create a route for household income
 def get_household_by_id(user_id):
