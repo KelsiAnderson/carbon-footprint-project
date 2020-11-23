@@ -191,6 +191,38 @@ def add_nat_gas_info(input_nat_gas_bill, carbon_footprint, user_id, travel_date=
 
     return seed_nat_gas_info
 
+def change_vehicle_carbon(user_id, vehicle_emit):
+
+    vehicle_carbon = Vehicle_Travel.query.get(user_id)
+    vehicle_carbon.carbon_footprint = vehicle_emit
+    db.session.commit()
+
+    return vehicle_carbon
+
+def change_gas_carbon(user_id, nat_gas_emit):
+
+    gas_carbon = Monthly_Nat_Gas.query.get(user_id)
+    gas_carbon.carbon_footprint = nat_gas_emit
+    db.session.commit()
+
+    return gas_carbon
+
+def change_elect_carbon(user_id, elect_emit):
+
+    elect_carbon = Monthly_Elect.query.get(user_id)
+    elect_carbon.carbon_footprint = elect_emit
+    db.session.commit()
+
+    return elect_carbon
+
+def change_public_trans_carbon(user_id, public_trans_emit):
+
+    public_trans_carbon = Public_Trans.query.get(user_id)
+    public_trans_carbon.carbon_footprint = public_trans_emit
+    db.session.commit()
+
+    return public_trans_carbon
+
 #TODO: create a route for household income
 def get_household_by_id(user_id):
 

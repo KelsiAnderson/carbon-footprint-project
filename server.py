@@ -54,10 +54,15 @@ def existing_user():
 
     cc_calcs = coolclimate.existing_user_cc_calcs(user_obj.user_id)
     
-    elect_bill = cc_calcs['input_footprint_housing_electricity_dollars']
+    elect_emit = cc_calcs['input_footprint_housing_electricity_dollars']
     nat_gas_emit = cc_calcs['input_footprint_housing_naturalgas_dollars']
     vehicle_emit = cc_calcs['input_footprint_transportation_miles1']
     public_trans_emit = cc_calcs['input_footprint_transportation_bus']
+
+    crud.change_vehicle_carbon(user_obj.user_id, vehicle_emit)
+    crud.change_gas_carbon(user_obj.user_id, nat_gas_emit)
+    crud.change_elect_carbon(user_obj.user_id, elect_emit)
+    crud.change_public_trans_carbon(user_obj.user_id, public_trans_emit)
 
     return render_template("profile.html", user_obj=user_obj) #user_obj=user_obj, vehicle_emit=vehicle_emit, 
     #                     nat_gas_emit=nat_gas_emit, public_trans_emit=public_trans_emit, elect_bill=elect_bill) 
@@ -200,18 +205,12 @@ def update_info():
     public_trans_emit = float(public_trans_emit)
 
     crud.add_mileage(user_id=user_id, mileage=vehicle_travel, carbon_footprint=vehicle_emit)
-
     crud.add_household_info(user_id=user_id, input_amt=input_amt, input_income=input_income, location_by_zip=location)
-
     crud.add_vehicle_info(input_fuel=input_fuel, input_mpg=input_mpg, user_id=user_id)
-
     crud.add_public_trans(user_id=user_id, input_public_trans=input_public_trans,carbon_footprint=public_trans_emit)
-
     crud.add_elect_bill(user_id=user_id, input_elect_bill=input_elect_bill, carbon_footprint=elect_bill)
-
     crud.add_nat_gas_info(input_nat_gas_bill=input_nat_gas_bill, carbon_footprint=nat_gas_emit, user_id=user_id)
 
-    
     return render_template('profile.html', user_obj=user_obj)
 
 #TODO: for update info route. It needs to be cleaned up and shorter
