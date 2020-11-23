@@ -12,8 +12,10 @@ $.get('/user-emission-info.json', (res) =>{
       data: {
         labels: labels,
         datasets: [{
-          data: data
-        }]
+          data: data, 
+          backgroundColor: ["#99ffff", "#0077ff", "#66ccff", "#335577"]
+        }],
+        
       }
     }); 
   } 

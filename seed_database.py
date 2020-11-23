@@ -67,10 +67,6 @@ for transit in public_trans_file:
 
 household_file = open_pipe_file("seed_text_files/household.seed")
 for house in household_file:
-    # num_occupants = house[0]
-    # income = house[1]
-    # zipcode = house[2]
-    # user_id = house[3]
     num_occupants, income, zipcode, user_id = house
     household = crud.create_household(num_occupants, income, zipcode, user_id)
 
