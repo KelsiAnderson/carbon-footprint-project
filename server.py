@@ -154,8 +154,9 @@ def get_user_emission_info():
     vehicle_emit = user_obj.vehicle_travel[-1].carbon_footprint
     nat_gas_emit = user_obj.monthly_nat_gas[-1].carbon_footprint
     public_trans_emit = user_obj.public_trans[-1].carbon_footprint
+    print("THIS IS THE PUBLIC TRANS********************", public_trans_emit)
 
-    emission_info = {"labels": ["Electric Emissions", "Vehicle Emissions", "Natural Gass Emissions", "Public Transit Emissions"],
+    emission_info = {"labels": ["Electric Emissions", "Vehicle Emissions", "Natural Gas Emissions", "Public Transit Emissions"],
                     "data": [monthly_elect, vehicle_emit, nat_gas_emit, public_trans_emit]
     }
     
