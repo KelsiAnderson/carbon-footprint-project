@@ -29,18 +29,6 @@ class User(db.Model):
     def __repr__(self):
         return f'<User user_id= {self.user_id} email={self.email}>'
 
-# class Location(db.Model):
-#     """location table"""
-
-#     __tablename__ = "location"
-#     location_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-#     zipcode = db.Column(db.Integer)
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-
-#     user = db.relationship('User')
-
-#     def __repr__(self):
-#         return f'<Location location_id= {self.location_id} zipcode={self.zipcode}>'
 
 class Vehicle(db.Model):
     """table representing the vehicle type a user drives"""

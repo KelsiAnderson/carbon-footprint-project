@@ -223,11 +223,67 @@ def change_public_trans_carbon(user_id, public_trans_emit):
 
     return public_trans_carbon
 
-#TODO: create a route for household income
+
+def compare_monthly_elect(user_id, month, year):
+    
+    first_of_month = datetime(year=year, month=month, day=1)
+    last_of_month = datetime(year=year, month=(month + 1), day=1)
+    current_date = Monthly_Elect.query.filter((Monthly_Elect.elect_date >= first_of_month), (Monthly_Elect.elect_date < last_of_month)).all()
+    #print("CHECK OUT THE CURRENT DATE", current_date)
+    
+    sum = 0
+    for dates in current_date:
+        sum += dates.carbon_footprint
+
+    return sum
+
+def compare_monthly_nat_gas(user_id, month, year):
+
+    first_of_month = datetime(year=year, month=month, day=1)
+    last_of_month = datetime(year=year, month=(month + 1), day=1)
+    current_date = Monthly_Nat_Gas.query.filter((Monthly_Nat_Gas.nat_gas_date >= first_of_month), (Monthly_Nat_Gas.nat_gas_date < last_of_month)).all()
+    #print("CHECK OUT THE CURRENT DATE", current_date)
+
+    sum = 0
+    for dates in current_date:
+        sum += dates.carbon_footprint
+
+        return sum
+
+def compare_monthly_vehicle_emissions(user_id, month, year):
+
+    first_of_month = datetime(year=year, month=month, day=1)
+    last_of_month = datetime(year=year, month=(month + 1), day=1)
+    current_date = Vehicle_Travel.query.filter((Vehicle_Travel.travel_date >= first_of_month), (Vehicle_Travel.travel_date < last_of_month)).all()
+    #print("CHECK OUT THE CURRENT DATE", current_date)
+
+    sum = 0
+    for dates in current_date:  
+        sum += dates.carbon_footprint
+
+    return sum
+
+def compare_monthly_public_trans(user_id, month, year):
+    
+    first_of_month = datetime(year=year, month=month, day=1)
+    last_of_month = datetime(year=year, month=(month + 1), day=1)
+    current_date = Public_Trans.query.filter((Public_Trans.public_trans_date >= first_of_month), (Public_Trans.public_trans_date < last_of_month)).all()
+    print("CHECK OUT THE CURRENT DATE", current_date)
+
+    sum = 0
+    for dates in current_date:  
+        sum += dates.carbon_footprint
+
+    return sum
+
+
+
+
 def get_household_by_id(user_id):
 
-    household = Household.query.filter(vehicle_Travel.user_id == user_id).first()
+    household = Household.query.filter(Vehicle_Travel.user_id == user_id).first()
     return household
+
 
 if __name__ == '__main__':
     from server import app
