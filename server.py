@@ -180,25 +180,6 @@ def submit_info():
                             current_vehicle_emit=current_vehicle_emit, previous_month_vehicle_emit=previous_month_vehicle_emit, 
                             current_public_trans_emit=current_public_trans_emit, previous_month_public_trans_emit=previous_month_public_trans_emit)
 
-@app.route('/user-emission-info.json')
-def get_user_emission_info():
-    """get the users emission info from the db, store it as json for charts"""
-
-    current_user = session.get('current_user')
-    #print("CUREENT USER IN SESSION",current_user)
-    user_obj = crud.get_user_by_id(current_user)
-    monthly_elect = user_obj.monthly_elect[-1].carbon_footprint
-    #print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",monthly_elect)
-    vehicle_emit = user_obj.vehicle_travel[-1].carbon_footprint
-    nat_gas_emit = user_obj.monthly_nat_gas[-1].carbon_footprint
-    public_trans_emit = user_obj.public_trans[-1].carbon_footprint
-    #print("THIS IS THE PUBLIC TRANS********************", public_trans_emit)
-
-    emission_info = {"labels": ["Electric Emissions", "Vehicle Emissions", "Natural Gas Emissions", "Public Transit Emissions"],
-                    "data": [monthly_elect, vehicle_emit, nat_gas_emit, public_trans_emit]
-    }
-    
-    return jsonify(emission_info)
 
 @app.route('/show-update-form')
 def show_update_form():
@@ -278,6 +259,46 @@ def update_info():
                          current_vehicle_emit=current_vehicle_emit,  previous_month_vehicle_emit= previous_month_vehicle_emit, 
                          current_public_trans_emit=current_public_trans_emit, 
                          previous_month_public_trans_emit=previous_month_public_trans_emit)
+
+@app.route('/user-emission-info.json')
+def get_user_emission_info():
+    """get the users emission info from the db, store it as json for charts"""
+
+    current_user = session.get('current_user')
+    #print("CUREENT USER IN SESSION",current_user)
+    user_obj = crud.get_user_by_id(current_user)
+    monthly_elect = user_obj.monthly_elect[-1].carbon_footprint
+    #print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",monthly_elect)
+    vehicle_emit = user_obj.vehicle_travel[-1].carbon_footprint
+    nat_gas_emit = user_obj.monthly_nat_gas[-1].carbon_footprint
+    public_trans_emit = user_obj.public_trans[-1].carbon_footprint
+    #print("THIS IS THE PUBLIC TRANS********************", public_trans_emit)
+
+    emission_info = {"labels": ["Electricity Emissions", "Vehicle Emissions", "Natural Gas Emissions", "Public Transit Emissions"],
+                    "data": [monthly_elect, vehicle_emit, nat_gas_emit, public_trans_emit]
+    }
+    
+    return jsonify(emission_info)
+
+@app.route('/previous-month-user-emission-info.json')
+def previous_month_user_emission_info():
+    
+    current_user = session.get('current_user')
+    user_obj = crud.get_user_by_id(current_user)
+    month = datetime.now().month
+    year = datetime.now().year
+    last_month = month - 1
+    
+    previous_elect_emission = crud.compare_monthly_elect(user_obj.user_id, last_month, year)
+    previous_month_gas_emit = crud.compare_monthly_nat_gas(user_obj.user_id, last_month, year)
+    previous_month_vehicle_emit = crud.compare_monthly_vehicle_emissions(user_obj.user_id, last_month, year)
+    previous_month_public_trans_emit = crud.compare_monthly_public_trans(user_obj.user_id, last_month, year)
+
+    previous_month_emit_info = {"labels": ["Previous Month Electricity Emissions", "Previous Month Vehicle Emissions", "Previous Month Natural Gas Emissions", "Previous Month Public Transit Emissions"],
+                                "data": [previous_elect_emission, previous_month_vehicle_emit, previous_month_gas_emit, previous_month_public_trans_emit]}
+
+    return jsonify(previous_month_emit_info)
+
 #TODO: for update info route. It needs to be cleaned up and shorter
  # user_inputs = {'location': request.form.get('zipcode'),
     #                'input_fuel': request.form.get('fuel-type'),
