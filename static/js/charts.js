@@ -21,6 +21,7 @@ $.get('/user-emission-info.json', (res) =>{
   } 
 );
 
+
 $.get('/previous-month-user-emission-info.json', (res) =>{
   const labels = res.labels
   console.log(labels)
