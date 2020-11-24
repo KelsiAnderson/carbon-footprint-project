@@ -17,11 +17,13 @@ Check out your emissions for this month by category:
 <canvas id="currentMonthDonutChart"></canvas>
 </div>
 <br>
-Previous months emissions chart
-<div id="previous-month-chart">
-<canvas id="previousMonthDonutChart"></canvas>
-</div>
-<br>
+{% if show_previous_month %}
+    Previous months emissions chart
+    <div id="previous-month-chart">
+    <canvas id="previousMonthDonutChart"></canvas>
+    </div>
+{% endif %}
+    <br>
 <p>
      Vehicle Travel Emissions:
      {{vehicle_emit}}

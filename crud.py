@@ -15,17 +15,6 @@ def create_user(fname, user_name, email, password):
 
     return user
 
-#THIS TABLE IS DELETED. Obsolete?
-# def create_location(zipcode, user_id):
-
-#     location = Location(zipcode=zipcode, user_id=user_id)
-
-#     db.session.add(location)
-#     db.session.commit()
-
-#     return location
-    
-
 
 def create_vehicle(mpg, fuel_type, user_id):
     """create and return a new users vehicle"""
@@ -226,55 +215,69 @@ def change_public_trans_carbon(user_id, public_trans_emit):
 
 def compare_monthly_elect(user_id, month, year):
     
+
     first_of_month = datetime(year=year, month=month, day=1)
     last_of_month = datetime(year=year, month=(month + 1), day=1)
-    current_date = Monthly_Elect.query.filter((Monthly_Elect.elect_date >= first_of_month), (Monthly_Elect.elect_date < last_of_month)).all()
+    current_date = Monthly_Elect.query.filter((Monthly_Elect.user_id == user_id), (Monthly_Elect.elect_date >= first_of_month), (Monthly_Elect.elect_date < last_of_month)).all()
     #print("CHECK OUT THE CURRENT DATE", current_date)
     
-    sum = 0
-    for dates in current_date:
-        sum += dates.carbon_footprint
-
-    return sum
+    return sum([date.carbon_footprint for date in current_date])
 
 def compare_monthly_nat_gas(user_id, month, year):
 
     first_of_month = datetime(year=year, month=month, day=1)
     last_of_month = datetime(year=year, month=(month + 1), day=1)
-    current_date = Monthly_Nat_Gas.query.filter((Monthly_Nat_Gas.nat_gas_date >= first_of_month), (Monthly_Nat_Gas.nat_gas_date < last_of_month)).all()
+    current_date = Monthly_Nat_Gas.query.filter(
+        (Monthly_Nat_Gas.user_id == user_id), 
+        (Monthly_Nat_Gas.nat_gas_date >= first_of_month), 
+        (Monthly_Nat_Gas.nat_gas_date < last_of_month)
+        ).all()
     #print("CHECK OUT THE CURRENT DATE", current_date)
+    #print("compare_monthly_nat_gas(user_id={}, month={}, year={})".format(user_id, month, year), "current_date=", current_date)     
+    
+    results = [date.carbon_footprint for date in current_date]
+    print("CARBON RESULT *********", results)
+    return sum(results)
+    # sum = 0
+    # for dates in current_date:
+    #     sum += dates.carbon_footprint
 
-    sum = 0
-    for dates in current_date:
-        sum += dates.carbon_footprint
-
-        return sum
+    #     return sum
 
 def compare_monthly_vehicle_emissions(user_id, month, year):
 
     first_of_month = datetime(year=year, month=month, day=1)
     last_of_month = datetime(year=year, month=(month + 1), day=1)
-    current_date = Vehicle_Travel.query.filter((Vehicle_Travel.travel_date >= first_of_month), (Vehicle_Travel.travel_date < last_of_month)).all()
+    current_date = Vehicle_Travel.query.filter(
+        (Vehicle_Travel.user_id == user_id), 
+        (Vehicle_Travel.travel_date >= first_of_month), 
+        (Vehicle_Travel.travel_date < last_of_month)
+    ).all()
     #print("CHECK OUT THE CURRENT DATE", current_date)
 
-    sum = 0
-    for dates in current_date:  
-        sum += dates.carbon_footprint
+    return sum ([date.carbon_footprint for date in current_date])
+    # sum = 0
+    # for dates in current_date:  
+    #     sum += dates.carbon_footprint
 
-    return sum
+    # return sum
 
 def compare_monthly_public_trans(user_id, month, year):
     
     first_of_month = datetime(year=year, month=month, day=1)
     last_of_month = datetime(year=year, month=(month + 1), day=1)
-    current_date = Public_Trans.query.filter((Public_Trans.public_trans_date >= first_of_month), (Public_Trans.public_trans_date < last_of_month)).all()
-    print("CHECK OUT THE CURRENT DATE", current_date)
+    current_date = Public_Trans.query.filter(
+        (Public_Trans.user_id == user_id),
+        (Public_Trans.public_trans_date >= first_of_month), 
+        (Public_Trans.public_trans_date < last_of_month)
+        ).all()
+    #print("CHECK OUT THE CURRENT DATE", current_date)
+    return sum ([date.carbon_footprint for date in current_date])
+    # sum = 0
+    # for dates in current_date:  
+    #     sum += dates.carbon_footprint
 
-    sum = 0
-    for dates in current_date:  
-        sum += dates.carbon_footprint
-
-    return sum
+    # return sum
 
 
 

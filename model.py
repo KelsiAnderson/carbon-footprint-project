@@ -150,7 +150,7 @@ class Comments(db.Model):
         return f'<comment_id = {self.comment_id} user_id = {self.user_id}>'
 
 #Dont forget to turn on echo (echo = True)
-def connect_to_db(flask_app, db_uri='postgresql:///project', echo=True):
+def connect_to_db(flask_app, db_uri='postgresql:///project', echo=False):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

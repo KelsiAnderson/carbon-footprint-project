@@ -69,7 +69,9 @@ def existing_user():
     date = datetime.now()
     last_month = month - 1
     current_elect_emission = crud.compare_monthly_elect(user_obj.user_id, month, year)
+    print("CUREENT NAT GAS EMIT", current_elect_emission)
     previous_elect_emission = crud.compare_monthly_elect(user_obj.user_id, last_month, year)
+    print("PREVIOUS NAT GAS EMIT", previous_elect_emission)
     
     current_nat_gas_emit= crud.compare_monthly_nat_gas(user_obj.user_id, month, year)
     previous_month_gas_emit = crud.compare_monthly_nat_gas(user_obj.user_id, last_month, year)
@@ -87,7 +89,8 @@ def existing_user():
                          previous_elect_emission=previous_elect_emission, current_nat_gas_emit=current_nat_gas_emit,
                          previous_month_gas_emit=previous_month_gas_emit,
                          current_vehicle_emit=current_vehicle_emit,  previous_month_vehicle_emit= previous_month_vehicle_emit, 
-                         current_public_trans_emit=current_public_trans_emit, previous_month_public_trans_emit=previous_month_public_trans_emit ) 
+                         current_public_trans_emit=current_public_trans_emit, 
+                         previous_month_public_trans_emit=previous_month_public_trans_emit, show_previous_month=True ) 
 
 
 @app.route('/new_users', methods=["POST","GET"])
@@ -95,7 +98,7 @@ def new_user():
     
     email= request.form.get("email")
     user_by_email = crud.get_user_by_email(email)
-    print(user_by_email)
+    print("THIS IS EMIAL", user_by_email)
     if not user_by_email:
         fname = request.form.get("fname")
         user_name = request.form.get("username")
@@ -123,7 +126,7 @@ def submit_info():
 
     user_id = session.get('current_user')
     user_obj = crud.get_user_by_id(user_id)
-    email = user_obj.email
+    #email = user_obj.email
     location_by_zip = request.form.get("zipcode")
     input_fuel = request.form.get("fuel-type")
     input_mpg = request.form.get("mpg")
@@ -149,6 +152,7 @@ def submit_info():
     
     public_trans_emit = float(public_trans_emit)
 
+
     crud.add_mileage(user_id=user_id, mileage=vehicle_travel, carbon_footprint=vehicle_emit, travel_date=datetime.now())
     crud.add_household_info(user_id=user_id, input_amt=input_amt, input_income=input_income, location_by_zip=location)
     crud.add_vehicle_info(input_fuel=input_fuel, input_mpg=input_mpg, user_id=user_id)
@@ -158,7 +162,6 @@ def submit_info():
 
     month = datetime.now().month
     year = datetime.now().year
-    date = datetime.now()
     last_month = month - 1
 
     current_elect_emission = crud.compare_monthly_elect(user_obj.user_id, month, year)
@@ -178,7 +181,9 @@ def submit_info():
                             previous_elect_emission=previous_elect_emission, 
                             current_nat_gas_emit=current_nat_gas_emit, previous_month_gas_emit=previous_month_gas_emit,
                             current_vehicle_emit=current_vehicle_emit, previous_month_vehicle_emit=previous_month_vehicle_emit, 
-                            current_public_trans_emit=current_public_trans_emit, previous_month_public_trans_emit=previous_month_public_trans_emit)
+                            current_public_trans_emit=current_public_trans_emit, 
+                            previous_month_public_trans_emit=previous_month_public_trans_emit, 
+                            show_previous_month = False)
 
 
 @app.route('/show-update-form')
@@ -260,25 +265,31 @@ def update_info():
                          current_public_trans_emit=current_public_trans_emit, 
                          previous_month_public_trans_emit=previous_month_public_trans_emit)
 
+
 @app.route('/user-emission-info.json')
 def get_user_emission_info():
     """get the users emission info from the db, store it as json for charts"""
 
     current_user = session.get('current_user')
-    #print("CUREENT USER IN SESSION",current_user)
     user_obj = crud.get_user_by_id(current_user)
-    monthly_elect = user_obj.monthly_elect[-1].carbon_footprint
-    #print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@",monthly_elect)
-    vehicle_emit = user_obj.vehicle_travel[-1].carbon_footprint
-    nat_gas_emit = user_obj.monthly_nat_gas[-1].carbon_footprint
-    public_trans_emit = user_obj.public_trans[-1].carbon_footprint
-    #print("THIS IS THE PUBLIC TRANS********************", public_trans_emit)
+    month = datetime.now().month
+    year = datetime.now().year
+    date = datetime.now()
+    last_month = month - 1
+
+    monthly_elect = crud.compare_monthly_elect(user_obj.user_id, month, year)
+    vehicle_emit = crud.compare_monthly_vehicle_emissions(user_obj.user_id, month, year)
+    nat_gas_emit = crud.compare_monthly_nat_gas(user_obj.user_id, month, year)
+    public_trans_emit = crud.compare_monthly_public_trans(user_obj.user_id, month, year)
+
+    print("SEE PUBLIC TRANSIT ****************", public_trans_emit)
 
     emission_info = {"labels": ["Electricity Emissions", "Vehicle Emissions", "Natural Gas Emissions", "Public Transit Emissions"],
                     "data": [monthly_elect, vehicle_emit, nat_gas_emit, public_trans_emit]
     }
     
     return jsonify(emission_info)
+
 
 @app.route('/previous-month-user-emission-info.json')
 def previous_month_user_emission_info():
@@ -290,6 +301,7 @@ def previous_month_user_emission_info():
     last_month = month - 1
     
     previous_elect_emission = crud.compare_monthly_elect(user_obj.user_id, last_month, year)
+    print("SEEE PREVIOS ELECT EMISSSS ------------", previous_elect_emission)
     previous_month_gas_emit = crud.compare_monthly_nat_gas(user_obj.user_id, last_month, year)
     previous_month_vehicle_emit = crud.compare_monthly_vehicle_emissions(user_obj.user_id, last_month, year)
     previous_month_public_trans_emit = crud.compare_monthly_public_trans(user_obj.user_id, last_month, year)
