@@ -40,13 +40,13 @@ def existing_user():
     user_obj = crud.get_user_by_email(email)
 
     if not user_obj:
-        flash("Please create account below!")
+        #flash("Please create account below!")
         return redirect('/')
     elif password:
         if password != user_obj.password:
             print("USER OBJ PASSWORD HERE",user_obj.password)
             print("password in text field:", password)
-            flash('incorrect password')
+            #flash('incorrect password')
 
             return redirect('/')
         else:
@@ -90,7 +90,8 @@ def existing_user():
                          previous_month_gas_emit=previous_month_gas_emit,
                          current_vehicle_emit=current_vehicle_emit,  previous_month_vehicle_emit= previous_month_vehicle_emit, 
                          current_public_trans_emit=current_public_trans_emit, 
-                         previous_month_public_trans_emit=previous_month_public_trans_emit, show_previous_month=True ) 
+                         previous_month_public_trans_emit=previous_month_public_trans_emit, 
+                         show_previous_month=True) 
 
 
 @app.route('/new_users', methods=["POST","GET"])
@@ -176,14 +177,17 @@ def submit_info():
     current_public_trans_emit = crud.compare_monthly_public_trans(user_obj.user_id, month, year)
     previous_month_public_trans_emit = crud.compare_monthly_public_trans(user_obj.user_id, last_month, year)
 
-    return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_emit, nat_gas_emit=nat_gas_emit, public_trans_emit=public_trans_emit, 
-                            elect_emit=elect_emit, current_elect_emission=current_elect_emission, 
-                            previous_elect_emission=previous_elect_emission, 
-                            current_nat_gas_emit=current_nat_gas_emit, previous_month_gas_emit=previous_month_gas_emit,
-                            current_vehicle_emit=current_vehicle_emit, previous_month_vehicle_emit=previous_month_vehicle_emit, 
-                            current_public_trans_emit=current_public_trans_emit, 
-                            previous_month_public_trans_emit=previous_month_public_trans_emit, 
-                            show_previous_month = False)
+    return render_template("profile.html", user_obj=user_obj, 
+        current_elect_emission=current_elect_emission, 
+        previous_elect_emission=previous_elect_emission, 
+        current_nat_gas_emit=current_nat_gas_emit, 
+        previous_month_gas_emit=previous_month_gas_emit,
+        current_vehicle_emit=current_vehicle_emit, 
+        previous_month_vehicle_emit=previous_month_vehicle_emit, 
+        current_public_trans_emit=current_public_trans_emit, 
+        previous_month_public_trans_emit=previous_month_public_trans_emit, 
+        show_previous_month = False
+    )
 
 
 @app.route('/show-update-form')
@@ -256,14 +260,17 @@ def update_info():
     current_public_trans_emit = crud.compare_monthly_public_trans(user_obj.user_id, month, year)
     previous_month_public_trans_emit = crud.compare_monthly_public_trans(user_obj.user_id, last_month, year)
 
-    return render_template('profile.html', user_obj=user_obj, vehicle_emit=vehicle_emit, 
-                         nat_gas_emit=nat_gas_emit, public_trans_emit=public_trans_emit, elect_emit=elect_emit, 
-                         current_elect_emission=current_elect_emission, 
-                         previous_elect_emission=previous_elect_emission, current_nat_gas_emit=current_nat_gas_emit,
-                         previous_month_gas_emit=previous_month_gas_emit,
-                         current_vehicle_emit=current_vehicle_emit,  previous_month_vehicle_emit= previous_month_vehicle_emit, 
-                         current_public_trans_emit=current_public_trans_emit, 
-                         previous_month_public_trans_emit=previous_month_public_trans_emit)
+    return render_template('profile.html', user_obj=user_obj,
+        current_elect_emission=current_elect_emission, 
+        previous_elect_emission=previous_elect_emission, 
+        current_nat_gas_emit=current_nat_gas_emit,
+        previous_month_gas_emit=previous_month_gas_emit,
+        current_vehicle_emit=current_vehicle_emit,  
+        previous_month_vehicle_emit= previous_month_vehicle_emit, 
+        current_public_trans_emit=current_public_trans_emit, 
+        previous_month_public_trans_emit=previous_month_public_trans_emit,
+        show_previous_month= True
+    )
 
 
 @app.route('/user-emission-info.json')

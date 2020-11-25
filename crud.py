@@ -158,7 +158,10 @@ def add_vehicle_info(input_fuel, input_mpg, user_id):
 
 def add_public_trans(user_id, input_public_trans, carbon_footprint, travel_date=datetime.now()):
     
-    seed_public_trans = Public_Trans(mileage=input_public_trans, user_id=user_id, carbon_footprint=carbon_footprint, public_trans_date=travel_date)
+    seed_public_trans = Public_Trans(mileage=input_public_trans, 
+        user_id=user_id, carbon_footprint=carbon_footprint, 
+        public_trans_date=travel_date
+    )
     db.session.add(seed_public_trans)
     db.session.commit()
 
@@ -166,7 +169,10 @@ def add_public_trans(user_id, input_public_trans, carbon_footprint, travel_date=
 
 def add_elect_bill(user_id, input_elect_bill, carbon_footprint, travel_date=datetime.now()):
  
-    seed_elect_info = Monthly_Elect(elect_bill=input_elect_bill, carbon_footprint=carbon_footprint, user_id=user_id, elect_date=travel_date)
+    seed_elect_info = Monthly_Elect(elect_bill=input_elect_bill, 
+        carbon_footprint=carbon_footprint, user_id=user_id, 
+        elect_date=travel_date
+    )
     db.session.add(seed_elect_info)
     db.session.commit()
 
@@ -174,7 +180,11 @@ def add_elect_bill(user_id, input_elect_bill, carbon_footprint, travel_date=date
 
 def add_nat_gas_info(input_nat_gas_bill, carbon_footprint, user_id, travel_date=datetime.now()):
 
-    seed_nat_gas_info = Monthly_Nat_Gas(nat_gas_bill=input_nat_gas_bill, carbon_footprint=carbon_footprint, user_id=user_id, nat_gas_date=travel_date)
+    seed_nat_gas_info = Monthly_Nat_Gas(nat_gas_bill=input_nat_gas_bill, 
+        carbon_footprint=carbon_footprint, 
+        user_id=user_id, 
+        nat_gas_date=travel_date
+        )
     db.session.add(seed_nat_gas_info)
     db.session.commit()
 
@@ -218,7 +228,11 @@ def compare_monthly_elect(user_id, month, year):
 
     first_of_month = datetime(year=year, month=month, day=1)
     last_of_month = datetime(year=year, month=(month + 1), day=1)
-    current_date = Monthly_Elect.query.filter((Monthly_Elect.user_id == user_id), (Monthly_Elect.elect_date >= first_of_month), (Monthly_Elect.elect_date < last_of_month)).all()
+    current_date = Monthly_Elect.query.filter(
+        (Monthly_Elect.user_id == user_id), 
+        (Monthly_Elect.elect_date >= first_of_month), 
+        (Monthly_Elect.elect_date < last_of_month)
+        ).all()
     #print("CHECK OUT THE CURRENT DATE", current_date)
     
     return sum([date.carbon_footprint for date in current_date])
@@ -232,17 +246,10 @@ def compare_monthly_nat_gas(user_id, month, year):
         (Monthly_Nat_Gas.nat_gas_date >= first_of_month), 
         (Monthly_Nat_Gas.nat_gas_date < last_of_month)
         ).all()
-    #print("CHECK OUT THE CURRENT DATE", current_date)
-    #print("compare_monthly_nat_gas(user_id={}, month={}, year={})".format(user_id, month, year), "current_date=", current_date)     
     
     results = [date.carbon_footprint for date in current_date]
-    print("CARBON RESULT *********", results)
     return sum(results)
-    # sum = 0
-    # for dates in current_date:
-    #     sum += dates.carbon_footprint
 
-    #     return sum
 
 def compare_monthly_vehicle_emissions(user_id, month, year):
 
@@ -253,14 +260,9 @@ def compare_monthly_vehicle_emissions(user_id, month, year):
         (Vehicle_Travel.travel_date >= first_of_month), 
         (Vehicle_Travel.travel_date < last_of_month)
     ).all()
-    #print("CHECK OUT THE CURRENT DATE", current_date)
 
     return sum ([date.carbon_footprint for date in current_date])
-    # sum = 0
-    # for dates in current_date:  
-    #     sum += dates.carbon_footprint
 
-    # return sum
 
 def compare_monthly_public_trans(user_id, month, year):
     
@@ -271,21 +273,12 @@ def compare_monthly_public_trans(user_id, month, year):
         (Public_Trans.public_trans_date >= first_of_month), 
         (Public_Trans.public_trans_date < last_of_month)
         ).all()
-    #print("CHECK OUT THE CURRENT DATE", current_date)
+
     return sum ([date.carbon_footprint for date in current_date])
-    # sum = 0
-    # for dates in current_date:  
-    #     sum += dates.carbon_footprint
-
-    # return sum
+   
 
 
 
-
-def get_household_by_id(user_id):
-
-    household = Household.query.filter(Vehicle_Travel.user_id == user_id).first()
-    return household
 
 
 if __name__ == '__main__':
