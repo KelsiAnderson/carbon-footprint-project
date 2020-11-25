@@ -40,13 +40,13 @@ def existing_user():
     user_obj = crud.get_user_by_email(email)
 
     if not user_obj:
-        #flash("Please create account below!")
+        flash("Please create account below!")
         return redirect('/')
     elif password:
         if password != user_obj.password:
             print("USER OBJ PASSWORD HERE",user_obj.password)
             print("password in text field:", password)
-            #flash('incorrect password')
+            flash('incorrect password')
 
             return redirect('/')
         else:
