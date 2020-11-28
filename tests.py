@@ -1,9 +1,9 @@
-from unittest import TestCase
-from server import app
-from model import connect_to_db, db, example_data
-from flask import session
+import unittest
 
-class EmissionTests(TestCase):
+from server import app
+from model import db, connect_to_db
+
+class EmissionTests(unittest.TestCase):
     """stuff to do before every test"""
 
     def setUp(self):
@@ -12,4 +12,23 @@ class EmissionTests(TestCase):
 
     def test_homepage(self):
         result = self.client.get("/")
-        self.assertIn()
+        self.assertIn(b"logging in, logging in, logging in", result.data)
+
+    def test_login(self):
+        result = self.client.get("/")
+        self.assertEqual(result.status_code, 200)
+        self.assertIn(b'<h2>LOGIN</h2>', result.data)
+        self.assertNotIn( b"<p>Don't have an account?</p>", result.data)
+
+        print("DOES THIS WORK?")
+
+    def test_new_account(self):
+        result = self.client.get("/")
+        self.assertEqual(result.status_code, 200)
+        self.assertIn(b"<p>Don't have an account?</p>", result.data)
+        self.assertNotIn(b"<h2>LOGIN</h2>", result.data)
+
+        print("DO I WORK?")
+
+if __name__ == "__main__":
+    unittest.main()
