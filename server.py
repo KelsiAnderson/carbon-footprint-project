@@ -2,7 +2,7 @@
 
 from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
 import os
-from model import connect_to_db
+from model import example_data, connect_to_db
 import crud
 import requests
 from datetime import datetime
