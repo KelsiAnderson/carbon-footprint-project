@@ -158,10 +158,28 @@ def example_data():
 
     new_user = User(fname="Karen", user_name = "KarenK", email = "Karen@Karen", 
     password = "hiimKaren12")
-    db.session.add(new_user)
-    
-    new_vehicle = ()
-    
+    new_vehicle = (fuel_type = 1, mpg = 32, user = new_user)
+    new_vehicle_travel = (mileage = 12000, travel_date = datetime.now(), carbon_footprint = 14000, user = new_user, vehicle = new_vehicle_travel)
+    new_public_trans = (mileage = 300, public_trans_date = datetime.now(), carbon_footprint = 88.75, user = new_user)
+    new_household = (num_occupants = 3, income = 5, zipcode = 80123, user = new_user)
+    new_monthly_gas = (nat_gas_bill = 35.00,nat_gas_date= datetime.now(), carbon_footprint = 460, user = new_user, household = new_household)
+    new_monthly_elect = (elect_bill = 200.00, elect_date = datetime.now(), carbon_footprint = 530, household = new_household, user = new_user)
+
+
+    user_bob = User(fname="Bob", user_name = "BobB", email = "bob@bob", 
+    password = "hiimbob12")
+    vehicle_bob = (fuel_type = 1, mpg = 22, user = user_bob)
+    vehicle_travel_bob = (mileage = 10000, travel_date = datetime.now(), carbon_footprint = 12000, user = user_bob, vehicle = vehicle_travel_bob)
+    public_trans_bob = (mileage = 600, public_trans_date = datetime.now(), carbon_footprint = 90.75, user = user_bob)
+    household_bob = (num_occupants = 2, income = 4, zipcode = 80120, user = user_bob)
+    monthly_gas_bob = (nat_gas_bill = 25.00,nat_gas_date= datetime.now(), carbon_footprint = 460, user = user_bob, household = household_bob)
+    monthly_elect_bob = (elect_bill = 150.00, elect_date = datetime.now(), carbon_footprint = 510, household = household_bob, user = user_bob)
+
+
+
+    db.session.add_all([new_user, new_vehicle, new_vehicle_travel, new_public_trans, new_household, 
+        new_monthly_gas, new_monthly_elect, user_bob, vehicle_bob, vehicle_travel_bob,
+        public_trans_bob, household_bob, monthly_gas_bob, monthly_elect_bob])
     
     db.session.commit()
 
