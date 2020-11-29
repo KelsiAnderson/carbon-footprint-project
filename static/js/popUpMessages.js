@@ -12,7 +12,7 @@ toastifyAlert.addEventListener('click', (evt) => {
 
 function randomMessages(){
   var phrases = ["Consider riding your bike today!","Check the weather and see if it's worth biking!",
-    "Do you have enough time to take public transit?" ];
+    "Do you have enough time to take public transit?", "call a friend and carpool to work today!", "Have you asked your boss if you can work from home today?" ];
   var random=  Math.floor((Math.random() * phrases.length));
   var randomPhrase= phrases[random];
   console.log(randomPhrase);

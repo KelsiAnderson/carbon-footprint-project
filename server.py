@@ -32,7 +32,7 @@ def existing_user():
     email= request.args.get("email")
     password = request.args.get("password")
     # user_obj = crud.get_user_by_email(email)
-    print("THIS IS THE SESSION", session['current_user'])
+    #print("THIS IS THE SESSION", session['current_user'])
     # if session.get("current_user"):
     #     user_obj = crud.get_user_by_id(session['current_user'])
     #     print("SESSION CURRENT USER WHAT IS ITTTT", user_obj)
