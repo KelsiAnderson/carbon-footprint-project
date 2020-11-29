@@ -125,7 +125,7 @@ def create_new_user():
 @app.route('/submit-info', methods=["POST"])
 def submit_info():
     """Show a page that allows a new user to fill out their travel, 
-        electric, and antrual gas usage.""""
+        electric, and natrual gas usage."""
 
     import coolclimate 
 
