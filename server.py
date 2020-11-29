@@ -21,22 +21,21 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def homepage():
+    """show homepage"""
 
     return render_template("homepage.html")
 
 #TODO: put login handling in own route and redirect to profile once (passwrod and everyhting too) logged in
 @app.route('/existing_users')
 def existing_user():
-    
-    import coolclimate #LUCIA ADDED THIS 
+    """determine if the user logging in already has a profile or not. If they do, check if the 
+        password is valid. If the password is not valid flash a message. 
+        If it is, log them in and show their profile page with emission info."""
+
+    import coolclimate 
     email= request.args.get("email")
     password = request.args.get("password")
-    # user_obj = crud.get_user_by_email(email)
-    #print("THIS IS THE SESSION", session['current_user'])
-    # if session.get("current_user"):
-    #     user_obj = crud.get_user_by_id(session['current_user'])
-    #     print("SESSION CURRENT USER WHAT IS ITTTT", user_obj)
-    # else:
+    
     user_obj = crud.get_user_by_email(email)
 
     if not user_obj:
@@ -96,6 +95,8 @@ def existing_user():
 
 @app.route('/new_users', methods=["POST","GET"])
 def new_user():
+    """Show a form for new users to create an account. 
+        If they are already a user, it will redirect to login page."""
     
     email= request.form.get("email")
     user_by_email = crud.get_user_by_email(email)
@@ -117,12 +118,15 @@ def new_user():
 
 @app.route('/create-new-user')
 def create_new_user():
+    """Show the new user form page."""
 
     return render_template("new_user.html")
 
 @app.route('/submit-info', methods=["POST"])
 def submit_info():
-    
+    """Show a page that allows a new user to fill out their travel, 
+        electric, and antrual gas usage.""""
+
     import coolclimate 
 
     user_id = session.get('current_user')
@@ -138,8 +142,9 @@ def submit_info():
     input_elect_bill = request.form.get("elect-bill")
     input_nat_gas_bill = request.form.get("nat-gas-bill")
                     
-    result = coolclimate.coolclimate_defaults(location_by_zip, input_fuel, input_mpg, vehicle_travel, input_public_trans, input_income, input_amt,
-                    input_elect_bill, input_nat_gas_bill)
+    result = coolclimate.coolclimate_defaults(location_by_zip, 
+        input_fuel, input_mpg, vehicle_travel, input_public_trans, 
+        input_income, input_amt, input_elect_bill, input_nat_gas_bill)
 
     location = result["input_location"]
     input_fuel = result["input_footprint_transportation_fuel1"]
@@ -192,6 +197,7 @@ def submit_info():
 
 @app.route('/show-update-form')
 def show_update_form():
+    """Show page to update existing users tavel, electric, and gas usage"""
 
     current_user = session.get('current_user')
     user_obj = crud.get_user_by_id(current_user)
@@ -201,6 +207,8 @@ def show_update_form():
 #TODO: rewrite a funciton that unpacks the result of the API OR 
 @app.route('/update-info', methods=["POST"])
 def update_info():
+    """Grab the info that the user updates in the form, send it to the API, 
+        grab the results from the API, and show it on the profile page."""
     
     import coolclimate
 
@@ -275,7 +283,8 @@ def update_info():
 
 @app.route('/user-emission-info.json')
 def get_user_emission_info():
-    """get the users emission info from the db, store it as json for charts"""
+    """get the users current month emission info from the db, 
+        store it as json for current month charts"""
 
     current_user = session.get('current_user')
     user_obj = crud.get_user_by_id(current_user)
@@ -300,7 +309,9 @@ def get_user_emission_info():
 
 @app.route('/previous-month-user-emission-info.json')
 def previous_month_user_emission_info():
-    
+    """Get the users previous month emission info from the db, 
+        store it as json for previous month charts."""
+
     current_user = session.get('current_user')
     user_obj = crud.get_user_by_id(current_user)
     month = datetime.now().month
