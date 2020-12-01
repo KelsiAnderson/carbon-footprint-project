@@ -1,6 +1,7 @@
 """data models for my carbon emmissions app."""
 
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -153,8 +154,14 @@ def example_data():
     """Create some sample data."""
 
     # In case this is run more than once, empty out existing data
-    Employee.query.delete()
-    Department.query.delete()
+    # User.query.delete()
+    # Vehicle.query.delete()
+    # Vehicle_Travel.query.delete()
+    # Public_Trans.query.delete()
+    # Household.query.delete()
+    # Monthly_Nat_Gas.query.delete()
+    # Monthly_Elect.query.delete()
+
 
     new_user = User(fname="Karen", user_name = "KarenK", email = "Karen@Karen", 
     password = "hiimKaren12")

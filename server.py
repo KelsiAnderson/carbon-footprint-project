@@ -83,14 +83,16 @@ def existing_user():
 
     
     return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_emit, 
-                         nat_gas_emit=nat_gas_emit, public_trans_emit=public_trans_emit, elect_emit=elect_emit, 
-                         current_elect_emission=current_elect_emission, 
-                         previous_elect_emission=previous_elect_emission, current_nat_gas_emit=current_nat_gas_emit,
-                         previous_month_gas_emit=previous_month_gas_emit,
-                         current_vehicle_emit=current_vehicle_emit,  previous_month_vehicle_emit= previous_month_vehicle_emit, 
-                         current_public_trans_emit=current_public_trans_emit, 
-                         previous_month_public_trans_emit=previous_month_public_trans_emit, 
-                         show_previous_month=True) 
+                        nat_gas_emit=nat_gas_emit, public_trans_emit=public_trans_emit, elect_emit=elect_emit, 
+                        current_elect_emission=current_elect_emission, 
+                        previous_elect_emission=previous_elect_emission, current_nat_gas_emit=current_nat_gas_emit,
+                        previous_month_gas_emit=previous_month_gas_emit,
+                        current_vehicle_emit=current_vehicle_emit,  previous_month_vehicle_emit= previous_month_vehicle_emit, 
+                        current_public_trans_emit=current_public_trans_emit, 
+                        previous_month_public_trans_emit=previous_month_public_trans_emit, 
+                        show_previous_month=True,
+                        #show_current_month = True
+) 
 
 
 @app.route('/new_users', methods=["POST","GET"])
@@ -191,7 +193,9 @@ def submit_info():
         previous_month_vehicle_emit=previous_month_vehicle_emit, 
         current_public_trans_emit=current_public_trans_emit, 
         previous_month_public_trans_emit=previous_month_public_trans_emit, 
-        show_previous_month = False
+        show_previous_month = False,
+        #show_current_month = True
+
     )
 
 
@@ -277,7 +281,8 @@ def update_info():
         previous_month_vehicle_emit= previous_month_vehicle_emit, 
         current_public_trans_emit=current_public_trans_emit, 
         previous_month_public_trans_emit=previous_month_public_trans_emit,
-        show_previous_month= True
+        show_previous_month= True, 
+        #show_current_month = True
     )
 
 
@@ -290,8 +295,8 @@ def get_user_emission_info():
     user_obj = crud.get_user_by_id(current_user)
     month = datetime.now().month
     year = datetime.now().year
-    date = datetime.now()
-    last_month = month - 1
+    #date = datetime.now()
+    #last_month = month - 1
 
     monthly_elect = crud.compare_monthly_elect(user_obj.user_id, month, year)
     vehicle_emit = crud.compare_monthly_vehicle_emissions(user_obj.user_id, month, year)
@@ -299,11 +304,12 @@ def get_user_emission_info():
     public_trans_emit = crud.compare_monthly_public_trans(user_obj.user_id, month, year)
 
     print("SEE PUBLIC TRANSIT ****************", public_trans_emit)
+    print("MONTHLY ELECTRICITY HERE #######################", monthly_elect)
 
     emission_info = {"labels": ["Electricity Emissions", "Vehicle Emissions", "Natural Gas Emissions", "Public Transit Emissions"],
                     "data": [monthly_elect, vehicle_emit, nat_gas_emit, public_trans_emit]
     }
-    
+    print("EMISSION INFO*******", emission_info)
     return jsonify(emission_info)
 
 
@@ -319,7 +325,7 @@ def previous_month_user_emission_info():
     last_month = month - 1
     
     previous_elect_emission = crud.compare_monthly_elect(user_obj.user_id, last_month, year)
-    print("SEEE PREVIOS ELECT EMISSSS ------------", previous_elect_emission)
+    #print("SEEE PREVIOS ELECT EMISSSS ------------", previous_elect_emission)
     previous_month_gas_emit = crud.compare_monthly_nat_gas(user_obj.user_id, last_month, year)
     previous_month_vehicle_emit = crud.compare_monthly_vehicle_emissions(user_obj.user_id, last_month, year)
     previous_month_public_trans_emit = crud.compare_monthly_public_trans(user_obj.user_id, last_month, year)

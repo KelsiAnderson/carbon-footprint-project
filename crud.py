@@ -234,6 +234,8 @@ def compare_monthly_elect(user_id, month, year):
         (Monthly_Elect.elect_date < last_of_month)
         ).all()
     #print("CHECK OUT THE CURRENT DATE", current_date)
+    print("THESE ARE THE DATES!!!!!", first_of_month, last_of_month)
+    print("THIS IS UCREENT DATE QUERY$$$,", current_date)
     
     return sum([date.carbon_footprint for date in current_date])
 
