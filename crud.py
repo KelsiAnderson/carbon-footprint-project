@@ -227,15 +227,13 @@ def compare_monthly_elect(user_id, month, year):
     
 
     first_of_month = datetime(year=year, month=month, day=1)
-    last_of_month = datetime(year=year, month=(month + 1), day=1)
+    last_of_month = datetime(year=year, month= (month + 1), day=1)
     current_date = Monthly_Elect.query.filter(
         (Monthly_Elect.user_id == user_id), 
         (Monthly_Elect.elect_date >= first_of_month), 
         (Monthly_Elect.elect_date < last_of_month)
         ).all()
     #print("CHECK OUT THE CURRENT DATE", current_date)
-    print("THESE ARE THE DATES!!!!!", first_of_month, last_of_month)
-    print("THIS IS UCREENT DATE QUERY$$$,", current_date)
     
     return sum([date.carbon_footprint for date in current_date])
 
