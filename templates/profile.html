@@ -7,55 +7,32 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js"></script>
-
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin></script>
 {% endblock %}
 
 {% block body %}
-<nav class="navbar navbar-expand-lg navbar-expand-md navbar-light bg-primary navbar-fixed-top">
-    <a class="navbar-brand"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <a class="navbar-brand" href="#">Navigate</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-text" href="/">Home </a> <span class="sr-only">(current)</span></a>
-        </li><br>
-        <li class="nav-item">
-          <a class="nav-text" href="/existing_users"> Profile </a>
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-text" href="/show-update-form" method="POST">update info </a>
+            <a class="nav-link" href="/existing_users"> Profile </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/show-update-form" method="POST">update info </a>
         </li>
       </ul>
     </div>
   </nav>
-<div class="profile-image">
-<button type="submit" id="suggestion-pop-up">Suggestions?</button>
-
-<!-- <nav class="navbar navbar-inverse navbar-expand-lg navbar-light bg-dark navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>                        
-        </button>
-        <a class="navbar-brand" href="#">Carbon Emissions</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="/">Home </a></li>
-          <li class="dropdown">
-            <ul class="dropdown-menu">
-            </ul>
-          </li>
-          <li><a href="/existing_users">View Profile</a></li>
-          <li><a href="/show-update-form" method="POST">update info</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav> -->
 
 
 
@@ -65,51 +42,45 @@
 Check out your emissions for this month by category:
 
     <br>
-    <div class="row">
-    <div class="boxes">
-        <div class="box-body">
-        <h6>Electricity Emission</h6>
-    current month:
-    {{ current_elect_emission}}
-    <br>
-    previous month:
-    {{previous_elect_emission}}
+
+    <div class="card" style="width: 18rem; height: 7rem;">
+        <div class="card-body">
+            <h5 class="card-title" color="black">Electricity Emission</h5>
+            <h6 class="card-subtitle mb-2 text-muted"> current month:
+                {{ current_elect_emission}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted"> previous month:
+                    {{previous_elect_emission}}</h6>
+        </div>
+        </div>
+<br>
+    <div class="card" style="width: 18rem; height: 7rem;">
+        <div class="card-body">
+            <h5 class="card-title" color="black">Public Transit Emissions:</h5>
+            <h6 class="card-subtitle mb-2 text-muted"> curent months:
+                {{current_public_trans_emit}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted"> previous month:
+                    {{previous_month_public_trans_emit}}</h6>
         </div>
     </div>
     <br>
-    <div class="boxes">
-        <div class="box-body">
-        <h6>Public Transit Emissions:</h6>
-    curent months:
-    {{current_public_trans_emit}}
-    <br>
-    previous month:
-    {{previous_month_public_trans_emit}}
-        </div>
+    <div class="card" style="width: 16rem; height: 7rem;">
+        <div class="card-body">
+            <h5 class="card-title" color="black">Natural Gas Emissions:</h5>
+            <h6 class="card-subtitle mb-2 text-muted"> current month:
+                {{current_nat_gas_emit}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted"> previous month:
+                    {{previous_month_gas_emit}}</h6>
     </div>
-    <br>
-    <div class="boxes"> 
-        <div class="box-body">
-        <h6>Natural Gas Emissions:</h6>
-    current month:
-    {{current_nat_gas_emit}}
-        <br>
-    previous month:
-        {{previous_month_gas_emit}}
-        </div>
-    </div>
-    <br>
-    <div class="boxes">
-        <div class="box-body">
-        <h6>Vehicle Emissions</h6>
-    current month:
-    {{current_vehicle_emit}}
-    <br>
-    previous month:
-    {{previous_month_vehicle_emit}}
-        </div>
-    </div>   
 </div>
+<br>
+<div class="card" style="width: 18rem; height: 7rem;">
+    <div class="card-body">
+        <h5 class="card-title" color="black">Vehicle Emissions</h5>
+        <h6 class="card-subtitle mb-2 text-muted"> current month:
+            {{current_vehicle_emit}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted"> previous month:
+                {{previous_month_vehicle_emit}}</h6>
+    </div>
 </div>
 <br>
 

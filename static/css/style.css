@@ -2,6 +2,7 @@ body {
     background-image: url("/static/images/mike-marrah-x4QaRXytmow-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     color: rgb(255, 253, 253);
   }
 #login-page-conatiner {
@@ -23,7 +24,7 @@ body {
     /* opacity: .5; */
     color: white;
     /* box-shadow: inset 1px 2000px rgba(208, 208, 208, 0.54); */
-    background: rgba(33, 33, 33, 0.5); */
+    background: rgba(33, 33, 33, 0.5);
 }
 
 .login-wrap-container {
@@ -81,6 +82,7 @@ body {
     float: right;
     text-align: right;
     display: inline-block;
+    color: white;
 }
 
 .nav-text {
@@ -203,10 +205,11 @@ content {
     float: center;
     box-align: center;
     clear: both;
-    background-color: rgb(125, 245, 233);
+    background-color: white;
     -webkit-box-shadow:0 0 30px rgba(0,0,0,.08);
     box-shadow:0 0 20px rgba(0,0,0,.08);
     font-family: 'Raleway', sans-serif;
+    color: black;
 
 }
 
@@ -217,5 +220,13 @@ content {
     width: 100%;
     font-family: 'Raleway', sans-serif;
 
+}
+
+.card {
+    background: rgba(33, 33, 33, 0.5);
+}
+
+.card-title {
+    color: black;
 }
 
