@@ -11,6 +11,26 @@
 {% endblock %}
 
 {% block body %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a href="/">Home </a> <span class="sr-only">(current)</span></a>
+        </li><br>
+        <li class="nav-item">
+          <a href="/existing_users"> Profile </a>
+        </li>
+        <li class="nav-item">
+          <a href="/show-update-form" method="POST">update info </a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
 <button type="submit" id="suggestion-pop-up">Suggestions?</button>
 <div id="profile-chart">
 <h2>Hi {{ user_obj.fname }}! </h2>
@@ -18,7 +38,7 @@ Check out your emissions for this month by category:
 <canvas id="currentMonthDonutChart"></canvas>
 </div>
 <br>
-{% if show_previous_month %}
+{% if show_previous_month and show_current_month%}
     Previous months emissions chart
     <div id="previous-month-chart">
     <canvas id="previousMonthDonutChart"></canvas>

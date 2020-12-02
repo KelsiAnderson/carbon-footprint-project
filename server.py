@@ -91,7 +91,7 @@ def existing_user():
                         current_public_trans_emit=current_public_trans_emit, 
                         previous_month_public_trans_emit=previous_month_public_trans_emit, 
                         show_previous_month=True,
-                        #show_current_month = True
+                        show_current_month = True
 ) 
 
 
@@ -194,7 +194,7 @@ def submit_info():
         current_public_trans_emit=current_public_trans_emit, 
         previous_month_public_trans_emit=previous_month_public_trans_emit, 
         show_previous_month = False,
-        #show_current_month = True
+        show_current_month = True
 
     )
 
@@ -282,7 +282,7 @@ def update_info():
         current_public_trans_emit=current_public_trans_emit, 
         previous_month_public_trans_emit=previous_month_public_trans_emit,
         show_previous_month= True, 
-        #show_current_month = True
+        show_current_month = True
     )
 
 
