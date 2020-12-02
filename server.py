@@ -91,7 +91,7 @@ def existing_user():
                         current_public_trans_emit=current_public_trans_emit, 
                         previous_month_public_trans_emit=previous_month_public_trans_emit, 
                         show_previous_month=True,
-                        show_current_month = True
+                        show_current_month = False
 ) 
 
 

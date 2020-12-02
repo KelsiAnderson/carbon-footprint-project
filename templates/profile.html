@@ -35,10 +35,14 @@
 <div id="profile-chart">
 <h2>Hi {{ user_obj.fname }}! </h2>
 Check out your emissions for this month by category:
+
+{% if show_current_month %}
 <canvas id="currentMonthDonutChart"></canvas>
 </div>
+
+{% endif %}
 <br>
-{% if show_previous_month and show_current_month%}
+{% if show_previous_month  %}
     Previous months emissions chart
     <div id="previous-month-chart">
     <canvas id="previousMonthDonutChart"></canvas>
