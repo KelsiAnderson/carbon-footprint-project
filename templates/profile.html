@@ -31,15 +31,67 @@
       </ul>
     </div>
   </nav>
+<div class="profile-image">
 <button type="submit" id="suggestion-pop-up">Suggestions?</button>
+
 <div id="profile-chart">
 <h2>Hi {{ user_obj.fname }}! </h2>
 Check out your emissions for this month by category:
 
+    <br>
+    <div class="row">
+    <div class="boxes">
+        <div class="box-body">
+        <h6>Electricity Emission</h6>
+    current month:
+    {{ current_elect_emission}}
+    <br>
+    previous month:
+    {{previous_elect_emission}}
+        </div>
+    </div>
+    <br>
+    <div class="boxes">
+        <div class="box-body">
+        <h6>Public Transit Emissions:</h6>
+    curent months:
+    {{current_public_trans_emit}}
+    <br>
+    previous month:
+    {{previous_month_public_trans_emit}}
+        </div>
+    </div>
+    <br>
+    <div class="boxes"> 
+        <div class="box-body">
+        <h6>Natural Gas Emissions:</h6>
+    current month:
+    {{current_nat_gas_emit}}
+        <br>
+    previous month:
+        {{previous_month_gas_emit}}
+        </div>
+    </div>
+    <br>
+    <div class="boxes">
+        <div class="box-body">
+        <h6>Vehicle Emissions</h6>
+    current month:
+    {{current_vehicle_emit}}
+    <br>
+    previous month:
+    {{previous_month_vehicle_emit}}
+        </div>
+    </div>   
+</div>
+</div>
+<br>
+
 {% if show_current_month %}
+<div id="current-month-chart">
 <canvas id="currentMonthDonutChart"></canvas>
 </div>
-
+</div>
 {% endif %}
 <br>
 {% if show_previous_month  %}
@@ -48,36 +100,9 @@ Check out your emissions for this month by category:
     <canvas id="previousMonthDonutChart"></canvas>
     </div>
 {% endif %}
-<br>
-    previous month electricity emissions:
-    {{previous_elect_emission}}
-<br>
-    current month electricity emissions:
-    {{ current_elect_emission}}
-<br>
-    previous month natural gas emissions:
-        {{previous_month_gas_emit}}
-<br>
-    current month natural gas emissions:
-        {{current_nat_gas_emit}}
-
-<br>
-    current month vehicle emissions:
-    {{current_vehicle_emit}}
-<br>
-    previous month vehicile emissions:
-    {{previous_month_vehicle_emit}}
-
-<br>
-    previous month public transit emissions:
-    {{previous_month_public_trans_emit}}
-<br>
-    curent months public transit emissions:
-    {{current_public_trans_emit}}
-<br>
 
 </p>
-
+</div>
 {% endblock %}
 
 {% block js %}

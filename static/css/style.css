@@ -57,6 +57,11 @@ body {
     position: center;
 }
 
+.login-page-background {
+    background: url("static/images/nasa-Q1p7bh3SHj8-unsplash (1).jpg");
+    background-size: cover;
+}
+
 .navbar-brand{
     display: flex;
     flex-direction: row;
@@ -101,11 +106,57 @@ body {
     justify-content:center;
 }
 
-body {
-    /* background: url("static/images/nasa-Q1p7bh3SHj8-unsplash (1).jpg") no-repeat center center fixed; */
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
+.profile-image {
+    background: url("static/images/shannon-mcinnes-FOvVKp7IA68-unsplash.jpg");
     background-size: cover;
-    -o-background-size: cover;
 }
 
+#current-month-chart{
+    float: right;
+    margin: 0 2.5%;
+    width: 55%;
+    font-family: 'Raleway', sans-serif;
+
+}
+
+#previous-month-chart {
+    float: right;
+    margin: 0 2.5%;
+    width: 55%;
+    font-family: 'Raleway', sans-serif;
+
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+
+.boxes {margin-bottom:1.875em;
+    border-radius:5px;
+    padding: 5;
+    box-sizing: border-box;
+    margin: 5;
+    text-align: justify;
+    justify-content: space-between;
+    border:1 solid transparent;
+    background-color: rgb(125, 245, 233);
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,.08);
+    box-shadow:0 0 20px rgba(0,0,0,.08);
+    font-family: 'Raleway', sans-serif;
+
+}
+
+.box-body {
+    float: left;
+    padding: 1.25em;
+    position: relative;
+    width: 100%;
+    font-family: 'Raleway', sans-serif;
+
+}
