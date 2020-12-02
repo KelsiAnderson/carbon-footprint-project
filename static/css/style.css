@@ -10,6 +10,7 @@ body {
 #login-page-conatiner {
     width:28%;
     min-height:100vh;
+    border-radius: 75px;
     margin: 0 auto;
     display:flex;
     flex-wrap:wrap;
@@ -26,7 +27,7 @@ body {
 
 .login-wrap-container {
     width:500px;
-    border-radius:10px;
+    border-radius:75px;
     justify-content: center;
     overflow:hidden;
     margin: 0 auto;
@@ -67,6 +68,11 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     font-size: 22px;
+    color: rgb(30, 41, 62);
+}
+.nav-bar > li {
+    padding-left:30px;
+    padding-right:30px;
 }
 
 .login-title{
@@ -115,6 +121,18 @@ body {
     float: right;
     margin: 0 2.5%;
     width: 55%;
+    margin-bottom:2.5em;
+    border-radius:5px;
+    box-sizing: border-box;
+    margin: 5;
+    text-align: justify;
+    display: block;
+    justify-content: space-between;
+    border:50 solid transparent;
+    clear: both;
+    background-color: rgb(172, 226, 255);
+    -webkit-box-shadow:0 0 30px rgba(0,0,0,.08);
+    box-shadow:0 0 20px rgba(0,0,0,.08);
     font-family: 'Raleway', sans-serif;
 
 }
@@ -123,30 +141,53 @@ body {
     float: right;
     margin: 0 2.5%;
     width: 55%;
+    margin-bottom:2.5em;
+    border-radius:5px;
+    box-sizing: border-box;
+    margin: 5;
+    text-align: justify;
+    display: block;
+    justify-content: space-between;
+    border:50 solid transparent;
+    clear: both;
+    background-color: rgb(172, 226, 255);
+    -webkit-box-shadow:0 0 30px rgba(0,0,0,.08);
+    box-shadow:0 0 20px rgba(0,0,0,.08);
     font-family: 'Raleway', sans-serif;
 
 }
 
 .row {
-    display: -ms-flexbox;
+    /* display: -ms-flexbox; */
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
+    clear: both;
 }
 
-
-.boxes {margin-bottom:1.875em;
+content {
+    float: left;
+    padding: 1.875em;
+    width: 100%;
+}
+.boxes {
+    margin-bottom:2.5em;
     border-radius:5px;
-    padding: 5;
+    padding: 100;
+    border: 10;
     box-sizing: border-box;
     margin: 5;
     text-align: justify;
+    display: block;
     justify-content: space-between;
-    border:1 solid transparent;
+    border:50 solid transparent;
+    float: center;
+    box-align: center;
+    clear: both;
     background-color: rgb(125, 245, 233);
-    -webkit-box-shadow:0 0 20px rgba(0,0,0,.08);
+    -webkit-box-shadow:0 0 30px rgba(0,0,0,.08);
     box-shadow:0 0 20px rgba(0,0,0,.08);
     font-family: 'Raleway', sans-serif;
 
@@ -160,3 +201,4 @@ body {
     font-family: 'Raleway', sans-serif;
 
 }
+

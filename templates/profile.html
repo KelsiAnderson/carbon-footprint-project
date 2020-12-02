@@ -11,9 +11,9 @@
 {% endblock %}
 
 {% block body %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark navbar-fixed-top">
     <a class="navbar-brand"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -27,13 +27,39 @@
         <li class="nav-item">
           <a href="/show-update-form" method="POST">update info </a>
         </li>
-
       </ul>
     </div>
   </nav>
 <div class="profile-image">
 <button type="submit" id="suggestion-pop-up">Suggestions?</button>
 
+<!-- <nav class="navbar navbar-inverse navbar-expand-lg navbar-light bg-dark navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#">Carbon Emissions</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Home </a></li>
+          <li class="dropdown">
+            <ul class="dropdown-menu">
+            </ul>
+          </li>
+          <li><a href="/existing_users">View Profile</a></li>
+          <li><a href="/show-update-form" method="POST">update info</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav> -->
+
+
+
+<div id="content">
 <div id="profile-chart">
 <h2>Hi {{ user_obj.fname }}! </h2>
 Check out your emissions for this month by category:
@@ -102,6 +128,7 @@ Check out your emissions for this month by category:
 {% endif %}
 
 </p>
+</div>
 </div>
 {% endblock %}
 
