@@ -1,5 +1,5 @@
 body { 
-    background-image: url("/static/images/nasa-Q1p7bh3SHj8-unsplash (1).jpg");
+    background-image: url("/static/images/mike-marrah-x4QaRXytmow-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     color: rgb(255, 253, 253);
@@ -23,7 +23,7 @@ body {
     /* opacity: .5; */
     color: white;
     /* box-shadow: inset 1px 2000px rgba(208, 208, 208, 0.54); */
-    background: rgba(162, 162, 162, 0.5); */
+    background: rgba(33, 33, 33, 0.5); */
 }
 
 .login-wrap-container {
@@ -90,13 +90,22 @@ body {
 
 .login-title{
     font-family: 'Poppins', sans-serif;
-    font-size: 30px;
+    font-size: 20px;
     color: white;
-    line-height: 1.2;
+    line-height: .2;
     text-align: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     display: block;
-
+    margin-bottom: 0px;
+}
+.login-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color: white;
+    line-height: .2;
+    text-align: center;
+    display: block;
+    margin-top: 50px;
 }
 
 .login-info {
