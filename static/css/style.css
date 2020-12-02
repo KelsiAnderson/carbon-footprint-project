@@ -1,16 +1,13 @@
 body { 
-    /* background: url("static/js/images/nasa-Q1p7bh3SHj8-unsplash (1).jpg") no-repeat center center fixed;
-    background-image: url(https://imgur.com/TJ1Q4CV) ;
-    /* -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover; */
-    /* background-size: cover; */
-    color: black;
+    background-image: url("/static/images/nasa-Q1p7bh3SHj8-unsplash (1).jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(255, 253, 253);
   }
 #login-page-conatiner {
     width:28%;
     min-height:100vh;
-    border-radius: 75px;
+    border-radius: 25px;
     margin: 0 auto;
     display:flex;
     flex-wrap:wrap;
@@ -19,27 +16,34 @@ body {
     align-items:center;padding:15px;
     background-repeat:no-repeat;
     background-position:center;
-    background-size:cover;position:relative;
+    background-size:cover;
+    position:relative;
     z-index:1;
-    background-color: #d5fefd;
-    background-image: linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);
+    /* background-color: transparent; */
+    /* opacity: .5; */
+    color: white;
+    /* box-shadow: inset 1px 2000px rgba(208, 208, 208, 0.54); */
+    background: rgba(77, 77, 77, 0.5); */
 }
 
 .login-wrap-container {
     width:500px;
-    border-radius:75px;
+    border-radius:25px;
     justify-content: center;
     overflow:hidden;
     margin: 0 auto;
     padding:55px 55px 37px;
     display:flex;
     flex-wrap:wrap;
-    align-items:center;padding:15px;
+    align-items:center;
+    padding:15px;
     background-repeat:no-repeat;
     background-position:center;
-    background-size:cover;position:relative;
+    background-size:cover;
+    position:relative;
     z-index:1;
     font-family: 'Poppins', sans-serif;
+    color: white;
     /* background:-webkit-linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);
     background:-o-linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);
     background:-moz-linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);
@@ -54,14 +58,15 @@ body {
     /* background-image: url("static/images/nasa-Q1p7bh3SHj8-unsplash (1).jpg") ; */
 }
 #log-in-existing-user {
-    color: black;
+    color: white;
     position: center;
 }
 
-.login-page-background {
-    background: url("static/images/nasa-Q1p7bh3SHj8-unsplash (1).jpg");
+/* #login-page-background {
+    background-image: url("/static/images/nasa-Q1p7bh3SHj8-unsplash (1).jpg");
+    background-repeat: no-repeat;
     background-size: cover;
-}
+} */
 
 .navbar-brand{
     display: flex;
@@ -70,15 +75,23 @@ body {
     font-size: 22px;
     color: rgb(30, 41, 62);
 }
-.nav-bar > li {
+.nav-item {
     padding-left:30px;
     padding-right:30px;
+    float: right;
+    text-align: right;
+    display: inline-block;
 }
+
+.nav-text {
+    color: rgb(170, 245, 247);
+}
+
 
 .login-title{
     font-family: 'Poppins', sans-serif;
     font-size: 30px;
-    color: black;
+    color: white;
     line-height: 1.2;
     text-align: center;
     text-transform: uppercase;
@@ -89,23 +102,18 @@ body {
 .login-info {
     font-family: 'Poppins', sans-serif;
     font-size:16px;
-    color:black;
+    color:white;
     line-height:1.2;
     text-align: center;
     display:block;
     width:100%;
     height:45px;
     background:0 0;
-    padding:0 5px 0 38px;
+    padding:0 5px 0 5px;
     border-top: transparent;
     border-left: transparent;
     border-right: transparent;
     border-bottom: auto;
-    background-repeat: no-repeat; 
-    background-attachment: scroll; 
-    background-size: 16px 18px; 
-    background-position: 98% 50%; 
-    cursor: pointer;
 }
 
 .text-center {
