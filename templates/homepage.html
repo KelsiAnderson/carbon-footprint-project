@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% block title %}Emissions Footprint Home{% endblock %}
-
+<html>
 {% block body %}
-
-  <body>
-  <div class="login-page-conatiner" style="background-image: url(https://i.imgur.com/TJ1Q4CV.jpg);"></div>
-  <div class="login-wrap=container"></div>
+ 
+  <div id="login-page-background" background: url("static/images/nasa-Q1p7bh3SHj8-unsplash (1).jpg"); >
+  <div id="login-page-conatiner">
+  <div class="login-wrap-container">
   <form class="login-container-form" action="/existing_users">
-    <div ></div>
     <span class="login-title"><h1>Welcome!</h1>
     <h2>LOGIN</h2>
     </span>
+    
     <p>
       <input class="enter-email" placeholder="Email" type="text" name="email">
       
@@ -29,7 +29,10 @@
     <a href="/create-new-user">Join now!</a>
   </p>
   </form>
-  </body>
+</div>
+</div>
+</div>
+</html>
   {% endblock %}
 
 

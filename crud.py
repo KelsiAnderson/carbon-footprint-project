@@ -91,7 +91,7 @@ def create_comment(text, user_id):
 
 def all_users():
     """get and return all users"""
-    return user.query.all()
+    return User.query.all()
 
 
 def get_user_by_id(user_id):
@@ -222,12 +222,16 @@ def change_public_trans_carbon(user_id, public_trans_emit):
 
     return public_trans_carbon
 
-
+#change the month +1 to something that would allow for a 13 or a 1 to renew the year
+#chagne the +1 back
 def compare_monthly_elect(user_id, month, year):
     
 
     first_of_month = datetime(year=year, month=month, day=1)
-    last_of_month = datetime(year=year, month= (month + 1), day=1)
+    if month == 12:
+        last_of_month = datetime(year=(year + 1), month=1, day=1)
+    else:
+        last_of_month = datetime(year=year, month=(month + 1), day=1)
     current_date = Monthly_Elect.query.filter(
         (Monthly_Elect.user_id == user_id), 
         (Monthly_Elect.elect_date >= first_of_month), 
@@ -240,7 +244,10 @@ def compare_monthly_elect(user_id, month, year):
 def compare_monthly_nat_gas(user_id, month, year):
 
     first_of_month = datetime(year=year, month=month, day=1)
-    last_of_month = datetime(year=year, month=(month + 1), day=1)
+    if month == 12:
+        last_of_month = datetime(year=(year + 1), month=1, day=1)
+    else:
+        last_of_month = datetime(year=year, month=(month + 1), day=1)
     current_date = Monthly_Nat_Gas.query.filter(
         (Monthly_Nat_Gas.user_id == user_id), 
         (Monthly_Nat_Gas.nat_gas_date >= first_of_month), 
@@ -252,9 +259,12 @@ def compare_monthly_nat_gas(user_id, month, year):
 
 
 def compare_monthly_vehicle_emissions(user_id, month, year):
-
+    
     first_of_month = datetime(year=year, month=month, day=1)
-    last_of_month = datetime(year=year, month=(month + 1), day=1)
+    if month == 12:
+        last_of_month = datetime(year=(year + 1), month=1, day=1)
+    else:
+        last_of_month = datetime(year=year, month=(month + 1), day=1)
     current_date = Vehicle_Travel.query.filter(
         (Vehicle_Travel.user_id == user_id), 
         (Vehicle_Travel.travel_date >= first_of_month), 
@@ -267,7 +277,10 @@ def compare_monthly_vehicle_emissions(user_id, month, year):
 def compare_monthly_public_trans(user_id, month, year):
     
     first_of_month = datetime(year=year, month=month, day=1)
-    last_of_month = datetime(year=year, month=(month + 1), day=1)
+    if month == 12:
+        last_of_month = datetime(year=(year + 1), month=1, day=1)
+    else:
+        last_of_month = datetime(year=year, month=(month + 1), day=1)
     current_date = Public_Trans.query.filter(
         (Public_Trans.user_id == user_id),
         (Public_Trans.public_trans_date >= first_of_month), 
