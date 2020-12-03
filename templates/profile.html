@@ -3,6 +3,7 @@
 {% block title %}profile{% endblock %}
 
 {% block head %}
+<div class="background">
 <!-- <script src="https://cdn.cool-js-lib.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
@@ -34,23 +35,26 @@
     </div>
   </nav>
 
-<div class="profile-image">
-<button type="submit" id="suggestion-pop-up">Suggestions?</button>
+
+<button type="submit" id="suggestion-pop-up" class="btn btn-outline-dark">Suggestions?</button>
 
 
-<div id="content">
+<div id="container">
+
 <div id="profile-chart">
-<h2>Hi {{ user_obj.fname }}! </h2>
-Check out your emissions for this month by category:
-
+<h1>Hi {{ user_obj.fname }}! </h1>
+<div id="profile-header">
+<h3>Check out your emissions for this month by category:</h3>
+</div>
     <br>
-
+    <div class="row">
+        <div class="col-3">
     <div class="card" style="width: 18rem; height: 7rem;">
         <div class="card-body">
             <h5 class="card-title" color="black">Electricity Emission</h5>
-            <h6 class="card-subtitle mb-2 text-muted"> current month:
+            <h6 id="emission-info" class="card-subtitle mb-2 text-muted"> current month:
                 {{ current_elect_emission}}</h6>
-                <h6 class="card-subtitle mb-2 text-muted"> previous month:
+                <h6 id="emission-info" class="card-subtitle mb-2 text-muted"> previous month:
                     {{previous_elect_emission}}</h6>
         </div>
         </div>
@@ -65,7 +69,7 @@ Check out your emissions for this month by category:
         </div>
     </div>
     <br>
-    <div class="card" style="width: 16rem; height: 7rem;">
+    <div class="card" style="width: 18rem; height: 7rem;">
         <div class="card-body">
             <h5 class="card-title" color="black">Natural Gas Emissions:</h5>
             <h6 class="card-subtitle mb-2 text-muted"> current month:
@@ -84,23 +88,22 @@ Check out your emissions for this month by category:
                 {{previous_month_vehicle_emit}}</h6>
     </div>
 </div>
+</div>
 <br>
-
+<div class="col-9" style="width: 30rem;">
 {% if show_current_month %}
 <div id="current-month-chart">
 <canvas id="currentMonthDonutChart"></canvas>
 </div>
-</div>
 {% endif %}
 <br>
 {% if show_previous_month  %}
-    Previous months emissions chart
     <div id="previous-month-chart">
     <canvas id="previousMonthDonutChart"></canvas>
     </div>
 {% endif %}
-
-</p>
+</div>
+</div>
 </div>
 </div>
 {% endblock %}

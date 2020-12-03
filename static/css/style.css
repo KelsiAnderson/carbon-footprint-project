@@ -1,5 +1,13 @@
-body { 
+#homepage { 
     background-image: url("/static/images/joey-kyber-45FJgZMXCK8-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: rgb(255, 253, 253);
+  }
+
+.background { 
+    background-image: url("/static/images/jon-grogan-eMayHt-uiBU-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -146,6 +154,7 @@ body {
     margin: 0 2.5%;
     width: 55%;
     margin-bottom:2.5em;
+    margin-right: 16px;
     border-radius:5px;
     box-sizing: border-box;
     margin: 5;
@@ -154,11 +163,12 @@ body {
     justify-content: space-between;
     border:50 solid transparent;
     clear: both;
-    background-color: rgba(172, 226, 255, 0.303);
+    background-color: rgba(56, 59, 60, 0.906);
     -webkit-box-shadow:0 0 30px rgba(0,0,0,.08);
     box-shadow:0 0 20px rgba(0,0,0,.08);
     font-family: 'Raleway', sans-serif;
     margin-right: 10px;
+    color: white;
 
 }
 
@@ -167,6 +177,7 @@ body {
     margin: 0 2.5%;
     width: 55%;
     margin-bottom:2.5em;
+    margin-right: 15px;
     border-radius:5px;
     box-sizing: border-box;
     margin: 5;
@@ -175,29 +186,32 @@ body {
     justify-content: space-between;
     border:50 solid transparent;
     clear: both;
-    background-color: rgba(172, 226, 255, 0.303);
+    background-color: rgba(56, 59, 60, 0.906);
     -webkit-box-shadow:0 0 30px rgba(0,0,0,.08);
     box-shadow:0 0 20px rgba(0,0,0,.08);
     font-family: 'Raleway', sans-serif;
 
 }
-
-.row {
-    /* display: -ms-flexbox; */
+/* .row {
+    display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
     clear: both;
-}
+} */
 
-content {
-    float: left;
+#container {
     padding: 1.875em;
+    margin: 15px;
     width: 100%;
+    color: white;
 }
-.boxes {
+#profile-header {
+    text-align: center;
+}
+/* .boxes {
     margin-bottom:2.5em;
     border-radius:5px;
     padding: 100;
@@ -217,7 +231,7 @@ content {
     font-family: 'Raleway', sans-serif;
     color: black;
 
-}
+} */
 
 .box-body {
     float: left;
@@ -229,11 +243,11 @@ content {
 }
 
 .card {
-    background: rgba(33, 33, 33, 0.5);
+    background: rgba(33, 33, 33, 0.488);
 }
 
 .card-title {
-    color: black;
+    color: white;
 }
 
 .update-info-container{
@@ -282,4 +296,9 @@ content {
     margin: 0em;
     font: 400 13.3333px Arial;
     border-radius: 0px;
+}
+
+
+#emission-info{
+    color: white;
 }
