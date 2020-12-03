@@ -81,6 +81,12 @@ def existing_user():
     current_public_trans_emit = crud.compare_monthly_public_trans(user_obj.user_id, month, year)
     previous_month_public_trans_emit = crud.compare_monthly_public_trans(user_obj.user_id, last_month, year)
 
+    if previous_month_gas_emit or previous_month_vehicle_emit or previous_month_public_trans_emit:
+        show_previous_month = True
+    else:
+        show_previous_month = False
+
+
     
     return render_template("profile.html", user_obj=user_obj, vehicle_emit=vehicle_emit, 
                         nat_gas_emit=nat_gas_emit, public_trans_emit=public_trans_emit, elect_emit=elect_emit, 
@@ -90,10 +96,48 @@ def existing_user():
                         current_vehicle_emit=current_vehicle_emit,  previous_month_vehicle_emit= previous_month_vehicle_emit, 
                         current_public_trans_emit=current_public_trans_emit, 
                         previous_month_public_trans_emit=previous_month_public_trans_emit, 
-                        show_previous_month=True,
-                        show_current_month = False
+                        show_previous_month=show_previous_month,
+                        show_current_month = True
 ) 
 
+@app.route("/show-profile-page")
+def show_profile_page():
+
+
+    month = datetime.now().month
+    year = datetime.now().year
+    last_month = month - 1 # (20 + 14 days) % 31 --> Jan 3rd ( 34 % 31 = 3 )
+    user = session.get('current_user') # user id
+    user_obj = crud.get_user_by_id(user)
+    print("HI USER /////////////////////////", user_obj)
+    current_elect_emission = crud.compare_monthly_elect(user, month, year)
+    
+    previous_elect_emission = crud.compare_monthly_elect(user, last_month, year)
+    
+    
+    current_nat_gas_emit= crud.compare_monthly_nat_gas(user, month, year)
+    previous_month_gas_emit = crud.compare_monthly_nat_gas(user, last_month, year)
+    
+    current_vehicle_emit = crud.compare_monthly_vehicle_emissions(user, month, year)
+    previous_month_vehicle_emit = crud.compare_monthly_vehicle_emissions(user, last_month, year)
+    
+    current_public_trans_emit = crud.compare_monthly_public_trans(user, month, year)
+    previous_month_public_trans_emit = crud.compare_monthly_public_trans(user, last_month, year)
+
+    if previous_month_gas_emit or previous_month_vehicle_emit or previous_month_public_trans_emit:
+        show_previous_month = True
+    else:
+        show_previous_month = False
+
+    return render_template("profile.html", user_obj=user_obj, 
+                        current_elect_emission=current_elect_emission, 
+                        previous_elect_emission=previous_elect_emission, current_nat_gas_emit=current_nat_gas_emit,
+                        previous_month_gas_emit=previous_month_gas_emit,
+                        current_vehicle_emit=current_vehicle_emit,  previous_month_vehicle_emit= previous_month_vehicle_emit, 
+                        current_public_trans_emit=current_public_trans_emit, 
+                        previous_month_public_trans_emit=previous_month_public_trans_emit, 
+                        show_previous_month=show_previous_month,
+                        show_current_month = True)
 
 @app.route('/new_users', methods=["POST","GET"])
 def new_user():

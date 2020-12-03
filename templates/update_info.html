@@ -4,7 +4,7 @@
 {% block body%}
 <!-- <input type="date" id="update-date" name="datetime"
        value="datetime"> -->
-       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+       <nav class="navbar navbar-expand-lg navbar-light bg-dark">
         <a class="navbar-brand" href="#">Navigate</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -15,10 +15,9 @@
               <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/existing_users"> Profile </a>
+                <a class="nav-link" href="/show-profile-page"> Profile </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/show-update-form" method="POST">update info </a>
@@ -26,11 +25,15 @@
           </ul>
         </div>
       </nav>
+<div class="update-info-container">
+    <h3>PLEASE UPDATE YOUR INFO BELOW:</h3>
 <form action="/update-info" method="POST">
     What is your zipcode?
-    <input type="text" name="zipcode">
+    <br>
+    <input type="text" name="zipcode" class="update-info-input">
     <br>
     What does your car run on?
+    <br>
     <select name="fuel-type">
         <option value="1">Gasoline</option>
         <option value="0">Diesel</option>
@@ -38,16 +41,20 @@
     </select>
     <br>
     <label>What is your vehicle's mpg?</label>
+        <br>
        <input type="text" name="mpg"> 
     <br>
         <label>How many miles per month do you travel by car?</label>
+        <br>
         <input type="text" name="vehicle-travel">
     <br>
         <label>How many miles per month do you travel on pubic transit?</label>
+        <br>
         <input type="text" name="public-trans">
 
     <br>
         <label>How many people live in your household</label>
+        <br>
         <select name="household-amt">
             <option value="1">1 person</option>
             <option value="2">2 people</option>
@@ -57,12 +64,15 @@
         </select>
     <br>
         <label>Please enter your monthly electricity bill</label>
+        <br>
         <input type="text" name="elect-bill">
     <br>
         <label> Please enter your monthly natrual gas bill</label>
+        <br>
         <input type="text" name="nat-gas-bill">
     <p>
-        <input type="submit">
+        <button type="submit" id="log-in-existing-user" class="btn btn-outline-light">SUBMIT</button>
       </p>
 </form>
+</div>
 {% endblock %}

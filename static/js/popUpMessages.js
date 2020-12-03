@@ -5,10 +5,11 @@ toastifyAlert.addEventListener('click', (evt) => {
   Toastify({
     text: randomMessages(),
     duration: 5000,
-    backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+    backgroundColor: " linear-gradient(to right #66ffdd, #9933ee)",
     className: "info",
   }).showToast();
 });
+
 
 function randomMessages(){
   var phrases = ["Consider riding your bike today!","Check the weather and see if it's worth biking!",

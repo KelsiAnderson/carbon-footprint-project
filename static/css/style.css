@@ -1,10 +1,18 @@
 body { 
-    background-image: url("/static/images/mike-marrah-x4QaRXytmow-unsplash.jpg");
+    background-image: url("/static/images/joey-kyber-45FJgZMXCK8-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     color: rgb(255, 253, 253);
   }
+
+/* .home-bg {
+    background-image: url("/static/images/mike-marrah-x4QaRXytmow-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: rgb(255, 253, 253);
+} */
 #login-page-conatiner {
     width:28%;
     min-height:100vh;
@@ -20,11 +28,8 @@ body {
     background-size:cover;
     position:relative;
     z-index:1;
-    /* background-color: transparent; */
-    /* opacity: .5; */
     color: white;
-    /* box-shadow: inset 1px 2000px rgba(208, 208, 208, 0.54); */
-    background: rgba(33, 33, 33, 0.5);
+    background: rgba(45, 44, 44, 0.5);
 }
 
 .login-wrap-container {
@@ -149,10 +154,11 @@ body {
     justify-content: space-between;
     border:50 solid transparent;
     clear: both;
-    background-color: rgb(172, 226, 255);
+    background-color: rgba(172, 226, 255, 0.303);
     -webkit-box-shadow:0 0 30px rgba(0,0,0,.08);
     box-shadow:0 0 20px rgba(0,0,0,.08);
     font-family: 'Raleway', sans-serif;
+    margin-right: 10px;
 
 }
 
@@ -169,7 +175,7 @@ body {
     justify-content: space-between;
     border:50 solid transparent;
     clear: both;
-    background-color: rgb(172, 226, 255);
+    background-color: rgba(172, 226, 255, 0.303);
     -webkit-box-shadow:0 0 30px rgba(0,0,0,.08);
     box-shadow:0 0 20px rgba(0,0,0,.08);
     font-family: 'Raleway', sans-serif;
@@ -230,3 +236,50 @@ content {
     color: black;
 }
 
+.update-info-container{
+    width:38%;
+    min-height:100vh;
+    border-radius: 10px;
+    margin: 0 auto;
+    display:flex;
+    flex-wrap:wrap;
+    font-family: 'Poppins', sans-serif;
+    justify-content:center;
+    text-align: center;
+    align-items:center;padding:15px;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    position:relative;
+    z-index:1;
+    color: white;
+    background: rgba(26, 26, 26, 0.5);
+}
+
+/* .text-bar-update-info{
+    background: rgba(45, 44, 44, 0.5);
+
+} */
+
+.update-info-input {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: menulist;
+    box-sizing: border-box;
+    align-items: center;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    background-color: -(rgba(136, 136, 136, 0.338));
+    cursor: default;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    border-radius: 0px;
+}
