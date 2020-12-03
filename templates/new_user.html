@@ -2,11 +2,11 @@
 {% block title %}new user info{% endblock %}
 {% block body %}
 <div id="homepage">
-
-<div class="update-info-container">
-
-<h1>Welcome!</h1>
-<h3>Create an account</h3>
+<div id="login-page-conatiner">
+<div class="login-wrap-container">
+<span class="login-title"><h1>Welcome!</h1>
+<br>
+<span class ="login-text"><h3>Create an account</h3></span>
   <form action="/new_users" method="POST">
     <p>
       <input class="login-info" placeholder="First Name" type="text" name="new-user-f-name">
@@ -23,11 +23,12 @@
  
     </p>
     <p>
-      <button type="submit" class="btn btn-outline-dark">Create Account</button>
+      <button type="submit" id="login-new-user" class="btn btn-outline-dark" color="white">Create Account</button>
 
 
     </p>
   </form>
+</div>
 </div>
 </div>
 {% endblock %}

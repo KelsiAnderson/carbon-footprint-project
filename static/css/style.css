@@ -7,13 +7,15 @@
   }
 
 .background { 
-    background-image: url("/static/images/jon-grogan-eMayHt-uiBU-unsplash.jpg");
+    background-image: url("/static/images/noah-buscher-x8ZStukS2PM-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     color: rgb(255, 253, 253);
   }
-
+.login-info::placeholder {
+    color: white;
+}
 /* .home-bg {
     background-image: url("/static/images/mike-marrah-x4QaRXytmow-unsplash.jpg");
     background-repeat: no-repeat;
@@ -69,6 +71,11 @@
     /* background-image: url("static/images/nasa-Q1p7bh3SHj8-unsplash (1).jpg") ; */
 }
 #log-in-existing-user {
+    color: white;
+    position: center;
+}
+
+#login-new-user {
     color: white;
     position: center;
 }

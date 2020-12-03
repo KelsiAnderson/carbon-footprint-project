@@ -2,7 +2,7 @@
 
 from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
 import os
-from model import example_data, connect_to_db
+from model import connect_to_db
 import crud
 import requests
 from datetime import datetime
@@ -111,10 +111,8 @@ def show_profile_page():
     user_obj = crud.get_user_by_id(user)
     print("HI USER /////////////////////////", user_obj)
     current_elect_emission = crud.compare_monthly_elect(user, month, year)
-    
     previous_elect_emission = crud.compare_monthly_elect(user, last_month, year)
-    
-    
+
     current_nat_gas_emit= crud.compare_monthly_nat_gas(user, month, year)
     previous_month_gas_emit = crud.compare_monthly_nat_gas(user, last_month, year)
     

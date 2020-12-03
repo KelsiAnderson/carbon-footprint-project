@@ -100,9 +100,6 @@ def existing_user_cc_calcs(user_id):
     #print("SEE RESULTS", results)
     return results
 
-
-existing_user_cc_calcs(1)
-
 # if __name__ == "__main__":
 #     from server import app
 #     connect_to_db(app)
