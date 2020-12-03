@@ -2,45 +2,30 @@
 {% block title %}new user info{% endblock %}
 {% block body %}
 <div id="homepage">
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
-  <a class="navbar-brand"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a href="/">Home </a> <span class="sr-only">(current)</span></a>
-      </li><br>
-      <li class="nav-item">
-        <a href="//show-profile-page"> Profile </a>
-      </li>
-      <li class="nav-item">
-        <a href="/show-update-form" method="POST">update info </a>
-      </li>
 
-    </ul>
-  </div>
-</nav>
 <div class="update-info-container">
 
 <h1>Welcome!</h1>
 <h3>Create an account</h3>
   <form action="/new_users" method="POST">
     <p>
-      First name <input type="text" name="fname">
+      <input class="login-info" placeholder="First Name" type="text" name="new-user-f-name">
       </p>
     <p>
-    username <input type="text" name="username">
+      <input class="login-info" placeholder="Username" type="text" name="new-user-username" color="white">
     </p>
     <p>
-    Email <input type="text" name="email">
+    <input class="login-info" placeholder="Email" type="text" name="new-user-email">
+
     </p>
     <p>
-    Password <input type="password" name="password">
+    <input class="login-info" placeholder="Password" type="text" name="new-user-password">
+ 
     </p>
     <p>
-      <input type="submit">
+      <button type="submit" class="btn btn-outline-dark">Create Account</button>
+
+
     </p>
   </form>
 </div>

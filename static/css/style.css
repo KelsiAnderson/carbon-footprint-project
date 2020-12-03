@@ -58,10 +58,7 @@
     z-index:1;
     font-family: 'Poppins', sans-serif;
     color: white;
-    /* background:-webkit-linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);
-    background:-o-linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);
-    background:-moz-linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);
-    background:linear-gradient(315deg, #d5fefd 0%, #fffcff 74%); */
+
 }
 
   html {
