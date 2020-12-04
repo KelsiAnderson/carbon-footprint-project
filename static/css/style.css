@@ -145,20 +145,21 @@
     display: flex;
     background: rgba(255, 255, 255, 0.756);
     padding: 1.875em;
-    margin-top: 50px;
+    /* margin-top: 50px;
+    /* margin-right: 200px; */
     margin-left: 70px;
-    width: 100%;
+    width: 90%;
     color: white;
 }
 #profile-header {
     text-align: left;
     margin-left: 60px;
-    color: rgb(252, 250, 250);
+    color: rgb(0, 0, 0);
 }
 .username {
     margin-left: 60px;
     margin-bottom: 0;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 #suggestion-pop-up {
     margin-left: 70px;
@@ -179,8 +180,8 @@
     /* background: rgba(165, 165, 165, 0.625); */
     float: center;
     text-align: center;
-    background-color: #f9f9f9;
-    
+    background-color: rgba(82, 82, 82, 0.557);
+    margin: 18px;
 }
 
 .chart-names {
@@ -265,6 +266,7 @@
 .col-4 {
     background-color: rgba(82, 82, 82, 0.557);
     margin-bottom: 20px;
+    float: right;
 }
 
 .bi.bi-person-fill{
