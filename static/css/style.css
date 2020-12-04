@@ -7,9 +7,10 @@
   }
 
 .background { 
-    background-image: url("/static/images/tim-mossholder-07uiqD9LS6U-unsplash.jpg");
+    background-image: url("/static/images/mathias-bach-laursen-_1xnPQ9wwus-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    margin: 0;
     background-attachment: fixed;
     color: rgb(255, 253, 253);
   }
@@ -150,7 +151,19 @@
     color: white;
 }
 #profile-header {
-    text-align: center;
+    text-align: left;
+    color: black;
+}
+
+#suggestion-pop-up {
+    margin: 70px;
+    float: right;
+    background-color: #738bdc;
+    background-image: linear-gradient(315deg, #738bdc 0%, #48c3eb 74%);
+}
+
+.username {
+    color: black;
 }
 
 .box-body {
@@ -163,11 +176,15 @@
 }
 
 .card {
-    background: rgba(33, 33, 33, 0.488);
+    /* background: rgba(165, 165, 165, 0.625); */
+    float: center;
+    text-align: center;
+    background-color: #f9f9f9;
+    background-image: linear-gradient(to right, rgba(0, 179, 255, .2), rgba(0, 255, 229, .2));
 }
 
 .card-title {
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .update-info-container{

@@ -15,7 +15,7 @@
 
 {% block body %}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark" style="color: #ffe3d8">
     <a class="navbar-brand" href="#">Navigate</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -36,20 +36,22 @@
   </nav>
 
 
-<button type="submit" id="suggestion-pop-up" class="btn btn-outline-dark">Suggestions?</button>
+<button type="submit" id="suggestion-pop-up" class="btn btn-outline-dark">Need a suggestion to help lower your impact?</button>
 
 
 <div id="container">
 
 <div id="profile-chart">
+<div class="username">
 <h1>Hi {{ user_obj.fname }}! </h1>
+</div>
 <div id="profile-header">
 <h3>Check out your emissions for this month by category:</h3>
 </div>
     <br>
     <div class="row">
-        <div class="col-3">
-    <div class="card" style="width: 18rem; height: 7rem;">
+        <div class="col-6">
+    <div class="card" style="width: 35rem; height: 7rem;">
         <div class="card-body">
             <h5 class="card-title" color="black">Electricity Emission</h5>
             <h6 id="emission-info" class="card-subtitle mb-2 text-muted"> current month:
@@ -59,7 +61,7 @@
         </div>
         </div>
 <br>
-    <div class="card" style="width: 18rem; height: 7rem;">
+    <div class="card" style="width: 35rem; height: 7rem;">
         <div class="card-body">
             <h5 class="card-title" color="black">Public Transit Emissions:</h5>
             <h6 class="card-subtitle mb-2 text-muted" color="white"> curent months:
@@ -69,7 +71,7 @@
         </div>
     </div>
     <br>
-    <div class="card" style="width: 18rem; height: 7rem;">
+    <div class="card" style="width: 35rem; height: 7rem;">
         <div class="card-body">
             <h5 class="card-title" color="black">Natural Gas Emissions:</h5>
             <h6 class="card-subtitle mb-2 text-muted"> current month:
@@ -79,7 +81,7 @@
     </div>
 </div>
 <br>
-<div class="card" style="width: 18rem; height: 7rem;">
+<div class="card" style="width: 35rem; height: 7rem;">
     <div class="card-body">
         <h5 class="card-title" color="black">Vehicle Emissions</h5>
         <h6 class="card-subtitle mb-2 text-muted"> current month:
@@ -90,7 +92,7 @@
 </div>
 </div>
 <br>
-<div class="col-6" style="width: 100rem;">
+<div class="col-4" style="width: 100rem;">
 {% if show_current_month %}
 <div id="current-month-chart">
 <canvas id="currentMonthDonutChart"></canvas>
