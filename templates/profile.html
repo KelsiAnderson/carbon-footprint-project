@@ -15,7 +15,7 @@
 
 {% block body %}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-dark" style="color: #ffe3d8">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="color: #ffe3d8">
     <a class="navbar-brand" href="#">Navigate</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -36,18 +36,20 @@
   </nav>
 
 
-<button type="submit" id="suggestion-pop-up" class="btn btn-outline-dark">Need a suggestion to help lower your impact?</button>
 
+
+<div class="username">
+    <h1>Hi {{ user_obj.fname }}! </h1>
+    </div>
+    <div id="profile-header">
+    <h3>Check out your emissions for this month by category:</h3>
+    </div>
+    <br>
+    <button type="submit" id="suggestion-pop-up" class="btn btn-outline-dark">Need a suggestion to help lower your impact?</button>
 
 <div id="container">
-
 <div id="profile-chart">
-<div class="username">
-<h1>Hi {{ user_obj.fname }}! </h1>
-</div>
-<div id="profile-header">
-<h3>Check out your emissions for this month by category:</h3>
-</div>
+
     <br>
     <div class="row">
         <div class="col-6">
@@ -92,14 +94,19 @@
 </div>
 </div>
 <br>
-<div class="col-4" style="width: 100rem;">
+<div class="col-4" style="width: 100rem; height: 40rem;">
+    
 {% if show_current_month %}
+<div class="chart-names"><h5>Current Month:</h5></div>
 <div id="current-month-chart">
 <canvas id="currentMonthDonutChart"></canvas>
 </div>
+
 {% endif %}
 <br>
 {% if show_previous_month  %}
+<div class="chart-names"><h5>Previous Month:</h5></div>
+
     <div id="previous-month-chart">
     <canvas id="previousMonthDonutChart"></canvas>
     </div>

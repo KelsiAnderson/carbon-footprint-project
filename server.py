@@ -367,7 +367,7 @@ def previous_month_user_emission_info():
     previous_month_vehicle_emit = crud.compare_monthly_vehicle_emissions(user_obj.user_id, last_month, year)
     previous_month_public_trans_emit = crud.compare_monthly_public_trans(user_obj.user_id, last_month, year)
 
-    previous_month_emit_info = {"labels": ["Previous Month Electricity Emissions", "Previous Month Vehicle Emissions", "Previous Month Natural Gas Emissions", "Previous Month Public Transit Emissions"],
+    previous_month_emit_info = {"labels": ["Electricity Emissions", "Vehicle Emissions", "Natural Gas Emissions", "Transit Emissions"],
                                 "data": [previous_elect_emission, previous_month_vehicle_emit, previous_month_gas_emit, previous_month_public_trans_emit]}
 
     return jsonify(previous_month_emit_info)

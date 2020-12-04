@@ -13,9 +13,13 @@ $.get('/user-emission-info.json', (res) =>{
         labels: labels,
         datasets: [{
           data: data, 
-          backgroundColor: ["#99ffff", "#0077ff", "#66ccff", "#335577"]
+          backgroundColor: ["#338800", "#9999ff", "#00cc33", "#0033cc"]
         }],
-        
+      },
+      options: {legend:
+        {labels: 
+          {fontColor: 'white', fontStyle: 'bold'},
+        }
       }
     }); 
   } 
@@ -35,9 +39,13 @@ $.get('/previous-month-user-emission-info.json', (res) =>{
         labels: labels,
         datasets: [{
           data: data, 
-          backgroundColor: ["#99ffff", "#ff00bb", "#66ccff", "#335577"]
-        }],
-        
+          backgroundColor: ["#99ffff", "#0033cc", "#66ccff", "#00cc33"]
+        }],  
+      },
+      options: {legend:
+        {labels: 
+          {fontColor: 'white', fontStyle: 'bold'},
+        }
       }
     }); 
   } 

@@ -3,7 +3,7 @@
 
 {% block body%}
 <div class="background">
-       <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="color: #ffe3d8">
+       <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="color: #ffe3d8;">
         <a class="navbar-brand" href="#">Navigate</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -25,15 +25,21 @@
         </div>
       </nav>
 <div class="update-info-container">
-    <h3>PLEASE UPDATE YOUR INFO BELOW:</h3>
+    <span class="update-info-header"><h2>PLEASE UPDATE YOUR INFO BELOW:</h2>
+    <br>
+    <div class="globe">
+    <i class="fas fa-globe-americas fa-5x"></i>
+    </span>
+    </div>
 <form action="/update-info" method="POST">
     What is your zipcode?
     <br>
-    <input type="text" name="zipcode" class="update-info-input">
+    
+    <input type="text" name="zipcode" class="update-info-input" id="wrapper">
     <br>
     What does your car run on?
     <br>
-    <select name="fuel-type">
+    <select name="fuel-type" id="wrapper">
         <option value="1">Gasoline</option>
         <option value="0">Diesel</option>
         <option value="2">Electric</option>
@@ -41,20 +47,20 @@
     <br>
     <label>What is your vehicle's mpg?</label>
         <br>
-       <input type="text" name="mpg"> 
+       <input type="text" name="mpg" id="wrapper"> 
     <br>
         <label>How many miles per month do you travel by car?</label>
         <br>
-        <input type="text" name="vehicle-travel">
+        <input type="text" name="vehicle-travel" id="wrapper">
     <br>
         <label>How many miles per month do you travel on pubic transit?</label>
         <br>
-        <input type="text" name="public-trans">
+        <input type="text" name="public-trans" id="wrapper">
 
     <br>
         <label>How many people live in your household</label>
         <br>
-        <select name="household-amt">
+        <select name="household-amt" id="wrapper">
             <option value="1">1 person</option>
             <option value="2">2 people</option>
             <option value="3">3 people</option>
@@ -64,11 +70,11 @@
     <br>
         <label>Please enter your monthly electricity bill</label>
         <br>
-        <input type="text" name="elect-bill">
+        <input type="text" name="elect-bill" id="wrapper">
     <br>
         <label> Please enter your monthly natrual gas bill</label>
         <br>
-        <input type="text" name="nat-gas-bill">
+        <input type="text" name="nat-gas-bill" id="wrapper">
     <p>
         <button type="submit" id="log-in-existing-user" class="btn btn-outline-light">SUBMIT</button>
       </p>
