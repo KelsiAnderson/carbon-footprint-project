@@ -62,7 +62,7 @@
     <div class="card" style="width: 18rem; height: 7rem;">
         <div class="card-body">
             <h5 class="card-title" color="black">Public Transit Emissions:</h5>
-            <h6 class="card-subtitle mb-2 text-muted"> curent months:
+            <h6 class="card-subtitle mb-2 text-muted" color="white"> curent months:
                 {{current_public_trans_emit}}</h6>
                 <h6 class="card-subtitle mb-2 text-muted"> previous month:
                     {{previous_month_public_trans_emit}}</h6>
@@ -90,7 +90,7 @@
 </div>
 </div>
 <br>
-<div class="col-9" style="width: 30rem;">
+<div class="col-6" style="width: 100rem;">
 {% if show_current_month %}
 <div id="current-month-chart">
 <canvas id="currentMonthDonutChart"></canvas>
@@ -102,6 +102,7 @@
     <canvas id="previousMonthDonutChart"></canvas>
     </div>
 {% endif %}
+
 </div>
 </div>
 </div>

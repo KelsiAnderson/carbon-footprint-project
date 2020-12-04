@@ -76,11 +76,11 @@ class EmissionTests(unittest.TestCase):
         self.assertIn(b'<h2>LEARN MORE ABOUT YOUR CARBON IMPACT!</h2>', result.data)
 
         print("HI AM I WORKING?")
-
+    #ui test? testing for presence of things on page (assertIn)
     def test_profile(self):
-        result = self.client.get("/existing_users")
+        result = self.client.get("/existing_users?email=Kelsi&password=1234")
         print("PROFILE DATA", result.data)
-        self.assertIn(b"You are a valued user", result.data)
+        self.assertIn(b"<h3>Check out your emissions for this month by category:</h3>", result.data)
 
         print("DOES THIS WORK?")
 

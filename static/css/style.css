@@ -7,22 +7,16 @@
   }
 
 .background { 
-    background-image: url("/static/images/noah-buscher-x8ZStukS2PM-unsplash.jpg");
+    background-image: url("/static/images/tim-mossholder-07uiqD9LS6U-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     color: rgb(255, 253, 253);
   }
 .login-info::placeholder {
-    color: white;
+    color: rgba(255, 255, 255, 0.735);
 }
-/* .home-bg {
-    background-image: url("/static/images/mike-marrah-x4QaRXytmow-unsplash.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    color: rgb(255, 253, 253);
-} */
+
 #login-page-conatiner {
     width:28%;
     min-height:100vh;
@@ -67,9 +61,8 @@
     background-size: cover;
     background-position: center;
     height: 100% ;
-    /* background: url("static/images/nasa-Q1p7bh3SHj8-unsplash (1).jpg"); */ */
-    /* background-image: url("static/images/nasa-Q1p7bh3SHj8-unsplash (1).jpg") ; */
 }
+
 #log-in-existing-user {
     color: white;
     position: center;
@@ -79,12 +72,6 @@
     color: white;
     position: center;
 }
-
-/* #login-page-background {
-    background-image: url("/static/images/nasa-Q1p7bh3SHj8-unsplash (1).jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-} */
 
 .navbar-brand{
     display: flex;
@@ -113,7 +100,6 @@
     color: white;
     line-height: .2;
     text-align: center;
-    /* text-transform: uppercase; */
     display: block;
     margin-bottom: 0px;
 }
@@ -124,7 +110,7 @@
     line-height: .2;
     text-align: center;
     display: block;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 .login-info {
@@ -153,89 +139,19 @@
     background-size: cover;
 }
 
-#current-month-chart{
-    float: right;
-    margin: 0 2.5%;
-    width: 55%;
-    margin-bottom:2.5em;
-    margin-right: 16px;
-    border-radius:5px;
-    box-sizing: border-box;
-    margin: 5;
-    text-align: justify;
-    display: block;
-    justify-content: space-between;
-    border:50 solid transparent;
-    clear: both;
-    background-color: rgba(56, 59, 60, 0.906);
-    -webkit-box-shadow:0 0 30px rgba(0,0,0,.08);
-    box-shadow:0 0 20px rgba(0,0,0,.08);
-    font-family: 'Raleway', sans-serif;
-    margin-right: 10px;
-    color: white;
-
-}
-
-#previous-month-chart {
-    float: right;
-    margin: 0 2.5%;
-    width: 55%;
-    margin-bottom:2.5em;
-    margin-right: 15px;
-    border-radius:5px;
-    box-sizing: border-box;
-    margin: 5;
-    text-align: justify;
-    display: block;
-    justify-content: space-between;
-    border:50 solid transparent;
-    clear: both;
-    background-color: rgba(56, 59, 60, 0.906);
-    -webkit-box-shadow:0 0 30px rgba(0,0,0,.08);
-    box-shadow:0 0 20px rgba(0,0,0,.08);
-    font-family: 'Raleway', sans-serif;
-
-}
-/* .row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-    clear: both;
-} */
 
 #container {
+    display: flex;
+    background: rgba(255, 255, 255, 0.756);
     padding: 1.875em;
-    margin: 15px;
+    margin: 70px;
+    margin-left: 70px;
     width: 100%;
     color: white;
 }
 #profile-header {
     text-align: center;
 }
-/* .boxes {
-    margin-bottom:2.5em;
-    border-radius:5px;
-    padding: 100;
-    border: 10;
-    box-sizing: border-box;
-    margin: 5;
-    text-align: justify;
-    display: block;
-    justify-content: space-between;
-    border:50 solid transparent;
-    float: center;
-    box-align: center;
-    clear: both;
-    background-color: white;
-    -webkit-box-shadow:0 0 30px rgba(0,0,0,.08);
-    box-shadow:0 0 20px rgba(0,0,0,.08);
-    font-family: 'Raleway', sans-serif;
-    color: black;
-
-} */
 
 .box-body {
     float: left;
@@ -274,10 +190,7 @@
     background: rgba(26, 26, 26, 0.5);
 }
 
-/* .text-bar-update-info{
-    background: rgba(45, 44, 44, 0.5);
 
-} */
 
 .update-info-input {
     -webkit-writing-mode: horizontal-tb !important;
@@ -305,4 +218,8 @@
 
 #emission-info{
     color: white;
+}
+
+.card-subtitle mb-2 text-muted {
+
 }

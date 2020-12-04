@@ -43,8 +43,6 @@ def existing_user():
         return redirect('/')
     elif password:
         if password != user_obj.password:
-            print("USER OBJ PASSWORD HERE",user_obj.password)
-            print("password in text field:", password)
             flash('incorrect password')
 
             return redirect('/')
@@ -68,9 +66,7 @@ def existing_user():
     date = datetime.now()
     last_month = month - 1
     current_elect_emission = crud.compare_monthly_elect(user_obj.user_id, month, year)
-    print("CUREENT NAT GAS EMIT", current_elect_emission)
     previous_elect_emission = crud.compare_monthly_elect(user_obj.user_id, last_month, year)
-    print("PREVIOUS NAT GAS EMIT", previous_elect_emission)
     
     current_nat_gas_emit= crud.compare_monthly_nat_gas(user_obj.user_id, month, year)
     previous_month_gas_emit = crud.compare_monthly_nat_gas(user_obj.user_id, last_month, year)
@@ -109,7 +105,6 @@ def show_profile_page():
     last_month = month - 1 # (20 + 14 days) % 31 --> Jan 3rd ( 34 % 31 = 3 )
     user = session.get('current_user') # user id
     user_obj = crud.get_user_by_id(user)
-    print("HI USER /////////////////////////", user_obj)
     current_elect_emission = crud.compare_monthly_elect(user, month, year)
     previous_elect_emission = crud.compare_monthly_elect(user, last_month, year)
 
@@ -142,14 +137,14 @@ def new_user():
     """Show a form for new users to create an account. 
         If they are already a user, it will redirect to login page."""
     
-    email= request.form.get("email")
+    email= request.form.get("new-user-email")
     user_by_email = crud.get_user_by_email(email)
     print("THIS IS EMIAL", user_by_email)
     if not user_by_email:
-        fname = request.form.get("fname")
-        user_name = request.form.get("username")
-        email = request.form.get("email")
-        password = request.form.get("password")
+        fname = request.form.get("new-user-f-name")
+        user_name = request.form.get("new-user-username")
+        email = request.form.get("new-user-email")
+        password = request.form.get("new-user-password")
         new_user = crud.create_user(fname, user_name, email, password)
         session['current_user'] = new_user.user_id
         print("NEW USER", new_user.user_id)
