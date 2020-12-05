@@ -27,27 +27,33 @@
 
 <form action="/submit-info" method="POST">
     What is your zipcode?
-    <input type="text" name="zipcode">
+    <br>
+    <input type="text" name="zipcode" id="wrapper">
     <br>
     What does your car run on?
-    <select id="fuel-type" name="fuel-type">
+    <br>
+    <select id="fuel-type" name="fuel-type" id="wrapper">
         <option value="1">Gasoline</option>
         <option value="0">Diesel</option>
         <option value="2">Electric</option>
     </select>
     <br>
     <label>What is your vehicle's mpg?</label>
-       <input id="mpg" type="text" name="mpg"> 
+    <br>
+       <input id="mpg" type="text" name="mpg" id="wrapper"> 
     <br>
         <label>How many miles per year do you travel by car?</label>
-        <input type="text" name="vehicle-travel">
+        <br>
+        <input type="text" name="vehicle-travel" id="wrapper">
     <br>
         <label>How many miles per year do you travel on pubic transit?</label>
-        <input type="text" name="public-trans">
+        <br>
+        <input type="text" name="public-trans" id="wrapper">
     <br>
 <!-- add location -->
         <label>What is your household income</label>
-        <select id="income-dropdown" name="household-income">
+        <br>
+        <select id="income-dropdown" name="household-income" >
             <option value="1">Average</option>
             <option value="2">Less than $10,000</option>
             <option value="3">$10,000 to $19,999</option>
@@ -62,7 +68,8 @@
         </select>
     <br>
         <label>How many people live in your household</label>
-        <select name="household-amt">
+        <br>
+        <select name="household-amt" id="wrapper">
             <option value="1">1 person</option>
             <option value="2">2 people</option>
             <option value="3">3 people</option>
@@ -71,10 +78,12 @@
         </select>
     <br>
         <label>Please enter your monthly electricity bill</label>
-        <input type="text" name="elect-bill">
+        <br>
+        <input type="text" name="elect-bill" id="wrapper">
     <br>
         <label> Please enter your monthly natrual gas bill</label>
-        <input type="text" name="nat-gas-bill">
+        <br>
+        <input type="text" name="nat-gas-bill" id="wrapper">
     <p>
         <input type="submit">
       </p>

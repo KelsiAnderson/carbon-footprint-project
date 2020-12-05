@@ -163,6 +163,7 @@
 }
 #suggestion-pop-up {
     margin-left: 70px;
+    margin-bottom: 20px;
     float: left;
     background-color: #738bdc;
     background-image: linear-gradient(315deg, #738bdc 0%, #48c3eb 74%);
@@ -257,6 +258,39 @@
     transition:height 1s;
     -webkit-transition:height 1s;
     width: 250px;
+}
+
+#mpg {
+    background-color:rgba(150, 149, 149, 0.619);
+    color:white;
+    border: none;
+    outline:none;
+    height:30px;
+    transition:height 1s;
+    -webkit-transition:height 1s;
+    width: 250px;   
+}
+
+#income-dropdown {
+    background-color:rgba(150, 149, 149, 0.619);
+    color:white;
+    border: none;
+    outline:none;
+    height:30px;
+    transition:height 1s;
+    -webkit-transition:height 1s;
+    width: 250px;   
+}
+
+#fuel-type {
+    background-color:rgba(150, 149, 149, 0.619);
+    color:white;
+    border: none;
+    outline:none;
+    height:30px;
+    transition:height 1s;
+    -webkit-transition:height 1s;
+    width: 250px;  
 }
 
 #emission-info{
