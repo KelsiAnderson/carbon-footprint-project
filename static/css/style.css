@@ -156,10 +156,13 @@
 
 #container {
     display: flex;
-    background: rgba(191, 191, 191, 0.303);
+    background: #353a40;
     padding: 1.875em;
-    margin-left: 70px;
-    width: 90%;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 100px;
+    width: 95%;
+
     color: white;
     position: relative;
 }
@@ -191,7 +194,7 @@
 .card {
     float: center;
     text-align: center;
-    background-color: #353a405b;
+    background-color: #353a40;
     margin: 10px;
     border: 10px;
     position: relative;
@@ -199,7 +202,7 @@
 }
 
 .col-4 {
-    background-color: #353a405b;;
+    background-color: #353a40;
     margin-bottom: 20px;
     float: right;
     position: relative;
@@ -216,6 +219,7 @@
 .card-title {
     color: rgb(255, 255, 255);
     font-family: 'Lato', sans-serif;
+    margin-bottom: 10px;
 }
 
 .update-info-container{

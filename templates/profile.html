@@ -22,6 +22,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+          <li>
+            <i class="fas fa-globe-americas fa-2x"></i>
+          </li>
         <li class="nav-item active">
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
@@ -56,9 +59,9 @@
     <div class="card" style="width: 30rem; height: 7rem;">
         <div class="card-body">
             <h5 class="card-title">Electricity Emission</h5>
-            <h6 id="emission-info" class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> current month:
+            <h6 id="emission-info" class="card-subtitle mb-2" style="color: rgb(248, 244, 244); font-family: 'Montserrat', sans-serif;"> current month:
                 {{ current_elect_emission}}</h6>
-                <h6 id="emission-info" class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> previous month:
+                <h6 id="emission-info" class="card-subtitle mb-2" style="color: rgb(255, 255, 255); font-family: 'Montserrat', sans-serif;"> previous month:
                     {{previous_elect_emission}}</h6>
         </div>
         </div>
@@ -66,9 +69,9 @@
     <div class="card" style="width: 30rem; height: 7rem;">
         <div class="card-body">
             <h5 class="card-title" >Public Transit Emissions</h5>
-            <h6 class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> curent months:
+            <h6 class="card-subtitle mb-2" style="color: rgb(255, 254, 254); font-family: 'Montserrat', sans-serif;"> curent months:
                 {{current_public_trans_emit}}</h6>
-                <h6 class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> previous month:
+                <h6 class="card-subtitle mb-2" style="color: rgb(254, 252, 252); font-family: 'Montserrat', sans-serif;"> previous month:
                     {{previous_month_public_trans_emit}}</h6>
         </div>
     </div>
@@ -76,9 +79,9 @@
     <div class="card" style="width: 30rem; height: 7rem;">
         <div class="card-body">
             <h5 class="card-title">Natural Gas Emissions</h5>
-            <h6 class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> current month:
+            <h6 class="card-subtitle mb-2" style="color: rgb(250, 248, 248); font-family: 'Montserrat', sans-serif;"> current month:
                 {{current_nat_gas_emit}}</h6>
-                <h6 class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> previous month:
+                <h6 class="card-subtitle mb-2" style="color: rgb(255, 255, 255); font-family: 'Montserrat', sans-serif;"> previous month:
                     {{previous_month_gas_emit}}</h6>
     </div>
 </div>
@@ -86,15 +89,15 @@
 <div class="card" style="width: 30rem; height: 7rem;">
     <div class="card-body">
         <h5 class="card-title">Vehicle Emissions</h5>
-        <h6 class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> current month:
+        <h6 class="card-subtitle mb-2" style="color: rgb(247, 247, 247); font-family: 'Montserrat', sans-serif;"> current month:
             {{current_vehicle_emit}}</h6>
-            <h6 class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> previous month:
+            <h6 class="card-subtitle mb-2" style="color: rgb(253, 250, 250); font-family: 'Montserrat', sans-serif;"> previous month:
                 {{previous_month_vehicle_emit}}</h6>
     </div>
 </div>
 </div>
 <br>
-<div class="col-4" style="width: 90rem; height: 37rem;">
+<div class="col-4" style="width: 90rem; height: 50rem;">
     
 {% if show_current_month %}
 <div class="chart-names"><h5>Current Month</h5></div>
