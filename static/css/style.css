@@ -7,13 +7,27 @@
   }
 
 .background { 
-    background-image: url("/static/images/francesco-gallarotti-ruQHpukrN7c-unsplash.jpg");
+    background-image: url("/static/images/aurelien-dockwiller-Rzo7hwe7rR0-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0;
     background-attachment: fixed;
     color: rgb(255, 253, 253);
   }
+
+.profile-background {
+    
+    background-color: #ffffff;
+    background-image: linear-gradient(315deg,  #d3d3d3 74%, #2d3436 0%,);
+
+}
+
+.update-background {
+    background-color: #e7eff9;
+    background-image: linear-gradient(315deg, #e7eff9 0%, #cfd6e6 74%);
+}
+
+
 .login-info::placeholder {
     color: rgba(255, 255, 255, 0.735);
 }
@@ -100,13 +114,13 @@
 
 
 .login-title{
-    font-family: 'Fjalla One', sans-serif;
+    font-family: 'Lato', sans-serif;
     font-size: 20px;
     color: white;
     line-height: .2;
     text-align: center;
     display: block;
-    margin-bottom: 0px;
+    margin-bottom: 30px;
 }
 .login-text {
     font-family: 'Lato', sans-serif;
@@ -142,7 +156,7 @@
 
 #container {
     display: flex;
-    background: rgba(255, 255, 255, 0.756);
+    background: rgba(191, 191, 191, 0.303);
     padding: 1.875em;
     margin-left: 70px;
     width: 90%;
@@ -151,40 +165,41 @@
 }
 
 .username {
-    font-family: 'Averia Serif Libre', cursive;
+    font-family: 'Lato', sans-serif;
     margin-left: 60px;
-    margin-bottom: 0;
-    color: rgb(0, 0, 0);
+    margin-top: 50px;
+    margin-bottom: 10px;
+    color: rgb(72, 72, 72);
 }
 
 #profile-header {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Lato bold', sans-serif;
     text-align: left;
     margin-left: 60px;
-    color: rgb(0, 0, 0);
+    color: rgb(72, 72, 72);
 }
 
 #suggestion-pop-up {
-    margin-left: 70px;
-    margin-bottom: 20px;
-    float: left;
-    background-color: #91d370;
-    background-image: linear-gradient(319deg, #91d370 0%, #bca0ff 37%, #f2cd54 100%);
+    margin-bottom: 10px;
+    margin-right: 10px;
+    float: right;
+    background-color: #9a9df6;
+    color: white;
 
 }
 
 .card {
     float: center;
     text-align: center;
-    background-color: rgba(82, 82, 82, 0.557);
-    margin: 18px;
+    background-color: #353a405b;
+    margin: 10px;
     border: 10px;
     position: relative;
     display: flex;
 }
 
 .col-4 {
-    background-color: rgba(82, 82, 82, 0.557);
+    background-color: #353a405b;;
     margin-bottom: 20px;
     float: right;
     position: relative;
@@ -193,14 +208,14 @@
 .chart-names {
     color: rgb(255, 255, 255);
     text-align: center;
-    font-family: 'Averia Serif Libre', cursive;
-    margin-top: 10px;
+    font-family: 'Lato', sans-serif;
+    margin-top: 30px;
 }
 
 
 .card-title {
     color: rgb(255, 255, 255);
-    font-family: 'Averia Serif Libre', cursive;
+    font-family: 'Lato', sans-serif;
 }
 
 .update-info-container{
@@ -210,7 +225,7 @@
     margin: 0 auto;
     display:flex;
     flex-wrap:wrap;
-    font-family: 'Fjalla One', sans-serif;
+    /* font-family: 'Lato', sans-serif; */
     justify-content:center;
     text-align: center;
     align-items:center;padding:15px;
@@ -254,11 +269,13 @@
 }
 
 .update-info-header {
+    font-family: 'Lato-bold', sans-serif;
     margin-top: 50px;
 }
 
 #wrapper {
     background-color:rgba(150, 149, 149, 0.619);
+    margin: 10px;
     color:white;
     border: none;
     outline:none;
@@ -303,6 +320,8 @@
 
 #emission-info{
     color: white;
+    font-family: 'Lato-bold', sans-serif;
+
 }
 
 

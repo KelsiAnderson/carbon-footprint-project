@@ -5,7 +5,7 @@ toastifyAlert.addEventListener('click', (evt) => {
   Toastify({
     text: randomMessages(),
     duration: 5000,
-    backgroundColor: " linear-gradient(to right #66ffdd, #9933ee)",
+    backgroundColor: "#9a9df6",
     className: "info",
   }).showToast();
 });
