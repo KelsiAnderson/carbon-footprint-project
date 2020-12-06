@@ -15,7 +15,7 @@
 
 {% block body %}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="color: #ffe3d8">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="color: #ffe3d8">
     <a class="navbar-brand" href="#">Navigate</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -36,68 +36,69 @@
   </nav>
 
 <div class="username">
-    <h1>Hi {{ user_obj.fname }}! </h1>
+    <h2>Hi {{ user_obj.fname }}! </h2>
     </div>
     <div id="profile-header">
     <h3>Check out your emissions for this month by category:</h3>
     </div>
     <br>
-    <button type="submit" id="suggestion-pop-up" class="btn btn-outline-dark">Need a suggestion to help lower your impact?</button>
+    <button type="submit" id="suggestion-pop-up" class="btn btn-outline-dark">CLICK HERE to learn how to lower your impact!</button>
 
 <div id="container">
 <!-- <div id="profile-chart"> -->
 
     <br>
-    <div class="row">
-        <div class="col-6">
-    <div class="card" style="width: 35rem; height: 7rem;">
+    <div class="row" position="relative">
+        <div class="col-6" >
+    <div class="card" style="width: 30rem; height: 7rem;">
         <div class="card-body">
-            <h5 class="card-title" color="black">Electricity Emission</h5>
-            <h6 id="emission-info" class="card-subtitle mb-2 text-muted"> current month:
+            <h5 class="card-title">Electricity Emission</h5>
+            <h6 id="emission-info" class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> current month:
                 {{ current_elect_emission}}</h6>
-                <h6 id="emission-info" class="card-subtitle mb-2 text-muted"> previous month:
+                <h6 id="emission-info" class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> previous month:
                     {{previous_elect_emission}}</h6>
         </div>
         </div>
 <br>
-    <div class="card" style="width: 35rem; height: 7rem;">
+    <div class="card" style="width: 30rem; height: 7rem;">
         <div class="card-body">
-            <h5 class="card-title" color="black">Public Transit Emissions:</h5>
-            <h6 class="card-subtitle mb-2 text-muted" color="white"> curent months:
+            <h5 class="card-title" >Public Transit Emissions:</h5>
+            <h6 class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> curent months:
                 {{current_public_trans_emit}}</h6>
-                <h6 class="card-subtitle mb-2 text-muted"> previous month:
+                <h6 class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> previous month:
                     {{previous_month_public_trans_emit}}</h6>
         </div>
     </div>
     <br>
-    <div class="card" style="width: 35rem; height: 7rem;">
+    <div class="card" style="width: 30rem; height: 7rem;">
         <div class="card-body">
-            <h5 class="card-title" color="black">Natural Gas Emissions:</h5>
-            <h6 class="card-subtitle mb-2 text-muted"> current month:
+            <h5 class="card-title">Natural Gas Emissions:</h5>
+            <h6 class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> current month:
                 {{current_nat_gas_emit}}</h6>
-                <h6 class="card-subtitle mb-2 text-muted"> previous month:
+                <h6 class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> previous month:
                     {{previous_month_gas_emit}}</h6>
     </div>
 </div>
 <br>
-<div class="card" style="width: 35rem; height: 7rem;">
+<div class="card" style="width: 30rem; height: 7rem;">
     <div class="card-body">
-        <h5 class="card-title" color="black">Vehicle Emissions</h5>
-        <h6 class="card-subtitle mb-2 text-muted"> current month:
+        <h5 class="card-title">Vehicle Emissions</h5>
+        <h6 class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> current month:
             {{current_vehicle_emit}}</h6>
-            <h6 class="card-subtitle mb-2 text-muted"> previous month:
+            <h6 class="card-subtitle mb-2" style="color: black; font-family: 'Montserrat', sans-serif;"> previous month:
                 {{previous_month_vehicle_emit}}</h6>
     </div>
 </div>
 </div>
 <br>
-<div class="col-4" style="width: 100rem; height: 40rem;">
+<div class="col-4" style="width: 90rem; height: 37rem;">
     
 {% if show_current_month %}
 <div class="chart-names"><h5>Current Month:</h5></div>
 <div id="current-month-chart">
 <canvas id="currentMonthDonutChart"></canvas>
 </div>
+
 
 {% endif %}
 <br>
@@ -110,7 +111,6 @@
 {% endif %}
 
 </div>
-<!-- </div> -->
 </div>
 </div>
 {% endblock %}

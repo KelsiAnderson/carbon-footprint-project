@@ -9,13 +9,3 @@ loginAlert.addEventListener('click', (evt) => {
     className: "info",
   }).showToast();
 });
-
-const test = document.querySelector("#test");
-console.log("HI IM TEXT MESSAGE", test)
-test.addEventListener('click', (evt) => {
-  console.log("THIS IS TEST")
-  Toastify({
-    text: "HEY IM A TEST BUTTON",
-    duration: 5000,
-  }).showToast();
-});

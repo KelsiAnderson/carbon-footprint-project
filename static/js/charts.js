@@ -18,7 +18,7 @@ $.get('/user-emission-info.json', (res) =>{
       },
       options: {legend:
         {labels: 
-          {fontColor: 'white', fontStyle: 'bold'},
+          {fontColor: 'white', fontStyle: 'bold', fontFamily: 'Montserrat'},
         }
       }
     }); 
@@ -44,7 +44,7 @@ $.get('/previous-month-user-emission-info.json', (res) =>{
       },
       options: {legend:
         {labels: 
-          {fontColor: 'white', fontStyle: 'bold'},
+          {fontColor: 'white', fontStyle: 'bold', fontFamily: 'Montserrat'},
         }
       }
     }); 
