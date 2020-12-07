@@ -180,6 +180,8 @@ def submit_info():
     input_amt = request.form.get("household-amt") 
     input_elect_bill = request.form.get("elect-bill")
     input_nat_gas_bill = request.form.get("nat-gas-bill")
+
+    
                     
     result = coolclimate.coolclimate_defaults(location_by_zip, 
         input_fuel, input_mpg, vehicle_travel, input_public_trans, 
@@ -316,7 +318,7 @@ def update_info():
         previous_month_gas_emit=previous_month_gas_emit,
         current_vehicle_emit=current_vehicle_emit,  
         previous_month_vehicle_emit= previous_month_vehicle_emit, 
-        current_public_trans_emit=current_public_trans_emit, 
+        current_public_trans_emit="{:.2f}".format(current_public_trans_emit), 
         previous_month_public_trans_emit=previous_month_public_trans_emit,
         show_previous_month= True, 
         show_current_month = True
@@ -334,7 +336,8 @@ def get_user_emission_info():
     year = datetime.now().year
     #date = datetime.now()
     #last_month = month - 1
-
+ #TODO: 
+ #updated values if they arte zero
     monthly_elect = crud.compare_monthly_elect(user_obj.user_id, month, year)
     vehicle_emit = crud.compare_monthly_vehicle_emissions(user_obj.user_id, month, year)
     nat_gas_emit = crud.compare_monthly_nat_gas(user_obj.user_id, month, year)
@@ -344,7 +347,7 @@ def get_user_emission_info():
     print("MONTHLY ELECTRICITY HERE #######################", monthly_elect)
 
     emission_info = {"labels": ["Electricity Emissions", "Vehicle Emissions", "Natural Gas Emissions", "Public Transit Emissions"],
-                    "data": [monthly_elect, vehicle_emit, nat_gas_emit, public_trans_emit]
+                    "data": [monthly_elect, vehicle_emit, nat_gas_emit, "{:.2f}".format(public_trans_emit)]
     }
     print("EMISSION INFO*******", emission_info)
     return jsonify(emission_info)

@@ -3,7 +3,7 @@
 {% block title %}profile{% endblock %}
 
 {% block head %}
-<div class="profile-background">
+<div class="background">
 <!-- <script src="https://cdn.cool-js-lib.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
@@ -14,16 +14,18 @@
 {% endblock %}
 
 {% block body %}
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="color: #ffe3d8">
+<div id="background">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="color: #ffe3d8;">
     <a class="navbar-brand" href="#"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-          <li>
+        <li>
+            <div class="nav-item">
             <i class="fas fa-globe-americas fa-2x" style="color: white;"></i>
+        </div>
           </li>
         <li class="nav-item active">
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
@@ -31,8 +33,9 @@
         <li class="nav-item">
             <a class="nav-link" href="/show-profile-page"> Profile </a>
         </li>
+        
         <li class="nav-item">
-            <a class="nav-link" href="/show-update-form" method="POST">Update Info </a>
+            <a class="nav-link" href="/show-update-form" method="POST">Update Info</a>
         </li>
         <li class="nav-item">
             <button type="submit" id="suggestion-pop-up" class="btn btn-dark">Lower Your Impact</button>
@@ -46,6 +49,7 @@
     </div>
     <div id="profile-header">
     <h3>Check out your emissions for this month by category:</h3>
+    <div id="profile-header"><h6>Don't forget to update your current month emissions info in the "update info" section</h6></div>
     </div>
     <br>
     
@@ -59,9 +63,9 @@
     <div class="card" style="width: 30rem; height: 8rem;">
         <div class="card-body">
             <h4 class="card-title">Electricity Emission</h4>
-            <h6 id="emission-info" class="card-subtitle mb-2" style="color: rgb(248, 244, 244); font-family: 'Montserrat', sans-serif;"> current month:
+            <h6 class="card-subtitle mb-2" style="color: rgb(248, 244, 244); font-family: 'lato', sans-serif;"> current month:
                 {{ current_elect_emission}}</h6>
-                <h6 id="emission-info" class="card-subtitle mb-2" style="color: rgb(255, 255, 255); font-family: 'Montserrat', sans-serif;"> previous month:
+                <h6 class="card-subtitle mb-2" style="color: rgb(255, 255, 255); font-family: 'lato', sans-serif;"> previous month:
                     {{previous_elect_emission}}</h6>
         </div>
         </div>
@@ -69,9 +73,9 @@
     <div class="card" style="width: 30rem; height: 8rem;">
         <div class="card-body">
             <h4 class="card-title" >Public Transit Emissions</h4>
-            <h6 class="card-subtitle mb-2" style="color: rgb(255, 254, 254); font-family: 'Montserrat', sans-serif;"> curent months:
+            <h6 class="card-subtitle mb-2" style="color: rgb(255, 254, 254); font-family: 'lato', sans-serif;"> curent months:
                 {{current_public_trans_emit}}</h6>
-                <h6 class="card-subtitle mb-2" style="color: rgb(254, 252, 252); font-family: 'Montserrat', sans-serif;"> previous month:
+                <h6 class="card-subtitle mb-2" style="color: rgb(254, 252, 252); font-family: 'lato', sans-serif;"> previous month:
                     {{previous_month_public_trans_emit}}</h6>
         </div>
     </div>
@@ -79,9 +83,9 @@
     <div class="card" style="width: 30rem; height: 8rem;">
         <div class="card-body">
             <h4 class="card-title">Natural Gas Emissions</h4>
-            <h6 class="card-subtitle mb-2" style="color: rgb(250, 248, 248); font-family: 'Montserrat', sans-serif;"> current month:
+            <h6 class="card-subtitle mb-2" style="color: rgb(250, 248, 248); 'lato', sans-serif;"> current month:
                 {{current_nat_gas_emit}}</h6>
-                <h6 class="card-subtitle mb-2" style="color: rgb(255, 255, 255); font-family: 'Montserrat', sans-serif;"> previous month:
+                <h6 class="card-subtitle mb-2" style="color: rgb(255, 255, 255);  font-family: 'lato', sans-serif;"> previous month:
                     {{previous_month_gas_emit}}</h6>
     </div>
 </div>
@@ -89,9 +93,9 @@
 <div class="card" style="width: 30rem; height: 8rem;">
     <div class="card-body">
         <h4 class="card-title">Vehicle Emissions</h4>
-        <h6 class="card-subtitle mb-2" style="color: rgb(247, 247, 247); font-family: 'Montserrat', sans-serif;"> current month:
+        <h6 class="card-subtitle mb-2" style="color: rgb(247, 247, 247); font-family: 'lato', sans-serif;"> current month:
             {{current_vehicle_emit}}</h6>
-            <h6 class="card-subtitle mb-2" style="color: rgb(253, 250, 250); font-family: 'Montserrat', sans-serif;"> previous month:
+            <h6 class="card-subtitle mb-2" style="color: rgb(253, 250, 250); font-family: 'lato', sans-serif;"> previous month:
                 {{previous_month_vehicle_emit}}</h6>
     </div>
 </div>
@@ -116,6 +120,7 @@
     </div>
 {% endif %}
 
+</div>
 </div>
 </div>
 </div>

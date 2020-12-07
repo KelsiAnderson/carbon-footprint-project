@@ -289,9 +289,11 @@ def compare_monthly_public_trans(user_id, month, year):
 
     return sum ([date.carbon_footprint for date in current_date])
    
-
-
-
+#TODO: MAke a validation funciton
+#def input_validation():
+    #declare whether the inputs are expected input. If zero, return 0 on chart
+    #case one: pop to a flash messgae that shows that the input is invalid
+    #if they entered in something that was valid, but zero, then just reutnr zero to the chart instead of sending to API
 
 
 if __name__ == '__main__':

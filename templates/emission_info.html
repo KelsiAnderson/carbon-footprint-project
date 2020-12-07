@@ -2,7 +2,7 @@
 {% block title %}gather info here page{% endblock %}
 {% block body %}
 <div id="homepage">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="color: #ffe3d8">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="color: #ffe3d8;">
     <a class="navbar-brand" href="#"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -10,8 +10,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li>
-          <i class="fas fa-globe-americas fa-2x" style="color: white;"></i>
-        </li>
+            <div class="nav-item">
+            <i class="fas fa-globe-americas fa-2x" style="color: white;"></i>
+        </div>
+          </li>
         <li class="nav-item active">
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
@@ -19,47 +21,43 @@
             <a class="nav-link" href="/show-profile-page"> Profile </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/show-update-form" method="POST">update info </a>
+            <a class="nav-link" href="/show-update-form" method="POST">update info</a>
         </li>
       </ul>
     </div>
   </nav>
 <div class="update-info-container">
-<span class="emission-info"> <h2>Thanks for joining!</h2>
+<span class="emission-info"> 
+  <div class="update-info-header"><h2>Thanks for joining!</h2></div>
 <br> 
 <div class="emission-info-title"><h3>Tell Us a Little More About Your Lifestyle</h3>
 </div>
+<div class="globe">
 <i class="fas fa-globe-americas fa-5x"></i>
+</div>
 </span>
 <form action="/submit-info" method="POST">
-    What is your zipcode?
-    <br>
+    <div class="update-info-text">What is your zipcode?</div>
     <input type="text" name="zipcode" id="wrapper">
-    <br>
-    What does your car run on?
-    <br>
+
+    <div class="update-info-text">What does your car run on?</div>
     <select id="fuel-type" name="fuel-type" id="wrapper">
         <option value="1">Gasoline</option>
         <option value="0">Diesel</option>
         <option value="2">Electric</option>
     </select>
-    <br>
-    <label>What is your vehicle's mpg?</label>
-    <br>
+  
+    <div class="update-info-text"><label>What is your vehicle's mpg?</label></div>
        <input id="mpg" type="text" name="mpg" id="wrapper"> 
-    <br>
-        <label>How many miles per year do you travel by car?</label>
-        <br>
+    
+    <div class="update-info-text"><label>How many miles per year do you travel by car?</label></div>
         <input type="text" name="vehicle-travel" id="wrapper">
-    <br>
-        <label>How many miles per year do you travel on pubic transit?</label>
-        <br>
+    
+    <div class="update-info-text"><label>How many miles per year do you travel on pubic transit?</label></div>
         <input type="text" name="public-trans" id="wrapper">
-    <br>
-<!-- add location -->
-        <label>What is your household income</label>
-        <br>
-        <select id="income-dropdown" name="household-income" >
+
+    <div class="update-info-text"><label>What is your household income</label></div>
+        <select id="income-dropdown" name="household-income">
             <option value="1">Average</option>
             <option value="2">Less than $10,000</option>
             <option value="3">$10,000 to $19,999</option>
@@ -72,9 +70,8 @@
             <option value="10">$100,000 to $119,999</option>
             <option value="11">$120,000 or more</option>
         </select>
-    <br>
-        <label>How many people live in your household</label>
-        <br>
+    
+    <div class="update-info-text"><label>How many people live in your household</label></div>
         <select name="household-amt" id="wrapper">
             <option value="1">1 person</option>
             <option value="2">2 people</option>
@@ -82,16 +79,13 @@
             <option value="4">4 people</option>
             <option value="5">5 or more people</option>
         </select>
-    <br>
-        <label>Please enter your monthly electricity bill</label>
-        <br>
+    
+    <div class="update-info-text"><label>Please enter your monthly electricity bill</label></div>
         <input type="text" name="elect-bill" id="wrapper">
-    <br>
         <label> Please enter your monthly natrual gas bill</label>
-        <br>
         <input type="text" name="nat-gas-bill" id="wrapper">
     <p>
-        <input type="submit">
+      <button type="submit" id="log-in-existing-user" class="btn btn-outline-light">Submit</button>
       </p>
 </form>
 </div>

@@ -7,7 +7,7 @@
   }
 
 .background { 
-    background-image: url("/static/images/aurelien-dockwiller-Rzo7hwe7rR0-unsplash.jpg");
+    background-image: url("/static/images/margot-polinder-K6atQPz7vWo-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0;
@@ -89,6 +89,7 @@
 .row{
     position: relative;
     display: flex;
+    bottom: 75%;
 }
 
 .nav-item {
@@ -115,7 +116,7 @@
     margin-bottom: 30px;
 }
 .login-text {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato-bold', sans-serif;
     font-size: 20px;
     font-style: bold;
     color: white;
@@ -149,10 +150,9 @@
 #container {
     display: flex;
     background: #353a40;
-    padding: 1.875em;
+    /* padding: 1.875em; */
     margin-left: 70px;
     margin-right: 70px;
-    margin-bottom: 700px;
     width: 90%;
     color: white;
     position: relative;
@@ -265,24 +265,26 @@
 
 .update-info-text {
     font-family: 'Lato-bold', sans-serif;
-    margin-top: 25px;
+    margin-top: 20px;
+    text-align: center;
 
 }
 
 .globe {
-   margin-top: 10px;
-   margin-bottom : 20px; 
+   margin-top: 30px;
+   margin-bottom : 10px; 
 }
 
 .update-info-header {
     font-family: 'Lato', sans-serif;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 #wrapper {
     background-color:rgba(150, 149, 149, 0.619);
     margin: 3px;
     text-align: center;
+    opactiy: .3;
     color:white;
     border: none;
     outline:none;
@@ -327,7 +329,9 @@
 
 #emission-info{
     color: white;
-    font-family: 'Lato-bold', sans-serif;
+    font-family: 'Lato', sans-serif;
+    margin-top: 20px;
+
 
 }
 
@@ -346,4 +350,4 @@
     margin: 30px;
 }
 .emission-info-title {
-    margin: 15px;
+    margin: 10px;
