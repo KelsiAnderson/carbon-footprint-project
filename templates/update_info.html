@@ -11,7 +11,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li>
-                <i class="fas fa-globe-americas fa-2x"></i>
+                <div class="nav-item">
+                <i class="fas fa-globe-americas fa-2x" style="color: white;"></i>
+            </div>
               </li>
             <li class="nav-item active">
               <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
@@ -22,7 +24,7 @@
             <li class="nav-item">
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/show-update-form" method="POST">update info </a>
+                <a class="nav-link" href="/show-update-form" method="POST">update info</a>
             </li>
           </ul>
         </div>
@@ -35,34 +37,26 @@
     </span>
     </div>
 <form action="/update-info" method="POST">
-    What is your zipcode?
-    <br>
-    
+    <div class="update-info-text">What is your zipcode?</div>
     <input type="text" name="zipcode" class="update-info-input" id="wrapper">
-    <br>
-    What does your car run on?
-    <br>
+    
+    <div class="update-info-text">What does your car run on?</div>
     <select name="fuel-type" id="wrapper">
         <option value="1">Gasoline</option>
         <option value="0">Diesel</option>
         <option value="2">Electric</option>
     </select>
-    <br>
-    <label>What is your vehicle's mpg?</label>
-        <br>
+    
+    <div class="update-info-text"><label>What is your vehicle's mpg?</label></div>
        <input type="text" name="mpg" id="wrapper"> 
-    <br>
-        <label>How many miles per month do you travel by car?</label>
-        <br>
+    
+    <div class="update-info-text"><label>How many miles per month do you travel by car?</label></div>
         <input type="text" name="vehicle-travel" id="wrapper">
-    <br>
-        <label>How many miles per month do you travel on pubic transit?</label>
-        <br>
+    
+    <div class="update-info-text"><label>How many miles per month do you travel on pubic transit?</label></div>
         <input type="text" name="public-trans" id="wrapper">
 
-    <br>
-        <label>How many people live in your household</label>
-        <br>
+    <div class="update-info-text"><label>How many people live in your household</label></div>
         <select name="household-amt" id="wrapper">
             <option value="1">1 person</option>
             <option value="2">2 people</option>
@@ -70,14 +64,13 @@
             <option value="4">4 people</option>
             <option value="5">5 or more people</option>
         </select>
-    <br>
-        <label>Please enter your monthly electricity bill</label>
-        <br>
+
+    <div class="update-info-text"><label>Please enter your monthly electricity bill</label></div>
         <input type="text" name="elect-bill" id="wrapper">
-    <br>
-        <label> Please enter your monthly natrual gas bill</label>
-        <br>
+
+    <div class="update-info-text"><label> Please enter your monthly natrual gas bill</label></div>
         <input type="text" name="nat-gas-bill" id="wrapper">
+        
     <p>
         <button type="submit" id="log-in-existing-user" class="btn btn-outline-light">SUBMIT</button>
       </p>
