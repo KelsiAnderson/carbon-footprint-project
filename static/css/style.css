@@ -147,6 +147,11 @@
     justify-content:center;
 }
 
+.chart-description {
+    font-family: 'Lato bold', sans-serif;
+    text-align: center;
+}
+
 #container {
     display: flex;
     background: #353a40;
