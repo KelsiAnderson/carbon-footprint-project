@@ -21,4 +21,11 @@ __Back End:__ Python, Flask, PostgreSQL, SQLAlchemy
 ## <a name="features"></a> Features
 Login as an existing user, or create a new account to access your Carbon Footprint:
 
-Once the user has logged in, they will see a toastify message, and then 2 charts will render. One chart represents a users current month emission info, and the second represents the users previous month emissions info
+Once the user has logged in, they will see a toastify message, and then 2 charts will render. One chart represents a users current month emission info, and the second represents the users previous month emissions info.
+
+If a user needs to update their current month info, they can visit the update info page:
+
+
+## <a name="developer></a>About the Developer:
+
+Kelsi Anderson is a Sales Representative transformed into a softare engineer. She transitioned into software engineering in mid-2020. After many of years in the beer industry, Kelsi wanted to be immersing herself into greater learning opportunities that weren't available in the beverage industry, as this industry provides immeasurable opportunity to learn and grow. Kelsi also wanted to be a part of something that was continually trending and growing. 
