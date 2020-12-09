@@ -19,6 +19,7 @@ __Front End:__ chart.js, Toastify JS, Jinja, CSS, HTML, Boostrap
 __Back End:__ Python, Flask, PostgreSQL, SQLAlchemy
 
 ## <a name="features"></a> Features
+(GIFs to come)
 Login as an existing user, or create a new account to access your Carbon Footprint:
 
 Once the user has logged in, they will see a toastify message, and then 2 charts will render. One chart represents a users current month emission info, and the second represents the users previous month emissions info.
