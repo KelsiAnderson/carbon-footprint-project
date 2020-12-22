@@ -46,7 +46,7 @@ def example_data():
     db.session.commit()
 
 
-# class can be naemd whatever, TastCase is opting in to test set up and run test behavior
+# class can be named whatever, TastCase is opting in to test set up and run test behavior
 #this makes it clear for others reading the code because it follows the norm/consistent pattern that it is testing. 
 
 class EmissionTests(unittest.TestCase):
@@ -73,22 +73,22 @@ class EmissionTests(unittest.TestCase):
     def test_homepage(self):
         result = self.client.get("/")
         print("SEE DATA", result.data)
-        self.assertIn(b'<h2>LEARN MORE ABOUT YOUR CARBON IMPACT!</h2>', result.data)
+        self.assertIn(b'<h2>Learn More About Your Carbon Impact</h2>', result.data)
 
         print("HI AM I WORKING?")
     #ui test? testing for presence of things on page (assertIn)
     def test_profile(self):
-        result = self.client.get("/existing_users?email=Kelsi&password=1234")
+        result = self.client.get("/existing_users?email=bob@bob&password=hiimbob12")
         print("PROFILE DATA", result.data)
-        self.assertIn(b"<h3>Check out your emissions for this month by category:</h3>", result.data)
+        self.assertIn(b"<h6>90.75</h6>", result.data)
 
         print("DOES THIS WORK?")
 
-    def test_new_account(self):
-        result = self.client.get("/existing_users")
-        self.assertEqual(result.status_code, 200)
-        self.assertIn(b"<p>Don't have an account?</p>", result.data)
-        self.assertNotIn(b"<h2>LOGIN</h2>", result.data)
+    # def test_new_account(self):
+    #     result = self.client.get("/existing_users")
+    #     self.assertEqual(result.status_code, 200)
+    #     self.assertIn(b"<p>Don't have an account?</p>", result.data)
+    #     self.assertNotIn(b"<h2>LOGIN</h2>", result.data)
 
         print("DO I WORK?")
 
